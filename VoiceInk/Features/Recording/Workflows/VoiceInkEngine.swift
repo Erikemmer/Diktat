@@ -147,7 +147,7 @@ class VoiceInkEngine: NSObject, ObservableObject {
 
     // MARK: - Toggle Record
 
-    func toggleRecord(modeId: UUID? = nil, sendAfterPaste: Bool = false) async {
+    func toggleRecord(sendAfterPaste: Bool = false) async {
         if recordingState == .starting {
             await cancelRecording()
             return
@@ -195,17 +195,8 @@ class VoiceInkEngine: NSObject, ObservableObject {
             requestRecordPermission { [self] granted in
                 if granted {
                     Task { @MainActor [self] in
-                        guard await self.passesRecordingPreflight() else {
-                            return
-                        }
-
                         let startID = UUID()
                         self.activeRecordingStartID = startID
-                        let activeModeTask = ActiveWindowService.shared.beginApplyingConfiguration(modeId: modeId) {
-                            [weak self] in
-                            guard let self else { return false }
-                            return self.activeRecordingStartID == startID && !self.shouldCancelRecording
-                        }
 
                         do {
                             let fileName = "\(UUID().uuidString).wav"
@@ -223,7 +214,6 @@ class VoiceInkEngine: NSObject, ObservableObject {
                                 self.recorderUIManager?.isRecorderPanelVisible ?? false,
                                 !self.shouldCancelRecording
                             else {
-                                activeModeTask.cancel()
                                 let shouldKeepRecordingFile = self.shouldCancelRecording
                                 if self.activeRecordingStartID == startID {
                                     await self.recorder.stopRecording()
@@ -238,8 +228,6 @@ class VoiceInkEngine: NSObject, ObservableObject {
 
                             self.recordingState = .recording
 
-                            await activeModeTask.value
-
                             guard self.recordingState == .recording,
                                 self.activeRecordingStartID == startID,
                                 !self.shouldCancelRecording
@@ -247,15 +235,12 @@ class VoiceInkEngine: NSObject, ObservableObject {
                                 return
                             }
 
-                            let modelResolution = ModeRuntimeResolver.transcriptionModelResolution(
-                                transcriptionModelManager: self.transcriptionModelManager
-                            )
                             guard
-                                let transcriptionConfiguration = ModeRuntimeResolver.transcriptionConfiguration(
-                                    from: modelResolution
+                                let transcriptionConfiguration = TranscriptionRuntimeResolver.transcriptionConfiguration(
+                                    transcriptionModelManager: self.transcriptionModelManager
                                 )
                             else {
-                                let failure = self.recordingModelFailure(for: modelResolution)
+                                let failure = self.recordingModelFailure()
                                 NotificationManager.shared.showNotification(
                                     title: failure.title,
                                     type: .error,
@@ -314,7 +299,7 @@ class VoiceInkEngine: NSObject, ObservableObject {
                             Task { @MainActor [weak self] in
                                 guard let self else { return }
 
-                                let currentModel = ModeRuntimeResolver.transcriptionConfiguration(
+                                let currentModel = TranscriptionRuntimeResolver.transcriptionConfiguration(
                                     transcriptionModelManager: self.transcriptionModelManager
                                 )?.model
 
@@ -349,7 +334,6 @@ class VoiceInkEngine: NSObject, ObservableObject {
                             }
 
                         } catch {
-                            activeModeTask.cancel()
                             self.logger.error("Recording failed to start: \(error, privacy: .public)")
                             let audioFailure = self.recordingAudioFailure(for: error)
                             if audioFailure == nil {
@@ -389,77 +373,20 @@ class VoiceInkEngine: NSObject, ObservableObject {
     }
 
     @MainActor
-    private func recordingModelFailure(
-        for resolution: ModeTranscriptionModelResolution
-    ) -> (title: String, actionLabel: String, action: () -> Void) {
-        switch resolution {
-        case .noMode:
+    private func recordingModelFailure() -> (title: String, actionLabel: String, action: () -> Void) {
+        if let model = transcriptionModelManager.currentTranscriptionModel {
             return (
-                String(localized: "No mode configured"),
-                String(localized: "Manage Modes"),
-                ModeSetupNavigator.openModesSettings
-            )
-        case .noSelection(let mode):
-            return (
-                String(
-                    format: String(localized: "No transcription model is selected for the '%@' mode"),
-                    mode.name
-                ),
-                String(localized: "Manage Modes"),
-                ModeSetupNavigator.openModesSettings
-            )
-        case .modelNotFound(let mode):
-            return (
-                String(
-                    format: String(localized: "The transcription model selected for the '%@' mode is unavailable"),
-                    mode.name
-                ),
-                String(localized: "Manage Modes"),
-                ModeSetupNavigator.openModesSettings
-            )
-        case .unavailable(let mode, let model), .available(let mode, let model):
-            return (
-                String(
-                    format: String(localized: "'%@' is not available for the %@ mode"),
-                    model.displayName,
-                    mode.name
-                ),
+                String(format: String(localized: "'%@' is not available"), model.displayName),
                 String(localized: "Manage AI Models"),
-                ModeSetupNavigator.openModelsSettings
+                ModelSetupNavigator.openModelsSettings
             )
         }
-    }
 
-    /// Checks requirements that do not depend on asynchronous app and URL mode resolution.
-    @MainActor
-    private func passesRecordingPreflight() async -> Bool {
-        if !ModeManager.shared.hasEnabledConfiguration {
-            await failRecordingPreflight(
-                title: String(localized: "No mode configured"),
-                actionLabel: String(localized: "Manage Modes"),
-                action: ModeSetupNavigator.openModesSettings
-            )
-            return false
-        }
-
-        return true
-    }
-
-    @MainActor
-    private func failRecordingPreflight(
-        title: String,
-        actionLabel: String,
-        action: @escaping () -> Void
-    ) async {
-        logger.error("❌ Recording preflight failed: \(title, privacy: .public)")
-        recordingState = .idle
-        NotificationManager.shared.showNotification(
-            title: title,
-            type: .error,
-            duration: 7.0,
-            actionButton: (actionLabel, action)
+        return (
+            String(localized: "No transcription model selected"),
+            String(localized: "Manage AI Models"),
+            ModelSetupNavigator.openModelsSettings
         )
-        await recorderUIManager?.dismissRecorderPanel()
     }
 
     // MARK: - Pipeline Dispatch
@@ -471,7 +398,8 @@ class VoiceInkEngine: NSObject, ObservableObject {
     ) async {
         guard
             let transcriptionConfiguration = currentSessionTranscriptionConfiguration
-                ?? ModeRuntimeResolver.transcriptionConfiguration(transcriptionModelManager: transcriptionModelManager)
+                ?? TranscriptionRuntimeResolver.transcriptionConfiguration(
+                    transcriptionModelManager: transcriptionModelManager)
         else {
             transcription.text = String(localized: "Transcription Failed: No model selected")
             transcription.transcriptionStatus = TranscriptionStatus.failed.rawValue
@@ -489,14 +417,11 @@ class VoiceInkEngine: NSObject, ObservableObject {
             audioURL: audioURL,
             transcriptionConfiguration: transcriptionConfiguration,
             formattingConfiguration: {
-                ModeRuntimeResolver.transcriptionFormattingConfiguration()
+                TranscriptionRuntimeResolver.transcriptionFormattingConfiguration()
             },
             session: session,
-            triggerWordModeSelection: { [weak self] text in
-                self?.selectTriggerWordModeIfNeeded(for: text)
-            },
             outputConfiguration: {
-                ModeRuntimeResolver.outputConfiguration()
+                TranscriptionRuntimeResolver.outputConfiguration()
             },
             sendAfterPaste: sendAfterPaste,
             onStateChange: { [weak self] state in
@@ -535,15 +460,6 @@ class VoiceInkEngine: NSObject, ObservableObject {
         if recordingState == .transcribing || recordingState == .busy {
             recordingState = .idle
         }
-    }
-
-    private func selectTriggerWordModeIfNeeded(for text: String) -> String? {
-        guard let (triggeredMode, processedText) = ModeManager.shared.getConfigurationForTriggerWord(text) else {
-            return nil
-        }
-
-        ModeManager.shared.setActiveConfiguration(triggeredMode)
-        return processedText
     }
 
     // MARK: - Cancellation
@@ -628,29 +544,15 @@ class VoiceInkEngine: NSObject, ObservableObject {
         duration: TimeInterval,
         transcriptionStatus: TranscriptionStatus
     ) -> Transcription {
-        let modeMetadata = currentModeMetadata()
-
         return Transcription(
             text: text,
             duration: duration,
             audioFileURL: audioURL.absoluteString,
-            transcriptionModelName: ModeRuntimeResolver.transcriptionConfiguration(
+            transcriptionModelName: TranscriptionRuntimeResolver.transcriptionConfiguration(
                 transcriptionModelManager: transcriptionModelManager
             )?.model.displayName,
-            modeName: modeMetadata.name,
-            modeEmoji: modeMetadata.emoji,
             transcriptionStatus: transcriptionStatus
         )
-    }
-
-    private func currentModeMetadata() -> (name: String?, emoji: String?) {
-        guard let mode = ModeManager.shared.currentEffectiveConfiguration,
-            mode.isEnabled
-        else {
-            return (nil, nil)
-        }
-
-        return (mode.name, mode.icon.value)
     }
 
     // MARK: - Resource Cleanup

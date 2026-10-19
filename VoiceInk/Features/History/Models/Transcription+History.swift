@@ -14,11 +14,4 @@ extension Transcription {
         }
         return url
     }
-
-    var recordedHistoryModeIcon: ModeIcon? {
-        guard let modeEmoji else { return nil }
-        let value = modeEmoji.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !value.isEmpty else { return nil }
-        return value.isValidEmoji ? .emoji(value) : .symbol(value)
-    }
 }

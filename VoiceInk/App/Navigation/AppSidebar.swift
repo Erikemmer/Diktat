@@ -62,7 +62,6 @@ private extension ViewType {
     }
 
     static let primaryItems: [ViewType] = [
-        .modes,
         .history,
         .dictionary,
         .models,
@@ -84,7 +83,6 @@ private extension ViewType {
         switch self {
         case .history: return "doc.text.fill"
         case .models: return "cpu"
-        case .modes: return "sparkles.square.fill.on.square"
         case .audio: return "mic.fill"
         case .dictionary: return "text.book.closed.fill"
         case .settings: return "gearshape.fill"
@@ -93,8 +91,6 @@ private extension ViewType {
 
     var sidebarIconStyle: SidebarIconStyle {
         switch self {
-        case .modes:
-            return .init(background: AppTheme.Sidebar.modes)
         case .models:
             return .init(background: AppTheme.Sidebar.models)
         case .audio:

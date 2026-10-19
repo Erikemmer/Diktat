@@ -62,7 +62,7 @@ final class ModelPrewarmService: ObservableObject {
         guard shouldPrewarm() else { return }
 
         guard
-            let transcriptionConfiguration = ModeRuntimeResolver.transcriptionConfiguration(
+            let transcriptionConfiguration = TranscriptionRuntimeResolver.transcriptionConfiguration(
                 transcriptionModelManager: transcriptionModelManager
             )
         else {
@@ -113,7 +113,7 @@ final class ModelPrewarmService: ObservableObject {
 
         // Prewarm only local runtimes that benefit from retained preparation.
         guard
-            let model = ModeRuntimeResolver.transcriptionConfiguration(
+            let model = TranscriptionRuntimeResolver.transcriptionConfiguration(
                 transcriptionModelManager: transcriptionModelManager
             )?.model
         else {

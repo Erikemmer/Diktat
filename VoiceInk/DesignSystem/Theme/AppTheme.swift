@@ -85,7 +85,6 @@ enum AppTheme {
     }
 
     enum Sidebar {
-        static let modes = Color(nsColor: .systemIndigo)
         static let models = Color(nsColor: .systemBrown)
         static let audio = Color(nsColor: .systemPink)
         static let dictionary = Color(nsColor: .systemBlue)

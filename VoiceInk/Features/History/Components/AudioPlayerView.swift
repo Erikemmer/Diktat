@@ -353,9 +353,7 @@ struct AudioPlayerView: View {
     @State private var isHovering = false
     @State private var isRetranscribing = false
     @State private var operationFeedback: OperationFeedback?
-    @State private var showModePopover = false
     @EnvironmentObject private var engine: VoiceInkEngine
-    @ObservedObject private var modeManager = ModeManager.shared
     @Environment(\.modelContext) private var modelContext
 
     private var isOperationInProgress: Bool {
@@ -364,10 +362,6 @@ struct AudioPlayerView: View {
 
     private var transcriptionService: AudioTranscriptionService {
         AudioTranscriptionService(modelContext: modelContext, engine: engine)
-    }
-
-    private var selectedMode: ModeConfig? {
-        modeManager.currentEffectiveConfiguration
     }
 
     var body: some View {
@@ -411,8 +405,6 @@ struct AudioPlayerView: View {
                     }
                     .buttonStyle(.plain)
                     .help("Playback speed")
-
-                    modeSelectorButton
 
                     CircleIconButton(
                         icon: playerManager.isPlaying ? "pause.fill" : "play.fill",
@@ -463,38 +455,6 @@ struct AudioPlayerView: View {
         NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
     }
 
-    private var modeSelectorButton: some View {
-        Button {
-            showModePopover.toggle()
-        } label: {
-            Circle()
-                .fill(selectedMode == nil ? AppTheme.Surface.subtle : AppTheme.Surface.controlActive)
-                .frame(width: 32, height: 32)
-                .overlay {
-                    if let selectedMode {
-                        ModeIconView(icon: selectedMode.icon, size: selectedMode.icon.kind == .emoji ? 14 : 12)
-                    } else {
-                        Image(systemName: "square.grid.2x2")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.primary.opacity(0.6))
-                    }
-                }
-        }
-        .buttonStyle(.plain)
-        .opacity(selectedMode == nil ? 0.4 : 1.0)
-        .help(selectedMode.map { "Mode: \($0.name)" } ?? "Select mode")
-        .popover(isPresented: $showModePopover, arrowEdge: .bottom) {
-            ModePopover(selectedModeId: selectedMode?.id) { mode in
-                selectMode(mode)
-            }
-        }
-    }
-
-    private func selectMode(_ mode: ModeConfig) {
-        modeManager.setActiveConfiguration(mode)
-        showModePopover = false
-    }
-
     private func showSuccessFeedback(_ feedback: OperationFeedback, title: String) {
         operationFeedback = feedback
         NotificationManager.shared.showNotification(title: title, type: .success, duration: 1.0)
@@ -510,14 +470,8 @@ struct AudioPlayerView: View {
     }
 
     private func retranscribeAudio() {
-        guard let selectedMode else {
-            showErrorNotification(String(localized: "No mode selected"))
-            return
-        }
-
         guard
-            let transcriptionConfiguration = ModeRuntimeResolver.transcriptionConfiguration(
-                mode: selectedMode,
+            let transcriptionConfiguration = TranscriptionRuntimeResolver.transcriptionConfiguration(
                 transcriptionModelManager: engine.transcriptionModelManager
             )
         else {
@@ -532,8 +486,7 @@ struct AudioPlayerView: View {
             do {
                 let result = try await transcriptionService.retranscribeAudio(
                     from: url,
-                    using: transcriptionConfiguration.model,
-                    mode: selectedMode
+                    using: transcriptionConfiguration.model
                 )
                 await MainActor.run {
                     isRetranscribing = false

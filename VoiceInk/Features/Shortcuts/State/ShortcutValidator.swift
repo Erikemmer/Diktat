@@ -30,10 +30,6 @@ enum ShortcutValidator {
             return error
         }
 
-        if let reservedAction = reservedActionConflicting(with: shortcut) {
-            return .alreadyUsedBy(reservedAction.displayName)
-        }
-
         if systemReservedShortcuts.contains(where: { $0.conflicts(with: shortcut) }) {
             return .reservedBySystem
         }
@@ -96,32 +92,11 @@ enum ShortcutValidator {
         return nil
     }
 
-    private static func reservedActionConflicting(with shortcut: Shortcut) -> ShortcutAction? {
-        for (action, reservedShortcut) in reservedRecorderPanelShortcuts {
-            if reservedShortcut.conflicts(with: shortcut) {
-                return action
-            }
-        }
-
-        return nil
-    }
-
     private static var allStoredActions: [ShortcutAction] {
         var seenActions = Set<ShortcutAction>()
-        let actions =
-            ShortcutAction.legacyKeyboardShortcutActions
-            + ModeManager.shared.configurations.map { ShortcutAction.mode($0.id) }
+        let actions = ShortcutAction.legacyKeyboardShortcutActions
 
         return actions.filter { seenActions.insert($0).inserted }
-    }
-
-    private static var reservedRecorderPanelShortcuts: [(ShortcutAction, Shortcut)] {
-        digitKeyCodes.enumerated().map { index, keyCode in
-            (
-                ShortcutAction.recorderPanelMode(index),
-                Shortcut.key(keyCode: keyCode, modifierFlags: [.option])
-            )
-        }
     }
 
     private static var systemReservedShortcuts: [Shortcut] {
@@ -242,18 +217,5 @@ enum ShortcutValidator {
         UInt16(kVK_ANSI_KeypadMinus),
         UInt16(kVK_ANSI_KeypadPlus),
         UInt16(kVK_ANSI_KeypadEquals),
-    ]
-
-    private static let digitKeyCodes: [UInt16] = [
-        UInt16(kVK_ANSI_1),
-        UInt16(kVK_ANSI_2),
-        UInt16(kVK_ANSI_3),
-        UInt16(kVK_ANSI_4),
-        UInt16(kVK_ANSI_5),
-        UInt16(kVK_ANSI_6),
-        UInt16(kVK_ANSI_7),
-        UInt16(kVK_ANSI_8),
-        UInt16(kVK_ANSI_9),
-        UInt16(kVK_ANSI_0),
     ]
 }

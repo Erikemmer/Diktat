@@ -8,10 +8,8 @@ enum ShortcutAction: Hashable {
     case cancelRecorder
     case openQuickHistory
     case quickAddToDictionary
-    case mode(UUID)
     case recorderPanelEscape
     case recorderPanelReturn
-    case recorderPanelMode(Int)
 
     var userDefaultsKey: String {
         "Shortcut_\(storageName)"
@@ -19,7 +17,7 @@ enum ShortcutAction: Hashable {
 
     var isStored: Bool {
         switch self {
-        case .recorderPanelEscape, .recorderPanelReturn, .recorderPanelMode:
+        case .recorderPanelEscape, .recorderPanelReturn:
             return false
         default:
             return true
@@ -42,14 +40,10 @@ enum ShortcutAction: Hashable {
             return "openHistoryWindow"
         case .quickAddToDictionary:
             return "quickAddToDictionary"
-        case .mode(let id):
-            return "mode_\(id.uuidString)"
         case .recorderPanelEscape:
             return "recorderPanelEscape"
         case .recorderPanelReturn:
             return "recorderPanelReturn"
-        case .recorderPanelMode(let index):
-            return "recorderPanelMode_\(index)"
         }
     }
 
@@ -69,22 +63,10 @@ enum ShortcutAction: Hashable {
             return String(localized: "Open Quick History")
         case .quickAddToDictionary:
             return String(localized: "Quick Add to Dictionary")
-        case .mode(let id):
-            if let config = ModeManager.shared.getConfiguration(with: id) {
-                return String(format: String(localized: "%@ Mode"), config.name)
-            }
-
-            if let template = StarterModeCatalog.templates.first(where: { $0.id == id }) {
-                return String(format: String(localized: "%@ Mode"), template.name)
-            }
-
-            return String(localized: "Mode")
         case .recorderPanelEscape:
             return String(localized: "Recorder Cancel")
         case .recorderPanelReturn:
             return String(localized: "Auto Send")
-        case .recorderPanelMode(let index):
-            return String(format: String(localized: "Select Mode %@"), Self.displayNumber(forRecorderPanelIndex: index))
         }
     }
 
@@ -108,8 +90,4 @@ enum ShortcutAction: Hashable {
         .openQuickHistory,
         .quickAddToDictionary,
     ]
-
-    private static func displayNumber(forRecorderPanelIndex index: Int) -> String {
-        index == 9 ? "10" : "\(index + 1)"
-    }
 }

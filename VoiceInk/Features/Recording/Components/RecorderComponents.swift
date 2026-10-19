@@ -1,40 +1,5 @@
 import SwiftUI
 
-// MARK: - Icon Toggle Button
-
-struct RecorderToggleButton: View {
-    let isEnabled: Bool
-    let icon: String
-    let disabled: Bool
-    let action: () -> Void
-
-    init(isEnabled: Bool, icon: String, disabled: Bool = false, action: @escaping () -> Void) {
-        self.isEnabled = isEnabled
-        self.icon = icon
-        self.disabled = disabled
-        self.action = action
-    }
-
-    private var isEmoji: Bool {
-        !icon.contains(".") && !icon.contains("-") && icon.unicodeScalars.contains { !$0.isASCII }
-    }
-
-    var body: some View {
-        Button(action: action) {
-            Group {
-                if isEmoji {
-                    Text(icon).font(.system(size: 14))
-                } else {
-                    Image(systemName: icon).font(.system(size: 13))
-                }
-            }
-            .foregroundColor(disabled ? .white.opacity(0.3) : (isEnabled ? .white : .white.opacity(0.6)))
-        }
-        .buttonStyle(PlainButtonStyle())
-        .disabled(disabled)
-    }
-}
-
 // MARK: - Record Button
 
 struct RecorderRecordButton: View {
@@ -210,63 +175,6 @@ struct ProgressAnimation: View {
         timer = Timer.scheduledTimer(withTimeInterval: animationSpeed, repeats: true) { _ in
             currentDot = (currentDot + 1) % (dotCount + 2)
             if currentDot > dotCount { currentDot = -1 }
-        }
-    }
-}
-
-// MARK: - Mode Button
-
-struct RecorderModeButton: View {
-    @ObservedObject private var modeManager = ModeManager.shared
-    let buttonSize: CGFloat
-    let padding: EdgeInsets
-
-    @State private var isPopoverPresented = false
-    @State private var isHoveringButton: Bool = false
-    @State private var isHoveringPopover: Bool = false
-    @State private var dismissWorkItem: DispatchWorkItem?
-
-    init(buttonSize: CGFloat = 28, padding: EdgeInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7)) {
-        self.buttonSize = buttonSize
-        self.padding = padding
-    }
-
-    var body: some View {
-        RecorderToggleButton(
-            isEnabled: !modeManager.enabledConfigurations.isEmpty,
-            icon: modeManager.enabledConfigurations.isEmpty
-                ? "square.grid.2x2" : (modeManager.currentEffectiveConfiguration?.icon.value ?? "square.grid.2x2"),
-            disabled: modeManager.enabledConfigurations.isEmpty
-        ) {
-            isPopoverPresented.toggle()
-        }
-        .frame(width: buttonSize)
-        .padding(padding)
-        .onHover {
-            isHoveringButton = $0
-            syncPopoverVisibility()
-        }
-        .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
-            ModePopover()
-                .onHover {
-                    isHoveringPopover = $0
-                    syncPopoverVisibility()
-                }
-        }
-    }
-
-    private func syncPopoverVisibility() {
-        if isHoveringButton || isHoveringPopover {
-            dismissWorkItem?.cancel()
-            dismissWorkItem = nil
-            isPopoverPresented = true
-        } else {
-            dismissWorkItem?.cancel()
-            let work = DispatchWorkItem { [isPopoverPresentedBinding = $isPopoverPresented] in
-                isPopoverPresentedBinding.wrappedValue = false
-            }
-            dismissWorkItem = work
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: work)
         }
     }
 }

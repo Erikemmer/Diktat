@@ -2,7 +2,6 @@ import OSLog
 import SwiftUI
 
 enum ViewType: String, CaseIterable, Identifiable {
-    case modes = "Modes"
     case models = "AI Models"
     case history = "History"
     case audio = "Audio"
@@ -84,8 +83,6 @@ struct ContentView: View {
             AudioSetupView()
         case .dictionary:
             DictionarySettingsView()
-        case .modes:
-            ModeView()
         case .settings:
             SettingsView()
         }

@@ -10,7 +10,6 @@ struct MenuBarView: View {
     @EnvironmentObject var menuBarManager: MenuBarManager
     @EnvironmentObject var mainWindowNavigation: MainWindowNavigation
     @ObservedObject private var launchAtLoginManager = LaunchAtLoginManager.shared
-    @ObservedObject private var modeManager = ModeManager.shared
     @ObservedObject var audioDeviceManager = AudioDeviceManager.shared
 
     var body: some View {
@@ -27,39 +26,8 @@ struct MenuBarView: View {
 
             Divider()
 
-            Menu {
-                ForEach(modeManager.enabledConfigurations) { config in
-                    Button {
-                        modeManager.setActiveConfiguration(config)
-                    } label: {
-                        let isActive = modeManager.currentEffectiveConfiguration?.id == config.id
-                        Text(isActive ? "\(config.name)  ✓" : config.name)
-                    }
-                }
-
-                if modeManager.enabledConfigurations.isEmpty {
-                    Text("No modes available")
-                        .foregroundColor(.secondary)
-                }
-
-                Divider()
-
-                Button("Manage Modes") {
-                    showMainWindowAndNavigate(to: "Modes")
-                }
-
-                Button("Manage Models") {
-                    showMainWindowAndNavigate(to: "AI Models")
-                }
-            } label: {
-                HStack {
-                    Image(systemName: "sparkles.square.fill.on.square")
-                        .font(.system(size: 11, weight: .medium))
-                    let activeMode = modeManager.currentEffectiveConfiguration
-                    Text(String(format: String(localized: "Mode: %@"), activeMode?.name ?? String(localized: "None")))
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.system(size: 10))
-                }
+            Button("Manage Models") {
+                showMainWindowAndNavigate(to: "AI Models")
             }
 
             Menu {

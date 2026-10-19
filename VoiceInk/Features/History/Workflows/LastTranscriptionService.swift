@@ -82,7 +82,7 @@ class LastTranscriptionService: ObservableObject {
             }
 
             guard
-                let transcriptionConfiguration = ModeRuntimeResolver.transcriptionConfiguration(
+                let transcriptionConfiguration = TranscriptionRuntimeResolver.transcriptionConfiguration(
                     transcriptionModelManager: transcriptionModelManager
                 )
             else {

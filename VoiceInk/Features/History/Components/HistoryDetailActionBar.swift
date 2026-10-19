@@ -12,19 +12,12 @@ struct HistoryDetailActionBar: View {
 
     @EnvironmentObject private var engine: VoiceInkEngine
     @Environment(\.modelContext) private var modelContext
-    @ObservedObject private var modeManager = ModeManager.shared
 
     @State private var didCopy = false
-    @State private var isShowingModes = false
     @State private var isWorking = false
-
-    private var selectedMode: ModeConfig? {
-        modeManager.currentEffectiveConfiguration
-    }
 
     var body: some View {
         HStack(spacing: 8) {
-            modeButton
             retryButton
             finderButton
             infoButton
@@ -33,35 +26,6 @@ struct HistoryDetailActionBar: View {
         }
         .padding(.horizontal, 10)
         .frame(height: HistoryLayout.actionBarHeight)
-    }
-
-    private var modeButton: some View {
-        Button {
-            isShowingModes.toggle()
-        } label: {
-            actionLabel(title: selectedMode?.name ?? String(localized: "Select Mode")) {
-                if let selectedMode {
-                    ModeIconView(
-                        icon: selectedMode.icon,
-                        size: selectedMode.icon.kind == .emoji ? 13 : 11,
-                        color: AppTheme.Text.primary
-                    )
-                    .frame(width: 16)
-                } else {
-                    Image(systemName: "square.grid.2x2")
-                }
-            }
-        }
-        .buttonStyle(.plain)
-        .disabled(isWorking)
-        .popover(isPresented: $isShowingModes, arrowEdge: .bottom) {
-            ModePopover(selectedModeId: selectedMode?.id) { mode in
-                modeManager.setActiveConfiguration(mode)
-                isShowingModes = false
-                retranscribe(using: mode)
-            }
-        }
-        .help("Select a mode and retranscribe")
     }
 
     private var textActionButton: some View {
@@ -94,14 +58,10 @@ struct HistoryDetailActionBar: View {
     private var retryButton: some View {
         HistoryIconButton(
             systemName: "arrow.clockwise",
-            help: "Retranscribe with the selected mode",
+            help: "Retranscribe with the selected model",
             isLoading: isWorking
         ) {
-            guard let selectedMode else {
-                showError(String(localized: "No mode selected"))
-                return
-            }
-            retranscribe(using: selectedMode)
+            retranscribe()
         }
         .disabled(isWorking || audioURL == nil)
     }
@@ -126,33 +86,12 @@ struct HistoryDetailActionBar: View {
         )
     }
 
-    private func actionLabel<Icon: View>(title: String, @ViewBuilder icon: () -> Icon) -> some View {
-        HStack(spacing: 7) {
-            icon()
-            Text(title)
-                .lineLimit(1)
-                .truncationMode(.tail)
-            Image(systemName: "chevron.down")
-                .font(.system(size: 8, weight: .semibold))
-                .foregroundStyle(AppTheme.Text.muted)
-        }
-        .font(.system(size: 11, weight: .medium))
-        .foregroundStyle(AppTheme.Text.secondary)
-        .padding(.horizontal, 10)
-        .frame(maxWidth: 140)
-        .frame(height: HistoryLayout.buttonHeight)
-        .clipped()
-        .background(QuickPanelButtonBackground())
-        .fixedSize(horizontal: true, vertical: false)
-    }
-
-    private func retranscribe(using mode: ModeConfig) {
+    private func retranscribe() {
         guard let audioURL else {
             showError(String(localized: "Audio file is unavailable"))
             return
         }
-        guard let configuration = ModeRuntimeResolver.transcriptionConfiguration(
-            mode: mode,
+        guard let configuration = TranscriptionRuntimeResolver.transcriptionConfiguration(
             transcriptionModelManager: engine.transcriptionModelManager
         ) else {
             showError(String(localized: "No transcription model selected"))
@@ -166,8 +105,7 @@ struct HistoryDetailActionBar: View {
             do {
                 let result = try await service.retranscribeAudio(
                     from: audioURL,
-                    using: configuration.model,
-                    mode: mode
+                    using: configuration.model
                 )
                 await MainActor.run {
                     isWorking = false

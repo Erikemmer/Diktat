@@ -97,25 +97,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VoiceInk muss mit Ihrem Browser interagieren, um die aktuelle Website zu erkennen und website-spezifische Konfigurationen anzuwenden."
+            "value" : "VoiceInk muss System Events steuern, um die Transkription mit der AppleScript-Einfügemethode einzufügen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "VoiceInk needs to interact with your browser to detect the current website for applying website-specific configurations."
+            "value" : "VoiceInk needs to control System Events to paste your transcription with the AppleScript paste method."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VoiceInk 需要与浏览器交互以检测当前网站，从而应用针对特定网站的配置。"
+            "value" : "VoiceInk 需要控制 System Events，以便通过 AppleScript 粘贴方式插入转录文本。"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VoiceInk doit interagir avec votre navigateur pour détecter le site Web actuel afin d'appliquer des configurations spécifiques au site Web."
+            "value" : "VoiceInk doit contrôler System Events pour coller la transcription avec la méthode de collage AppleScript."
           }
         }
       }

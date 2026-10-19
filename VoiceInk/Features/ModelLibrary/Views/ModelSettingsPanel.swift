@@ -124,10 +124,7 @@ private struct WhisperPromptSettingsSection: View {
     }
 
     private func selectCurrentTranscriptionLanguage() {
-        let activeLanguage =
-            ModeManager.shared.currentEffectiveConfiguration?.selectedLanguage
-            ?? UserDefaults.standard.string(forKey: "SelectedLanguage")
-            ?? "en"
+        let activeLanguage = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en"
 
         promptLanguage = supportedLanguages[activeLanguage] == nil ? "en" : activeLanguage
     }

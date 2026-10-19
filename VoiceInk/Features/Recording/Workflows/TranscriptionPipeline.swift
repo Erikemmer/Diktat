@@ -23,7 +23,7 @@ class TranscriptionPipeline {
     /// - Parameters:
     ///   - transcription: The pending Transcription SwiftData object to populate and save.
     ///   - audioURL: The recorded audio file.
-    ///   - transcriptionConfiguration: Mode-resolved transcription engine settings for this phase.
+    ///   - transcriptionConfiguration: Resolved transcription engine settings for this phase.
     ///   - session: An active streaming session if one was prepared, otherwise nil.
     ///   - onStateChange: Called when the pipeline moves to a new recording state (e.g. `.idle`).
     ///   - shouldCancel: Returns true if the user requested cancellation.
@@ -35,7 +35,6 @@ class TranscriptionPipeline {
         transcriptionConfiguration: TranscriptionRuntimeConfiguration,
         formattingConfiguration resolveFormattingConfiguration: @escaping () -> TranscriptionFormattingConfiguration,
         session: TranscriptionSession?,
-        triggerWordModeSelection: @escaping (String) -> String? = { _ in nil },
         outputConfiguration: @escaping () -> OutputRuntimeConfiguration,
         sendAfterPaste: Bool = false,
         onStateChange: @escaping (RecordingState) -> Void,
@@ -97,16 +96,8 @@ class TranscriptionPipeline {
 
             text = text.trimmingCharacters(in: .whitespacesAndNewlines)
 
-            if let processedText = triggerWordModeSelection(text) {
-                text = processedText
-            }
-
             let formattingConfiguration = resolveFormattingConfiguration()
             let resolvedOutputConfiguration = outputConfiguration()
-            let modeMetadata = metadata(
-                for: formattingConfiguration.mode ?? resolvedOutputConfiguration.mode
-                    ?? transcriptionConfiguration.mode
-            )
 
             if formattingConfiguration.isTextFormattingEnabled {
                 text = ParagraphFormatter.format(text)
@@ -121,8 +112,6 @@ class TranscriptionPipeline {
             transcription.duration = actualDuration
             transcription.transcriptionModelName = model.displayName
             transcription.transcriptionDuration = transcriptionDuration
-            transcription.modeName = modeMetadata.name
-            transcription.modeEmoji = modeMetadata.emoji
             finalText = cleanedText
             outputForDelivery = resolvedOutputConfiguration
 
@@ -174,13 +163,5 @@ class TranscriptionPipeline {
         )
 
         saveTranscriptionAndPostCompletion()
-    }
-
-    private func metadata(for mode: ModeConfig?) -> (name: String?, emoji: String?) {
-        guard let mode, mode.isEnabled else {
-            return (nil, nil)
-        }
-
-        return (mode.name, mode.icon.value)
     }
 }

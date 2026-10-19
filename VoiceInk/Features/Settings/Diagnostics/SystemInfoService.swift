@@ -9,9 +9,7 @@ final class SystemInfoService {
     private init() {}
 
     func getSystemInfoString() -> String {
-        let modeConfigurationInfo = getModeConfigurationInfo(
-            for: ModeManager.shared.currentEffectiveConfiguration
-        )
+        let transcriptionConfigurationInfo = getTranscriptionConfigurationInfo()
         let info = """
             === VOICEINK SYSTEM INFORMATION ===
             Generated: \(Self.englishTimestamp())
@@ -38,8 +36,8 @@ final class SystemInfoService {
             Primary Shortcut: \(getPrimaryShortcut())
             Secondary Shortcut: \(getSecondaryShortcut())
 
-            MODE CONFIGURATION:
-            \(modeConfigurationInfo)
+            TRANSCRIPTION CONFIGURATION:
+            \(transcriptionConfigurationInfo)
 
             UI SETTINGS:
             Hide Dock Icon: \(UserDefaults.standard.bool(forKey: "IsMenuBarOnly"))
@@ -156,40 +154,31 @@ final class SystemInfoService {
         ShortcutStore.shortcut(for: action)?.displayString ?? ""
     }
 
-    private func getModeConfigurationInfo(for mode: ModeConfig?) -> String {
-        guard let mode else {
-            return "No enabled mode"
-        }
-
-        let model = mode.selectedTranscriptionModelName.flatMap { modelName in
+    private func getTranscriptionConfigurationInfo() -> String {
+        let selectedModelName = UserDefaults.standard.string(forKey: "CurrentTranscriptionModel")
+        let model = selectedModelName.flatMap { modelName in
             TranscriptionModelRegistry.model(forSelectionKey: modelName, in: TranscriptionModelRegistry.models)
         }
         let modelDescription = model?.displayName
-            ?? mode.selectedTranscriptionModelName
+            ?? selectedModelName
             ?? "Not configured"
-        let languageDescription = getModeLanguageDescription(for: mode, model: model)
+        let languageDescription = getLanguageDescription(model: model)
 
         return """
-            Mode: \(mode.name)
             Transcription Model: \(modelDescription)
             Language: \(languageDescription)
             """
     }
 
-    private func getModeLanguageDescription(for mode: ModeConfig, model: (any TranscriptionModel)?) -> String {
+    private func getLanguageDescription(model: (any TranscriptionModel)?) -> String {
+        let selectedLanguage = UserDefaults.standard.string(forKey: "SelectedLanguage")
+
         guard let model else {
-            return mode.selectedLanguage ?? "Not configured"
+            return selectedLanguage ?? "Not configured"
         }
 
-        let language = TranscriptionLanguageSupport.validLanguageOrFallback(
-            mode.selectedLanguage,
-            for: model,
-            realtimeEnabled: mode.isRealtimeTranscriptionEnabled
-        )
-        let displayName = TranscriptionLanguageSupport.languages(
-            for: model,
-            realtimeEnabled: mode.isRealtimeTranscriptionEnabled
-        )[language]
+        let language = TranscriptionLanguageSupport.validLanguageOrFallback(selectedLanguage, for: model)
+        let displayName = TranscriptionLanguageSupport.languages(for: model)[language]
 
         guard let displayName, displayName.caseInsensitiveCompare(language) != .orderedSame else {
             return language

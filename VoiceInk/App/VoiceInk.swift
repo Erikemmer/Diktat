@@ -19,7 +19,6 @@ struct VoiceInkApp: App {
     @StateObject private var recordingShortcutManager: RecordingShortcutManager
     @StateObject private var menuBarManager: MenuBarManager
     @StateObject private var mainWindowNavigation = MainWindowNavigation.shared
-    @StateObject private var activeWindowService = ActiveWindowService.shared
     @State private var showMenuBarIcon = true
     @State private var didShowLaunchReminders = false
 
@@ -136,9 +135,6 @@ struct VoiceInkApp: App {
         let menuBarManager = MenuBarManager()
         _menuBarManager = StateObject(wrappedValue: menuBarManager)
         menuBarManager.configure(engine: engine)
-
-        let activeWindowService = ActiveWindowService.shared
-        _activeWindowService = StateObject(wrappedValue: activeWindowService)
 
         let prewarmService = ModelPrewarmService(
             transcriptionModelManager: transcriptionModelManager,
@@ -341,16 +337,6 @@ struct VoiceInkApp: App {
                 type: .warning,
                 duration: 7.0,
                 actionButton: (String(localized: "Open Settings"), Self.openAccessibilitySettings)
-            )
-            return
-        }
-
-        if !ModeManager.shared.hasEnabledConfiguration {
-            NotificationManager.shared.showNotification(
-                title: String(localized: "No mode configured"),
-                type: .warning,
-                duration: 7.0,
-                actionButton: (String(localized: "Manage Modes"), ModeSetupNavigator.openModesSettings)
             )
         }
     }

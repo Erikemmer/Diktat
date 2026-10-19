@@ -161,16 +161,6 @@ struct HistoryTranscriptionRow: View {
     private var selectionButton: some View {
         Button(action: onSelect) {
             HStack(spacing: 12) {
-                if let icon = transcription.recordedHistoryModeIcon {
-                    ModeIconView(
-                        icon: icon,
-                        size: icon.kind == .emoji ? 18 : 16,
-                        color: AppTheme.Text.primary
-                    )
-                    .frame(width: 26)
-                    .accessibilityHidden(true)
-                }
-
                 Text(transcription.preferredHistoryText)
                     .font(.system(size: 13))
                     .foregroundStyle(AppTheme.Text.primary)

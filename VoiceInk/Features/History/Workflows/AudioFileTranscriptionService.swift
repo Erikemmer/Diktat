@@ -36,7 +36,7 @@ class AudioTranscriptionService: ObservableObject {
         self.serviceRegistry = serviceRegistry
     }
 
-    func retranscribeAudio(from url: URL, using model: any TranscriptionModel, mode: ModeConfig? = nil) async throws
+    func retranscribeAudio(from url: URL, using model: any TranscriptionModel) async throws
         -> AudioRetranscriptionResult
     {
         guard FileManager.default.fileExists(atPath: url.path) else {
@@ -48,25 +48,21 @@ class AudioTranscriptionService: ObservableObject {
         }
 
         do {
-            let mode = mode ?? ModeManager.shared.currentEffectiveConfiguration
             let language = TranscriptionLanguageSupport.validLanguageOrFallback(
-                mode?.selectedLanguage,
-                for: model,
-                realtimeEnabled: mode?.isRealtimeTranscriptionEnabled
+                UserDefaults.standard.string(forKey: "SelectedLanguage"),
+                for: model
             )
             let requestContext = TranscriptionRequestContext(
                 language: language,
                 prompt: model.provider == .whisper ? WhisperPrompt.resolvedPrompt(for: language) : nil
             )
-            let modeName = (mode?.isEnabled == true) ? mode?.name : nil
-            let modeEmoji = (mode?.isEnabled == true) ? mode?.icon.value : nil
 
             let transcriptionStart = Date()
             var text = try await serviceRegistry.transcribe(audioURL: url, model: model, context: requestContext)
             let transcriptionDuration = Date().timeIntervalSince(transcriptionStart)
             text = TranscriptionOutputFilter.filter(text)
             text = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            let formattingConfiguration = ModeRuntimeResolver.transcriptionFormattingConfiguration(mode: mode)
+            let formattingConfiguration = TranscriptionRuntimeResolver.transcriptionFormattingConfiguration()
 
             if formattingConfiguration.isTextFormattingEnabled {
                 text = ParagraphFormatter.format(text)
@@ -102,9 +98,7 @@ class AudioTranscriptionService: ObservableObject {
                 audioFileURL: permanentURLString,
                 transcriptionModelName: model.displayName,
                 promptName: nil,
-                transcriptionDuration: transcriptionDuration,
-                modeName: modeName,
-                modeEmoji: modeEmoji
+                transcriptionDuration: transcriptionDuration
             )
             modelContext.insert(newTranscription)
             do {
