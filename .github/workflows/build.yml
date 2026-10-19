@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: ['ci/**', 'diktat/**']
+  workflow_dispatch:
+
+jobs:
+  local:
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode-Version
+        run: xcodebuild -version
+      - name: Bauen (make local)
+        run: make local 2>&1 | tee build.log
+      - name: App packen
+        if: success()
+        run: ditto -c -k --keepParent "$HOME/Downloads/"*.app app.zip
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build
+          path: |
+            app.zip
+            build.log
