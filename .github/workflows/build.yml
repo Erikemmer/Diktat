@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: ['ci/**', 'diktat/**']
+    branches: ['ci/**', 'diktat/**', 'main']
   workflow_dispatch:
 
 jobs:
