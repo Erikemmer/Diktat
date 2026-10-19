@@ -124,7 +124,7 @@ private struct WhisperPromptSettingsSection: View {
     }
 
     private func selectCurrentTranscriptionLanguage() {
-        let activeLanguage = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en"
+        let activeLanguage = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "de"
 
         promptLanguage = supportedLanguages[activeLanguage] == nil ? "en" : activeLanguage
     }
