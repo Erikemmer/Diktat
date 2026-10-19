@@ -116,19 +116,9 @@ enum AutoLearnSettings {
     }
 }
 
-enum OnboardingSettings {
-    static let completedV2Key = "hasCompletedOnboardingV2"
-    static let preparedV2Key = "hasPreparedOnboardingV2"
-}
-
 enum AppDefaults {
     static func registerDefaults() {
         UserDefaults.standard.register(defaults: [
-            // Onboarding & General
-            OnboardingSettings.completedV2Key: false,
-            OnboardingSettings.preparedV2Key: false,
-            "enableAnnouncements": true,
-
             // Clipboard
             "restoreClipboardAfterPaste": true,
             "clipboardRestoreDelay": 2.0,

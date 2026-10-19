@@ -22,8 +22,6 @@ struct VoiceInkApp: App {
     @StateObject private var aiService = AIService()
     @StateObject private var enhancementService: AIEnhancementService
     @StateObject private var activeWindowService = ActiveWindowService.shared
-    @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = false
-    @AppStorage("enableAnnouncements") private var enableAnnouncements = true
     @State private var showMenuBarIcon = true
     @State private var didShowLaunchReminders = false
 
@@ -45,7 +43,6 @@ struct VoiceInkApp: App {
         AppDefaults.registerDefaults()
         AppLanguagePreference.applyStored()
         AppAppearancePreference.applyStored()
-        OnboardingV2Migration.prepareIfNeeded()
 
         let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "Initialization")
         // Keep existing model order stable; append new models after synced entities.
@@ -291,89 +288,57 @@ struct VoiceInkApp: App {
     var body: some Scene {
         Window("VoiceInk", id: AppWindowID.main) {
             Group {
-                if hasCompletedOnboardingV2 {
-                    ContentView()
-                        .environmentObject(engine)
-                        .environmentObject(whisperModelManager)
-                        .environmentObject(fluidAudioModelManager)
-                        .environmentObject(transcriptionModelManager)
-                        .environmentObject(recorderUIManager)
-                        .environmentObject(recordingShortcutManager)
-                        .environmentObject(menuBarManager)
-                        .environmentObject(mainWindowNavigation)
-                        .environmentObject(aiService)
-                        .environmentObject(enhancementService)
-                        .modelContainer(container)
-                        .lazyChangeLogPresenter { isPresenting in
-                            if isPresenting {
-                                if enableAnnouncements {
-                                    AnnouncementsService.shared.stop()
-                                }
-                            } else {
-                                if enableAnnouncements {
-                                    AnnouncementsService.shared.start()
-                                }
-                                showLaunchRemindersIfNeeded()
+                ContentView()
+                    .environmentObject(engine)
+                    .environmentObject(whisperModelManager)
+                    .environmentObject(fluidAudioModelManager)
+                    .environmentObject(transcriptionModelManager)
+                    .environmentObject(recorderUIManager)
+                    .environmentObject(recordingShortcutManager)
+                    .environmentObject(menuBarManager)
+                    .environmentObject(mainWindowNavigation)
+                    .environmentObject(aiService)
+                    .environmentObject(enhancementService)
+                    .modelContainer(container)
+                    .onAppear {
+                        showLaunchRemindersIfNeeded()
+
+                        GitHubStarPromptCoordinator.shared.scheduleIfNeeded(modelContainer: container)
+
+                        // Run due audio-only cleanup and schedule future checks when transcript cleanup is not managing retention.
+                        if !UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isTranscriptionCleanupEnabled)
+                            && UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isAudioCleanupEnabled)
+                        {
+                            Task {
+                                await audioCleanupManager.runAutomaticCleanupIfNeeded(
+                                    modelContext: container.mainContext)
                             }
+                            audioCleanupManager.startAutomaticCleanup(modelContext: container.mainContext)
                         }
-                        .onAppear {
-                            if !ChangeLogManager.needsPresentation() {
-                                if enableAnnouncements {
-                                    AnnouncementsService.shared.start()
-                                }
-                                showLaunchRemindersIfNeeded()
-                            }
 
-                            GitHubStarPromptCoordinator.shared.scheduleIfNeeded(modelContainer: container)
-
-                            // Run due audio-only cleanup and schedule future checks when transcript cleanup is not managing retention.
-                            if !UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isTranscriptionCleanupEnabled)
-                                && UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isAudioCleanupEnabled)
-                            {
-                                Task {
-                                    await audioCleanupManager.runAutomaticCleanupIfNeeded(
-                                        modelContext: container.mainContext)
-                                }
-                                audioCleanupManager.startAutomaticCleanup(modelContext: container.mainContext)
-                            }
-
-                            // Process any pending open-file request now that the main ContentView is ready.
-                            if let pendingURL = appDelegate.pendingOpenFileURL {
+                        // Process any pending open-file request now that the main ContentView is ready.
+                        if let pendingURL = appDelegate.pendingOpenFileURL {
+                            NotificationCenter.default.post(
+                                name: .navigateToDestination, object: nil,
+                                userInfo: ["destination": "Transcribe Audio"])
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                 NotificationCenter.default.post(
-                                    name: .navigateToDestination, object: nil,
-                                    userInfo: ["destination": "Transcribe Audio"])
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                    NotificationCenter.default.post(
-                                        name: .openFileForTranscription, object: nil, userInfo: ["url": pendingURL])
-                                }
-                                appDelegate.pendingOpenFileURL = nil
+                                    name: .openFileForTranscription, object: nil, userInfo: ["url": pendingURL])
                             }
+                            appDelegate.pendingOpenFileURL = nil
                         }
-                        .background(
-                            WindowAccessor { window in
-                                WindowManager.shared.configureWindow(window)
-                            }
-                        )
-                        .onDisappear {
-                            AnnouncementsService.shared.stop()
-                            whisperModelManager.unloadModel()
+                    }
+                    .background(
+                        WindowAccessor { window in
+                            WindowManager.shared.configureWindow(window)
+                        }
+                    )
+                    .onDisappear {
+                        whisperModelManager.unloadModel()
 
-                            // Stop the automatic audio cleanup process
-                            audioCleanupManager.stopAutomaticCleanup()
-                        }
-                } else {
-                    OnboardingView(hasCompletedOnboardingV2: $hasCompletedOnboardingV2)
-                        .environmentObject(fluidAudioModelManager)
-                        .environmentObject(transcriptionModelManager)
-                        .environmentObject(aiService)
-                        .environmentObject(enhancementService)
-                        .frame(width: AppWindowLayout.width)
-                        .frame(minHeight: AppWindowLayout.minimumHeight)
-                        .background(
-                            WindowAccessor { window in
-                                WindowManager.shared.configureWindow(window)
-                            })
-                }
+                        // Stop the automatic audio cleanup process
+                        audioCleanupManager.stopAutomaticCleanup()
+                    }
             }
         }
         .windowStyle(.hiddenTitleBar)

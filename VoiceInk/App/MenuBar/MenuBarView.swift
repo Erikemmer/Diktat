@@ -14,29 +14,10 @@ struct MenuBarView: View {
     @ObservedObject private var launchAtLoginManager = LaunchAtLoginManager.shared
     @ObservedObject private var modeManager = ModeManager.shared
     @ObservedObject var audioDeviceManager = AudioDeviceManager.shared
-    @AppStorage(OnboardingSettings.completedV2Key) private var hasCompletedOnboardingV2 = false
 
     var body: some View {
         VStack {
-            if hasCompletedOnboardingV2 {
-                completedOnboardingMenu
-            } else {
-                onboardingMenu
-            }
-        }
-    }
-
-    private var onboardingMenu: some View {
-        Group {
-            Button("Complete Onboarding") {
-                showMainWindow()
-            }
-
-            Divider()
-
-            Button("Quit VoiceInk") {
-                NSApplication.shared.terminate(nil)
-            }
+            completedOnboardingMenu
         }
     }
 
