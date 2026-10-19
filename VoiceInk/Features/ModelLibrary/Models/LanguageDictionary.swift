@@ -127,6 +127,8 @@ enum LanguageDictionary {
         "ar", "de", "el", "en", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "vi", "zh",
     ])
 
+    static let canary180mFlash = forCodes(["de", "en", "es", "fr"])
+
     static let senseVoiceSmall = forCodes(
         ["en", "ja", "ko", "yue", "zh"],
         includesAutoDetect: true

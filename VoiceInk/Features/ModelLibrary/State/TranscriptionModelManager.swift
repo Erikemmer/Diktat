@@ -67,6 +67,8 @@ class TranscriptionModelManager: ObservableObject {
         }
     }
 
+    static let defaultModelName = "parakeet-tdt-0.6b-v3"
+
     // MARK: - Model loading from UserDefaults
 
     func loadCurrentTranscriptionModel() {
@@ -81,6 +83,14 @@ class TranscriptionModelManager: ObservableObject {
 
             currentTranscriptionModel = savedModel
             ensureSelectedLanguageIsSupported(by: savedModel)
+        } else if UserDefaults.standard.string(forKey: "CurrentTranscriptionModel") == nil,
+            let defaultModel = TranscriptionModelRegistry.model(
+                forSelectionKey: Self.defaultModelName, in: allAvailableModels)
+        {
+            // No selection stored yet (first launch): fall back to Parakeet TDT 0.6B v3.
+            currentTranscriptionModel = defaultModel
+            UserDefaults.standard.set(defaultModel.selectionKey, forKey: "CurrentTranscriptionModel")
+            ensureSelectedLanguageIsSupported(by: defaultModel)
         }
     }
 

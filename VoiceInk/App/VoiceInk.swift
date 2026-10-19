@@ -122,6 +122,15 @@ struct VoiceInkApp: App {
         transcriptionModelManager.refreshAllAvailableModels()
         transcriptionModelManager.loadCurrentTranscriptionModel()
 
+        // Default model (Parakeet v3): download automatically on launch if it is selected but not on disk yet.
+        // Progress is shown on the model card in the model library.
+        if let defaultModel = transcriptionModelManager.currentTranscriptionModel as? FluidAudioModel,
+            defaultModel.name == TranscriptionModelManager.defaultModelName,
+            !fluidAudioModelManager.isFluidAudioModelDownloaded(defaultModel)
+        {
+            fluidAudioModelManager.startDownload(defaultModel)
+        }
+
         _whisperModelManager = State(initialValue: whisperModelManager)
         _fluidAudioModelManager = State(initialValue: fluidAudioModelManager)
         _transcriptionModelManager = StateObject(wrappedValue: transcriptionModelManager)

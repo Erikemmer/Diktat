@@ -368,17 +368,19 @@ final class TranscribeCppModelManager: ObservableObject {
             guard regularFileSize(at: partialURL) == artifact.expectedFileSize else {
                 throw CocoaError(.fileReadCorruptFile)
             }
-            let checksumTask = Task.detached(priority: .utility) {
-                try await Self.sha256(of: partialURL)
-            }
-            let checksum = try await withTaskCancellationHandler {
-                try await checksumTask.value
-            } onCancel: {
-                checksumTask.cancel()
-            }
-            try Task.checkCancellation()
-            guard checksum == artifact.expectedSHA256 else {
-                throw CocoaError(.fileReadCorruptFile)
+            if let expectedSHA256 = artifact.expectedSHA256 {
+                let checksumTask = Task.detached(priority: .utility) {
+                    try await Self.sha256(of: partialURL)
+                }
+                let checksum = try await withTaskCancellationHandler {
+                    try await checksumTask.value
+                } onCancel: {
+                    checksumTask.cancel()
+                }
+                try Task.checkCancellation()
+                guard checksum == expectedSHA256 else {
+                    throw CocoaError(.fileReadCorruptFile)
+                }
             }
         } catch is CancellationError {
             try? FileManager.default.removeItem(at: partialURL)
@@ -393,11 +395,13 @@ final class TranscribeCppModelManager: ObservableObject {
         do {
             try Task.checkCancellation()
             // Commit the checksum first so the final model move makes the installation visible atomically.
-            try artifact.expectedSHA256.write(
-                to: artifact.checksumFileURL,
-                atomically: true,
-                encoding: .utf8
-            )
+            if let expectedSHA256 = artifact.expectedSHA256 {
+                try expectedSHA256.write(
+                    to: artifact.checksumFileURL,
+                    atomically: true,
+                    encoding: .utf8
+                )
+            }
             try Task.checkCancellation()
             try? FileManager.default.removeItem(at: artifact.modelFileURL)
             try FileManager.default.moveItem(at: partialURL, to: artifact.modelFileURL)

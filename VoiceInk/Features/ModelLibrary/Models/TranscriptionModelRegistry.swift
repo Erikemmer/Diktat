@@ -111,6 +111,17 @@ enum TranscriptionModelRegistry {
                 publisher: "FunAudioLLM / Alibaba",
                 supportedLanguages: LanguageDictionary.senseVoiceSmall
             ),
+            TranscribeCppModel(
+                name: "canary-180m-flash",
+                displayName: "Canary 180M Flash",
+                description: "Fast and compact transcription for English, German, Spanish and French that runs privately on your Mac",
+                size: "218 MB",
+                speed: 0.95,
+                accuracy: 0.92,
+                ramUsage: 0.6,
+                publisher: "NVIDIA",
+                supportedLanguages: LanguageDictionary.canary180mFlash
+            ),
 
             // Local Models
             WhisperModel(

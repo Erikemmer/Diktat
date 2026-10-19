@@ -6,12 +6,14 @@ struct TranscribeCppModelArtifact: Sendable {
     let repository: String
     let repositoryRevision: String
     let expectedFileSize: Int64
-    let expectedSHA256: String
+    let expectedSHA256: String?
     let architectureHint: String?
     let enablesInverseTextNormalization: Bool
     let maximumChunkSeconds: Int
     let boundarySearchSeconds: Int
     let boundaryEnergyWindowSamples: Int
+    /// When true, an existing file with this name in the Handy app folder is used directly (no size/checksum check, no copy).
+    var searchesHandyModelFolder: Bool = false
 
     var downloadURL: URL {
         URL(
@@ -34,7 +36,10 @@ struct TranscribeCppModelArtifact: Sendable {
     }
 
     var installedModelFileURL: URL? {
-        modelFileIsValid(in: modelDirectory) ? modelFileURL : nil
+        if searchesHandyModelFolder, let handyFileURL = Self.handyModelFileURL(named: fileName) {
+            return handyFileURL
+        }
+        return modelFileIsValid(in: modelDirectory) ? modelFileURL : nil
     }
 
     func modelFileIsValid(in directory: URL) -> Bool {
@@ -50,6 +55,7 @@ struct TranscribeCppModelArtifact: Sendable {
             return false
         }
 
+        guard let expectedSHA256 else { return true }
         let installedChecksum = try? String(contentsOf: checksumURL, encoding: .utf8)
             .trimmingCharacters(in: .whitespacesAndNewlines)
         return installedChecksum == expectedSHA256
@@ -62,6 +68,48 @@ struct TranscribeCppModelArtifact: Sendable {
     private static var applicationSupportDirectory: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("com.prakashjoshipax.VoiceInk", isDirectory: true)
+    }
+
+    private static var handyApplicationSupportDirectory: URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("com.pais.handy", isDirectory: true)
+    }
+
+    private final class HandyLookupCache: @unchecked Sendable {
+        let lock = NSLock()
+        var entries: [String: (url: URL?, checkedAt: Date)] = [:]
+    }
+
+    private static let handyLookupCache = HandyLookupCache()
+
+    /// Recursively looks for `name` below the Handy app folder. Results are cached briefly because this is queried from UI code.
+    private static func handyModelFileURL(named name: String) -> URL? {
+        handyLookupCache.lock.lock()
+        defer { handyLookupCache.lock.unlock() }
+
+        if let cached = handyLookupCache.entries[name] {
+            if let url = cached.url {
+                if FileManager.default.fileExists(atPath: url.path) { return url }
+            } else if Date().timeIntervalSince(cached.checkedAt) < 5 {
+                return nil
+            }
+        }
+
+        var found: URL?
+        if let enumerator = FileManager.default.enumerator(
+            at: handyApplicationSupportDirectory,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) {
+            for case let url as URL in enumerator where url.lastPathComponent == name {
+                if (try? url.resourceValues(forKeys: [.isRegularFileKey]))?.isRegularFile == true {
+                    found = url
+                    break
+                }
+            }
+        }
+        handyLookupCache.entries[name] = (found, Date())
+        return found
     }
 }
 
@@ -94,9 +142,27 @@ enum TranscribeCppModelCatalog {
         boundaryEnergyWindowSamples: 1_600
     )
 
+    // Size 218,447,648 bytes is taken from the transcribe.cpp catalog (canary-180m-flash.json). The SHA256 is unknown,
+    // so none is verified. The architecture name "canary" is the arch identifier in transcribe.cpp (src/arch/canary).
+    static let canary180mFlash = TranscribeCppModelArtifact(
+        modelName: "canary-180m-flash",
+        fileName: "canary-180m-flash-Q8_0.gguf",
+        repository: "handy-computer/canary-180m-flash-gguf",
+        repositoryRevision: "main",
+        expectedFileSize: 218_447_648,
+        expectedSHA256: nil,
+        architectureHint: "canary",
+        enablesInverseTextNormalization: false,
+        maximumChunkSeconds: 35,
+        boundarySearchSeconds: 5,
+        boundaryEnergyWindowSamples: 1_600,
+        searchesHandyModelFolder: true
+    )
+
     private static let artifactsByModelName = [
         cohereTranscribe.modelName: cohereTranscribe,
         senseVoiceSmall.modelName: senseVoiceSmall,
+        canary180mFlash.modelName: canary180mFlash,
     ]
 
     static func artifact(for modelName: String) -> TranscribeCppModelArtifact? {
