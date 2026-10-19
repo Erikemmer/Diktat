@@ -12,8 +12,7 @@ final class ModelPrewarmService: ObservableObject {
     private let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "ModelPrewarm")
     private lazy var serviceRegistry = TranscriptionServiceRegistry(
         modelProvider: whisperModelManager,
-        modelsDirectory: whisperModelManager.modelsDirectory,
-        modelContext: modelContext
+        modelsDirectory: whisperModelManager.modelsDirectory
     )
     private let prewarmAudioURL = Bundle.main.url(forResource: "sound7", withExtension: "wav")
     private let prewarmEnabledKey = "PrewarmModelOnWake"

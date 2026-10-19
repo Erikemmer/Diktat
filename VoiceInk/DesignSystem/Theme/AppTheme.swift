@@ -89,7 +89,6 @@ enum AppTheme {
         static let audio = Color(nsColor: .systemPink)
         static let dictionary = Color(nsColor: .systemBlue)
         static let fallback = Color(nsColor: .systemGray)
-        static let license = Color(nsColor: .systemGreen)
     }
 
     enum Waveform {
