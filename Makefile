@@ -6,7 +6,7 @@ LOCAL_DERIVED_DATA := $(CURDIR)/.local-build
 LOCAL_CODESIGN_IDENTITY ?=
 RUN_APP_NAME ?= Diktat
 
-.PHONY: all clean whisper setup build local check healthcheck help dev run release
+.PHONY: all clean whisper setup build local check healthcheck help dev run release release-setup
 
 # Default target
 all: check build
@@ -105,6 +105,10 @@ local: check setup
 # Signierte und notarisierte Diktat.dmg zum Weitergeben (siehe scripts/release.sh)
 release: check
 	@./scripts/release.sh
+
+# Einmalig: Notarisierungs-Zugang im Schlüsselbund ablegen
+release-setup:
+	@./scripts/release-setup.sh
 
 # Run application
 run:

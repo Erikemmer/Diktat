@@ -44,13 +44,11 @@ Einmalig vorbereiten:
 
 1. In Xcode unter *Einstellungen → Konten → Zertifikate verwalten → +* ein Zertifikat **Developer ID Application** anlegen.
 2. Unter [appleid.apple.com](https://appleid.apple.com) ein **app-spezifisches Passwort** erzeugen.
-3. Zugangsdaten für die Notarisierung im Schlüsselbund ablegen (die Team-ID steht in Xcode bei deinem Team):
+3. Zugangsdaten für die Notarisierung im Schlüsselbund ablegen. Das Skript findet die Team-ID selbst, fragt nach deiner Apple-ID und lässt Apples Werkzeug das Passwort abfragen (es wird nirgends gespeichert außer im Schlüsselbund):
 
    ```bash
-   xcrun notarytool store-credentials "diktat-notary" --apple-id "deine@apple-id.de" --team-id "TEAMID"
+   make release-setup
    ```
-
-   Das Passwort wird dabei abgefragt und nicht in einer Datei gespeichert.
 
 Danach genügt:
 
