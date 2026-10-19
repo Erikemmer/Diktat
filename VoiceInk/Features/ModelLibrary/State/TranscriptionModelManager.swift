@@ -54,13 +54,6 @@ class TranscriptionModelManager: ObservableObject {
                 return transcribeCppModelManager.isModelDownloaded(named: model.name)
             case .nativeApple:
                 if #available(macOS 26, *) { return true } else { return false }
-            case .custom:
-                return true
-            default:
-                if let cloudProvider = CloudProviderRegistry.provider(for: model.provider) {
-                    return APIKeyManager.shared.hasAPIKey(forProvider: cloudProvider.providerKey)
-                }
-                return false
             }
         }
     }
@@ -152,15 +145,6 @@ class TranscriptionModelManager: ObservableObject {
             }
         } else {
             currentTranscriptionModel = nil
-        }
-    }
-
-    func refreshOpenRouterCatalog() async {
-        do {
-            try await OpenRouterTranscriptionCatalog.refresh()
-            refreshAllAvailableModels()
-        } catch {
-            logger.error("Failed to refresh OpenRouter transcription models: \(error.localizedDescription, privacy: .public)")
         }
     }
 

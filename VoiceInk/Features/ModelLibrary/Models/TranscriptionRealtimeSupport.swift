@@ -10,7 +10,7 @@ enum TranscriptionRealtimeSupport {
             return FluidAudioModelManager.requiresRealtime(named: model.name)
         }
 
-        return CloudProviderRegistry.provider(for: model.provider)?.isStreamingOnly ?? false
+        return false
     }
 
     static func isEnabled(for model: any TranscriptionModel, modeValue: Bool? = nil) -> Bool {

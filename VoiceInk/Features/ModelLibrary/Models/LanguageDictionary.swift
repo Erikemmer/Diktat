@@ -53,13 +53,6 @@ enum LanguageDictionary {
             return ["en": "English"]
         }
 
-        if let cloudProvider = CloudProviderRegistry.provider(for: provider) {
-            guard let codes = cloudProvider.languageCodes else {
-                return all
-            }
-            return forCodes(codes, includesAutoDetect: cloudProvider.includesAutoDetect)
-        }
-
         switch provider {
         case .whisper:
             return languages(matching: whisperLanguageCodes)

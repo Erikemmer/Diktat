@@ -1,5 +1,4 @@
 import Foundation
-import SwiftData
 import os
 
 /// Sendable source that bridges audio chunks from any thread into an AsyncStream.
@@ -123,7 +122,6 @@ class StreamingTranscriptionService {
     private let chunkSource = AudioChunkSource()
     private var state: StreamingState = .idle
     private var committedSegments: [String] = []
-    private let modelContext: ModelContext
     private let fluidAudioService: FluidAudioTranscriptionService?
     private var onPartialTranscript: ((String) -> Void)?
     private let metrics = StreamingMetrics()
@@ -132,10 +130,9 @@ class StreamingTranscriptionService {
     private var firstCommitLogged = false
 
     init(
-        modelContext: ModelContext, fluidAudioService: FluidAudioTranscriptionService? = nil,
+        fluidAudioService: FluidAudioTranscriptionService? = nil,
         onPartialTranscript: ((String) -> Void)? = nil
     ) {
-        self.modelContext = modelContext
         self.fluidAudioService = fluidAudioService
         self.onPartialTranscript = onPartialTranscript
     }
@@ -305,33 +302,27 @@ class StreamingTranscriptionService {
     // MARK: - Private
 
     private func createProvider(for model: any TranscriptionModel) -> StreamingTranscriptionProvider {
-        if model.provider == .fluidAudio {
-            if FluidAudioModelManager.isNemotronModel(named: model.name) {
-                return FluidAudioNemotronStreamingProvider()
-            }
-
-            if FluidAudioModelManager.isParakeetUnifiedModel(named: model.name) {
-                guard let fluidAudioService else {
-                    fatalError("FluidAudioTranscriptionService required for Unified streaming")
-                }
-                return FluidAudioUnifiedStreamingProvider(fluidAudioService: fluidAudioService)
-            }
-
-            guard let fluidAudioService else {
-                fatalError(
-                    "FluidAudioTranscriptionService required for FluidAudio streaming. Ensure it is passed to StreamingTranscriptionService."
-                )
-            }
-            return FluidAudioStreamingProvider(fluidAudioService: fluidAudioService)
-        }
-        guard let cloudProvider = CloudProviderRegistry.provider(for: model.provider),
-            let streamingProvider = cloudProvider.makeStreamingProvider(modelContext: modelContext)
-        else {
+        guard model.provider == .fluidAudio else {
             fatalError(
                 "Unsupported streaming provider: \(model.provider). Check shouldUseRealtimeTranscription() before calling startStreaming()."
             )
         }
-        return streamingProvider
+
+        if FluidAudioModelManager.isNemotronModel(named: model.name) {
+            return FluidAudioNemotronStreamingProvider()
+        }
+
+        guard let fluidAudioService else {
+            fatalError(
+                "FluidAudioTranscriptionService required for FluidAudio streaming. Ensure it is passed to StreamingTranscriptionService."
+            )
+        }
+
+        if FluidAudioModelManager.isParakeetUnifiedModel(named: model.name) {
+            return FluidAudioUnifiedStreamingProvider(fluidAudioService: fluidAudioService)
+        }
+
+        return FluidAudioStreamingProvider(fluidAudioService: fluidAudioService)
     }
 
     /// Consumes audio chunks from the AsyncStream and sends them to the provider.

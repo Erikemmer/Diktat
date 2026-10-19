@@ -71,10 +71,6 @@ enum BackupImporter {
         if shouldRepairModePromptSelections {
             enhancementService.repairModePromptSelections()
         }
-
-        if categories.contains(.customModels) {
-            importCustomModels(backup.customCloudModels, transcriptionModelManager: transcriptionModelManager)
-        }
     }
 
     @MainActor
@@ -261,22 +257,6 @@ enum BackupImporter {
         if result.summary.skippedEntryCount > 0 {
             print("Skipped \(result.summary.skippedEntryCount) dictionary entries.")
         }
-    }
-
-    @MainActor
-    private static func importCustomModels(
-        _ models: [CustomModelBackup]?, transcriptionModelManager: TranscriptionModelManager
-    ) {
-        guard let models else {
-            print("No custom models found in the imported file.")
-            return
-        }
-
-        let customModelManager = CustomCloudModelManager.shared
-        customModelManager.customModels = models.map { $0.makeModel() }
-        customModelManager.saveCustomModels()
-        transcriptionModelManager.refreshAllAvailableModels()
-        print("Successfully imported \(models.count) custom model definitions.")
     }
 
 }

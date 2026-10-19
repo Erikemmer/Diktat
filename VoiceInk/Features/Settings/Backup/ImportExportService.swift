@@ -133,9 +133,6 @@ class ImportExportService {
                 return (config.id.uuidString, ShortcutBackup(shortcut))
             })
 
-        // Export custom models
-        let customModels = CustomCloudModelManager.shared.customModels.map { CustomModelBackup(model: $0) }
-
         // Fetch vocabulary words from SwiftData
         var exportedDictionaryItems: [WordBackup]? = nil
         let vocabularyDescriptor = FetchDescriptor<VocabularyWord>()
@@ -200,8 +197,7 @@ class ImportExportService {
             vocabularyWords: exportedDictionaryItems,
             wordReplacements: exportedWordReplacements,
             generalSettings: generalSettingsToExport,
-            customEmojis: emojiManager.customEmojis,
-            customCloudModels: customModels
+            customEmojis: emojiManager.customEmojis
         )
 
         let encoder = JSONEncoder()
@@ -366,7 +362,7 @@ class ImportExportService {
     }
 
     private func needsAPIKeyReminder(for categories: Set<BackupCategory>) -> Bool {
-        !categories.isDisjoint(with: [.prompts, .modes, .customModels])
+        !categories.isDisjoint(with: [.prompts, .modes])
     }
 
     private func showAlert(title: String, message: String) {

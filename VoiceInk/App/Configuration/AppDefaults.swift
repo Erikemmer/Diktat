@@ -12,16 +12,6 @@ enum RecorderDisplaySettingsKeys {
     static let showLiveTranscript = "ShowLiveTranscript"
 }
 
-enum CloudTranscriptionSettings {
-    static let timeoutKey = "CloudTranscriptionTimeout"
-    static let defaultTimeout = 30
-
-    static var timeout: TimeInterval {
-        let stored = UserDefaults.standard.integer(forKey: timeoutKey)
-        return TimeInterval(stored > 0 ? stored : defaultTimeout)
-    }
-}
-
 enum AutoLearnSettings {
     static let isEnabledKey = "IsAutoLearnDictionaryEnabled"
     static let providerKey = "AutoLearnDictionaryProvider"
@@ -140,7 +130,6 @@ enum AppDefaults {
             "AppendTrailingSpace": true,
             "RecorderType": "mini",
             RecorderDisplaySettingsKeys.showLiveTranscript: true,
-            CloudTranscriptionSettings.timeoutKey: CloudTranscriptionSettings.defaultTimeout,
             AutoLearnSettings.isEnabledKey: true,
             AutoLearnSettings.reviewScheduleKey: AutoLearnReviewSchedule.immediately.rawValue,
 

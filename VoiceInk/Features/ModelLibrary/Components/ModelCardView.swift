@@ -49,8 +49,6 @@ struct ModelCardView: View {
                         model: nativeAppleModel
                     )
                 }
-            default:
-                EmptyView()
             }
         }
     }

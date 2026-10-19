@@ -195,20 +195,11 @@ struct ModeConfigFormView: View {
                 .foregroundColor(.secondary)
             } else {
                 let availableModels = warmupSnapshot.usableTranscriptionModels
-                let openRouterModels = availableModels.filter { $0.provider == .openRouter }
 
                 LabeledContent("Model") {
                     Menu {
-                        ForEach(availableModels.filter { $0.provider != .openRouter }, id: \.selectionKey) { model in
+                        ForEach(availableModels, id: \.selectionKey) { model in
                             transcriptionModelMenuItem(model)
-                        }
-
-                        if !openRouterModels.isEmpty {
-                            Menu("OpenRouter") {
-                                ForEach(openRouterModels, id: \.selectionKey) { model in
-                                    transcriptionModelMenuItem(model)
-                                }
-                            }
                         }
                     } label: {
                         Text(

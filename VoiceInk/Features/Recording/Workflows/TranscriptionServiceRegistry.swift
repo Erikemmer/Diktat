@@ -14,7 +14,6 @@ class TranscriptionServiceRegistry {
         modelsDirectory: modelsDirectory,
         modelProvider: modelProvider
     )
-    private(set) lazy var cloudTranscriptionService = CloudTranscriptionService(modelContext: modelContext)
     private(set) lazy var nativeAppleTranscriptionService = NativeAppleTranscriptionService()
     private(set) lazy var fluidAudioTranscriptionService = FluidAudioTranscriptionService()
     private var cachedTranscribeCppTranscriptionService: TranscribeCppTranscriptionService?
@@ -44,8 +43,6 @@ class TranscriptionServiceRegistry {
             return transcribeCppTranscriptionService
         case .nativeApple:
             return nativeAppleTranscriptionService
-        default:
-            return cloudTranscriptionService
         }
     }
 
@@ -67,7 +64,6 @@ class TranscriptionServiceRegistry {
 
         if shouldUseRealtimeTranscription(for: configuration) {
             let streamingService = StreamingTranscriptionService(
-                modelContext: modelContext,
                 fluidAudioService: model.provider == .fluidAudio ? fluidAudioTranscriptionService : nil,
                 onPartialTranscript: onPartialTranscript
             )
