@@ -23,3 +23,8 @@ struct ModelProviderIcon: View {
         .help(modelName)
     }
 }
+
+enum ModelInsightKind: String, Codable, Sendable {
+    case transcription
+    case enhancement
+}

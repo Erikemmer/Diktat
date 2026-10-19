@@ -23,7 +23,6 @@ struct SettingsView: View {
     @AppStorage(FinishAndSendSettings.key) private var finishAndSendKey = FinishAndSendKey.none.rawValue
     @State private var showLanguageRestartAlert = false
     @State private var cancelRecordingShortcutRecorderResetID = 0
-    @State private var isImportingSettings = false
 
     @State private var isRestoreClipboardExpanded = false
 
@@ -229,47 +228,6 @@ struct SettingsView: View {
                 )
                 .disabled(launchAtLoginManager.isUpdating)
 
-            }
-
-            Section {
-                LabeledContent("Export Settings") {
-                    Button("Export") {
-                        Task {
-                            await ImportExportService.shared.exportSettings(
-                                recordingShortcutManager: recordingShortcutManager,
-                                menuBarManager: menuBarManager,
-                                mediaController: mediaController,
-                                playbackController: playbackController,
-                                recorderUIManager: recorderUIManager,
-                                modelContext: modelContext
-                            )
-                        }
-                    }
-                }
-
-                LabeledContent("Import Settings") {
-                    Button("Import") {
-                        guard !isImportingSettings else { return }
-                        isImportingSettings = true
-                        Task { @MainActor in
-                            defer { isImportingSettings = false }
-                            await ImportExportService.shared.importSettings(
-                                recordingShortcutManager: recordingShortcutManager,
-                                menuBarManager: menuBarManager,
-                                mediaController: mediaController,
-                                playbackController: playbackController,
-                                recorderUIManager: recorderUIManager,
-                                modelContext: modelContext,
-                                transcriptionModelManager: transcriptionModelManager
-                            )
-                        }
-                    }
-                    .disabled(isImportingSettings)
-                }
-            } header: {
-                Text("Backup")
-            } footer: {
-                Text("Export all settings, or choose specific categories when importing a backup.")
             }
 
             Section("Diagnostics") {

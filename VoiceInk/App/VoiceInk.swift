@@ -157,16 +157,9 @@ struct VoiceInkApp: App {
 
         AppShortcuts.updateAppShortcutParameters()
 
-        let statsMigrationTask = SessionMetricMigrationService.shared.runStatsMigrationIfNeeded(
-            modelContainer: resolvedContainer)
         let mainContext = resolvedContainer.mainContext
         Task { @MainActor in
-            await statsMigrationTask?.value
             TranscriptionAutoCleanupService.shared.startMonitoring(modelContext: mainContext)
-
-            let tokenBackfillTask = SessionMetricMigrationService.shared.runEnhancementTokenBackfillIfNeeded(
-                modelContainer: resolvedContainer)
-            await tokenBackfillTask?.value
         }
     }
 
@@ -215,18 +208,11 @@ struct VoiceInkApp: App {
         )
 
         let dictionarySchema = Schema([VocabularyWord.self, WordReplacement.self])
-        // Dev shares the local stores but must never connect to CloudKit.
-        #if DEBUG || LOCAL_BUILD
-            let dictionaryCloudKit: ModelConfiguration.CloudKitDatabase = .none
-        #else
-            let dictionaryCloudKit: ModelConfiguration.CloudKitDatabase = .private(
-                "iCloud.com.prakashjoshipax.VoiceInk")
-        #endif
         let dictionaryConfig = ModelConfiguration(
             "dictionary",
             schema: dictionarySchema,
             url: dictionaryStoreURL,
-            cloudKitDatabase: dictionaryCloudKit
+            cloudKitDatabase: .none
         )
 
         let statsSchema = Schema([SessionMetric.self])
@@ -281,8 +267,6 @@ struct VoiceInkApp: App {
                     .onAppear {
                         showLaunchRemindersIfNeeded()
 
-                        GitHubStarPromptCoordinator.shared.scheduleIfNeeded(modelContainer: container)
-
                         // Run due audio-only cleanup and schedule future checks when transcript cleanup is not managing retention.
                         if !UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isTranscriptionCleanupEnabled)
                             && UserDefaults.standard.bool(forKey: CleanupSettingsKeys.isAudioCleanupEnabled)
@@ -292,18 +276,6 @@ struct VoiceInkApp: App {
                                     modelContext: container.mainContext)
                             }
                             audioCleanupManager.startAutomaticCleanup(modelContext: container.mainContext)
-                        }
-
-                        // Process any pending open-file request now that the main ContentView is ready.
-                        if let pendingURL = appDelegate.pendingOpenFileURL {
-                            NotificationCenter.default.post(
-                                name: .navigateToDestination, object: nil,
-                                userInfo: ["destination": "Transcribe Audio"])
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                NotificationCenter.default.post(
-                                    name: .openFileForTranscription, object: nil, userInfo: ["url": pendingURL])
-                            }
-                            appDelegate.pendingOpenFileURL = nil
                         }
                     }
                     .background(

@@ -2,10 +2,8 @@ import OSLog
 import SwiftUI
 
 enum ViewType: String, CaseIterable, Identifiable {
-    case dashboard = "Dashboard"
     case modes = "Modes"
     case models = "AI Models"
-    case transcribeAudio = "Transcribe Audio"
     case history = "History"
     case audio = "Audio"
     case dictionary = "Dictionary"
@@ -17,7 +15,7 @@ enum ViewType: String, CaseIterable, Identifiable {
 final class MainWindowNavigation: ObservableObject {
     static let shared = MainWindowNavigation()
 
-    @Published var selectedView: ViewType = .dashboard
+    @Published var selectedView: ViewType = .history
 
     private init() {}
 
@@ -53,12 +51,6 @@ struct ContentView: View {
         .onDisappear {
             logger.notice("ContentView disappeared")
         }
-        .onReceive(NotificationCenter.default.publisher(for: .navigateToDestination)) { notification in
-            if let destination = notification.userInfo?["destination"] as? String {
-                logger.notice("navigateToDestination received: \(destination, privacy: .public)")
-                navigation.navigate(to: destination)
-            }
-        }
     }
 
     @ViewBuilder
@@ -84,12 +76,8 @@ struct ContentView: View {
     @ViewBuilder
     private func detailView(for viewType: ViewType) -> some View {
         switch viewType {
-        case .dashboard:
-            DashboardView()
         case .models:
             ModelManagementView()
-        case .transcribeAudio:
-            AudioTranscribeView()
         case .history:
             HistoryView()
         case .audio:

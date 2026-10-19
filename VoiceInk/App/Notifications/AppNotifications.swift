@@ -8,7 +8,6 @@ extension Notification.Name {
     static let dismissRecorderPanel = Notification.Name("dismissRecorderPanel")
     static let didChangeModel = Notification.Name("didChangeModel")
     static let transcribeCppModelDeleted = Notification.Name("transcribeCppModelDeleted")
-    static let navigateToDestination = Notification.Name("navigateToDestination")
     static let showMainWindowRequested = Notification.Name("showMainWindowRequested")
     static let modeConfigurationApplied = Notification.Name("modeConfigurationApplied")
     static let modeConfigurationsDidChange = Notification.Name("ModeConfigurationsDidChange")
@@ -16,8 +15,6 @@ extension Notification.Name {
     static let transcriptionCreated = Notification.Name("transcriptionCreated")
     static let transcriptionCompleted = Notification.Name("transcriptionCompleted")
     static let transcriptionDeleted = Notification.Name("transcriptionDeleted")
-    static let sessionMetricsDidChange = Notification.Name("sessionMetricsDidChange")
     static let wordReplacementsDidChange = Notification.Name("wordReplacementsDidChange")
-    static let openFileForTranscription = Notification.Name("openFileForTranscription")
     static let recordingDeviceChangeRequired = Notification.Name("recordingDeviceChangeRequired")
 }
