@@ -35,3 +35,29 @@ Alternativ baut der GitHub-Actions-Workflow „build“ (Push auf `diktat/**` od
 - **Bedienungshilfen**: zum Einfügen des Textes in die aktive App und für globale Hotkeys.
 
 Beim ersten Start führt ein kleiner Dialog durch beide Berechtigungen. Bei Ad-hoc-signierten Builds fragt macOS nach jedem neuen Build erneut.
+
+## Weitergeben (signiert und notarisiert)
+
+Voraussetzung: Mitgliedschaft im Apple Developer Program.
+
+Einmalig vorbereiten:
+
+1. In Xcode unter *Einstellungen → Konten → Zertifikate verwalten → +* ein Zertifikat **Developer ID Application** anlegen.
+2. Unter [appleid.apple.com](https://appleid.apple.com) ein **app-spezifisches Passwort** erzeugen.
+3. Zugangsdaten für die Notarisierung im Schlüsselbund ablegen (die Team-ID steht in Xcode bei deinem Team):
+
+   ```bash
+   xcrun notarytool store-credentials "diktat-notary" --apple-id "deine@apple-id.de" --team-id "TEAMID"
+   ```
+
+   Das Passwort wird dabei abgefragt und nicht in einer Datei gespeichert.
+
+Danach genügt:
+
+```bash
+make release
+```
+
+Das baut Diktat mit Hardened Runtime, lässt es von Apple notarisieren und legt `~/Downloads/Diktat.dmg` ab. Diese Datei öffnet sich auf anderen Macs ohne Sicherheitswarnung. Dauer: etwa 10–20 Minuten, davon einige Minuten Wartezeit bei Apple.
+
+Mehrere Zertifikate? Dann `DEVELOPER_ID="Developer ID Application: Name (TEAMID)" make release`.

@@ -33,6 +33,7 @@ playground.xcworkspace
 .build/
 build/
 .local-build/
+.release-build/
 .review-build/
 .local-dependencies/
 

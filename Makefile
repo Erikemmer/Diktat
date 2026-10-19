@@ -6,7 +6,7 @@ LOCAL_DERIVED_DATA := $(CURDIR)/.local-build
 LOCAL_CODESIGN_IDENTITY ?=
 RUN_APP_NAME ?= Diktat
 
-.PHONY: all clean whisper setup build local check healthcheck help dev run
+.PHONY: all clean whisper setup build local check healthcheck help dev run release
 
 # Default target
 all: check build
@@ -101,6 +101,10 @@ local: check setup
 		echo "Error: Could not find built Diktat.app at $$APP_PATH"; \
 		exit 1; \
 	fi
+
+# Signierte und notarisierte Diktat.dmg zum Weitergeben (siehe scripts/release.sh)
+release: check
+	@./scripts/release.sh
 
 # Run application
 run:
