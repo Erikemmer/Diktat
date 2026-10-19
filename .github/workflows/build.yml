@@ -7,14 +7,17 @@ on:
 
 jobs:
   local:
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - name: Xcode-Version
         run: xcodebuild -version
       - name: Bauen (make local)
-        run: make local 2>&1 | tee build.log
+        run: |
+          set -o pipefail
+          ls /Applications | grep -i xcode | tr "\n" " "
+          make local 2>&1 | tee build.log
       - name: App packen
         if: success()
         run: |
