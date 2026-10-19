@@ -5,8 +5,8 @@
 	<key>LSUIElement</key>
 	<false/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>VoiceInk needs access to your microphone to record audio for transcription.</string>
+	<string>Diktat needs access to your microphone to record audio for transcription.</string>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>VoiceInk needs to control System Events to paste your transcription with the AppleScript paste method.</string>
+	<string>Diktat needs to control System Events to paste your transcription with the AppleScript paste method.</string>
 </dict>
 </plist>

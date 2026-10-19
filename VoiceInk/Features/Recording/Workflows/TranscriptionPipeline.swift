@@ -9,7 +9,7 @@ class TranscriptionPipeline {
     private let modelContext: ModelContext
     private let serviceRegistry: TranscriptionServiceRegistry
     private let delivery = TranscriptionDelivery()
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "TranscriptionPipeline")
+    private let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "TranscriptionPipeline")
 
     init(
         modelContext: ModelContext,

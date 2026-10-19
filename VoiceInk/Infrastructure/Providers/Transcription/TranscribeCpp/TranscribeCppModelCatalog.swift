@@ -67,7 +67,7 @@ struct TranscribeCppModelArtifact: Sendable {
 
     private static var applicationSupportDirectory: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("com.prakashjoshipax.VoiceInk", isDirectory: true)
+            .appendingPathComponent("de.die-lithothek.diktat", isDirectory: true)
     }
 
     private static var handyApplicationSupportDirectory: URL {

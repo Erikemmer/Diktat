@@ -115,7 +115,7 @@ private enum StreamingFinalizationWait {
 @MainActor
 class StreamingTranscriptionService {
 
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "StreamingTranscriptionService")
+    private let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "StreamingTranscriptionService")
     private var provider: StreamingTranscriptionProvider?
     private var sendTask: Task<Void, Never>?
     private var eventConsumerTask: Task<Void, Never>?

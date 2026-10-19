@@ -32,7 +32,7 @@ final class ShortcutMonitor {
     private var onStandaloneModifierChord: ((ShortcutAction) -> Void)?
     private var eventTap: CFMachPort?
     private var eventTapRunLoopSource: CFRunLoopSource?
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "ShortcutMonitor")
+    private let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "ShortcutMonitor")
 
     private static let shortcutInterruptionWindow: TimeInterval = 1.0
 

@@ -32,9 +32,10 @@ final class MainWindowNavigation: ObservableObject {
 }
 
 struct ContentView: View {
-    private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "ContentView")
+    private let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "ContentView")
     private static let detailBackgroundTintOpacity = 0.50
     @EnvironmentObject private var navigation: MainWindowNavigation
+    @AppStorage("HasCompletedFirstRunSetup") private var hasCompletedFirstRunSetup = false
 
     var body: some View {
         HStack(spacing: 0) {
@@ -44,6 +45,14 @@ struct ContentView: View {
         }
         .frame(width: AppWindowLayout.width)
         .frame(minHeight: AppWindowLayout.minimumHeight)
+        .sheet(
+            isPresented: Binding(
+                get: { !hasCompletedFirstRunSetup },
+                set: { if !$0 { hasCompletedFirstRunSetup = true } }
+            )
+        ) {
+            FirstRunSetupView { hasCompletedFirstRunSetup = true }
+        }
         .onAppear {
             logger.notice("ContentView appeared")
         }

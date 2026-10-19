@@ -100,7 +100,7 @@ struct MenuBarView: View {
             }
             .keyboardShortcut(",", modifiers: .command)
 
-            Button("Quit VoiceInk") {
+            Button("Quit Diktat") {
                 NSApplication.shared.terminate(nil)
             }
         }

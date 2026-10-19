@@ -128,7 +128,7 @@ struct SettingsView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Text("Auto Send")
-                        InfoTip("Press Return while recording to stop and deliver the result. VoiceInk will then paste the result and press the selected key to send it. Choose None to disable this feature.")
+                        InfoTip("Press Return while recording to stop and deliver the result. Diktat will then paste the result and press the selected key to send it. Choose None to disable this feature.")
                     }
                 }
 
@@ -236,10 +236,10 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .alert("Restart VoiceInk to Apply Language", isPresented: $showLanguageRestartAlert) {
+        .alert("Restart Diktat to Apply Language", isPresented: $showLanguageRestartAlert) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("Your language change will take full effect after you quit and reopen VoiceInk.")
+            Text("Your language change will take full effect after you quit and reopen Diktat.")
         }
     }
 

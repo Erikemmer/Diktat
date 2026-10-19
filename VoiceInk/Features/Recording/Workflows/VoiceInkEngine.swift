@@ -105,7 +105,7 @@ class VoiceInkEngine: NSObject, ObservableObject {
     internal let serviceRegistry: TranscriptionServiceRegistry
     private let pipeline: TranscriptionPipeline
 
-    let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "VoiceInkEngine")
+    let logger = Logger(subsystem: "de.die-lithothek.diktat", category: "VoiceInkEngine")
 
     init(
         modelContext: ModelContext,
@@ -117,7 +117,7 @@ class VoiceInkEngine: NSObject, ObservableObject {
         self.transcriptionModelManager = transcriptionModelManager
 
         let appSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("com.prakashjoshipax.VoiceInk")
+            .appendingPathComponent("de.die-lithothek.diktat")
         self.recordingsDirectory = appSupportDirectory.appendingPathComponent("Recordings")
 
         self.serviceRegistry = TranscriptionServiceRegistry(

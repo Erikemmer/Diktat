@@ -22,7 +22,7 @@ jobs:
         if: success()
         run: |
           echo "::notice::Downloads: $(ls "$HOME/Downloads" | tr '\n' ' ')"
-          ditto -c -k --keepParent "$HOME/Downloads/VoiceInk.app" app.zip || echo "::error::ditto fehlgeschlagen"
+          ditto -c -k --keepParent "$HOME/Downloads/Diktat.app" app.zip || echo "::error::ditto fehlgeschlagen"
           ls -la app.zip
       - name: Fehler aus Log melden
         if: always()
