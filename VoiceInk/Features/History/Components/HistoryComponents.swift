@@ -187,7 +187,7 @@ struct HistoryTranscriptionRow: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(transcription.hasEnhancedHistoryText ? "Enhanced transcription" : "Original transcription")
+        .accessibilityLabel("Original transcription")
         .accessibilityValue(transcription.preferredHistoryText)
         .accessibilityHint(
             onPaste == nil

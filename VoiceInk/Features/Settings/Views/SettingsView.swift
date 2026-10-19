@@ -9,7 +9,6 @@ struct SettingsView: View {
     @EnvironmentObject private var recordingShortcutManager: RecordingShortcutManager
     @EnvironmentObject private var recorderUIManager: RecorderUIManager
     @EnvironmentObject private var transcriptionModelManager: TranscriptionModelManager
-    @EnvironmentObject private var enhancementService: AIEnhancementService
     @ObservedObject private var launchAtLoginManager = LaunchAtLoginManager.shared
     @ObservedObject private var mediaController = MediaController.shared
     @ObservedObject private var playbackController = PlaybackController.shared
@@ -80,13 +79,6 @@ struct SettingsView: View {
             Section("Additional Shortcuts") {
                 LabeledContent("Paste Last Transcription (Original)") {
                     ShortcutRecorder(action: .pasteLastTranscription) {
-                        recordingShortcutManager.updateShortcutStatus()
-                    }
-                    .controlSize(.small)
-                }
-
-                LabeledContent("Paste Last Transcription (Enhanced)") {
-                    ShortcutRecorder(action: .pasteLastEnhancement) {
                         recordingShortcutManager.updateShortcutStatus()
                     }
                     .controlSize(.small)
@@ -244,7 +236,6 @@ struct SettingsView: View {
                     Button("Export") {
                         Task {
                             await ImportExportService.shared.exportSettings(
-                                enhancementService: enhancementService,
                                 recordingShortcutManager: recordingShortcutManager,
                                 menuBarManager: menuBarManager,
                                 mediaController: mediaController,
@@ -263,7 +254,6 @@ struct SettingsView: View {
                         Task { @MainActor in
                             defer { isImportingSettings = false }
                             await ImportExportService.shared.importSettings(
-                                enhancementService: enhancementService,
                                 recordingShortcutManager: recordingShortcutManager,
                                 menuBarManager: menuBarManager,
                                 mediaController: mediaController,

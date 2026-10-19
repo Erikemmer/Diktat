@@ -3,10 +3,8 @@ import SwiftUI
 struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
     @ObservedObject var stateProvider: S
     @ObservedObject var recorder: Recorder
-    @ObservedObject var assistantSession: AssistantSession
     let onRecordButtonTapped: () -> Void
     let onCloseTapped: () -> Void
-    let onAssistantFollowUp: (String) -> Void
     @AppStorage(RecorderDisplaySettingsKeys.showLiveTranscript) private var showLiveTranscript = true
     /// Bumped on every screen reconfiguration to invalidate the view. The notch metrics below
     /// come from AppKit, which SwiftUI cannot observe on its own, so without this the view keeps
@@ -19,19 +17,14 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
         case collapsed
         case active
         case liveText
-        case assistant
     }
 
     private var displayState: DisplayState {
-        if assistantSession.isVisible {
-            return .assistant
-        }
-
         switch stateProvider.recordingState {
         case .recording:
             let shouldShowLive = showLiveTranscript && !stateProvider.partialTranscript.isEmpty
             return shouldShowLive ? .liveText : .active
-        case .transcribing, .enhancing:
+        case .transcribing:
             return .active
         default:
             return .collapsed
@@ -73,10 +66,8 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
 
     private let recordingSideExpansion: CGFloat = 90
     private let transcriptSideExpansion: CGFloat = 110
-    private let assistantSideExpansion: CGFloat = 230
     private let activeHeightBonus: CGFloat = 6
     private let transcriptPanelHeight: CGFloat = 57
-    private let assistantPanelHeight: CGFloat = 320
 
     private var mainRowHeight: CGFloat { notchHeight + activeHeightBonus }
 
@@ -87,7 +78,6 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
         case .collapsed: return notchWidth
         case .active: return notchWidth + recordingSideExpansion * 2
         case .liveText: return notchWidth + transcriptSideExpansion * 2
-        case .assistant: return notchWidth + assistantSideExpansion * 2
         }
     }
 
@@ -96,7 +86,6 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
         case .collapsed: return 0
         case .active: return mainRowHeight
         case .liveText: return mainRowHeight + transcriptPanelHeight
-        case .assistant: return mainRowHeight + assistantPanelHeight
         }
     }
 
@@ -104,24 +93,13 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
         switch displayState {
         case .liveText:
             return transcriptSideExpansion
-        case .assistant:
-            return assistantSideExpansion
         case .active, .collapsed:
             return recordingSideExpansion
         }
     }
 
     private var sideEdgePadding: CGFloat {
-        displayState == .liveText || displayState == .assistant ? 20 : 16
-    }
-
-    private var shouldShowCloseButton: Bool {
-        displayState == .assistant && stateProvider.recordingState == .idle && !assistantSession.isBusy
-    }
-
-    private var liveAssistantFollowUpText: String {
-        guard showLiveTranscript, stateProvider.recordingState == .recording else { return "" }
-        return stateProvider.partialTranscript
+        displayState == .liveText ? 20 : 16
     }
 
     // MARK: - Animation
@@ -153,14 +131,13 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
         VStack(spacing: 0) {
             mainRow
             liveTextPanel
-            assistantPanel
         }
         .frame(width: pillWidth, height: pillHeight)
         .background(Color.black)
         .clipShape(
             NotchShape(
                 topCornerRadius: displayState == .liveText ? 12 : 8,
-                bottomCornerRadius: displayState == .liveText || displayState == .assistant ? 22 : 16
+                bottomCornerRadius: displayState == .liveText ? 22 : 16
             )
         )
     }
@@ -172,14 +149,10 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
             Color.clear
 
             HStack(spacing: 14) {
-                if shouldShowCloseButton {
-                    RecorderCloseButton(action: onCloseTapped)
-                } else {
-                    RecorderRecordButton(
-                        recordingState: stateProvider.recordingState,
-                        action: onRecordButtonTapped
-                    )
-                }
+                RecorderRecordButton(
+                    recordingState: stateProvider.recordingState,
+                    action: onRecordButtonTapped
+                )
                 RecorderModeButton(buttonSize: 20, padding: EdgeInsets())
                 Spacer(minLength: 0)
             }
@@ -223,21 +196,6 @@ struct NotchRecorderView<S: RecorderStateProvider & ObservableObject>: View {
             }
         }
         .frame(height: displayState == .liveText ? transcriptPanelHeight : 0)
-        .clipped()
-    }
-
-    private var assistantPanel: some View {
-        VStack(spacing: 0) {
-            if displayState == .assistant {
-                Divider().background(Color.white.opacity(0.15))
-                AssistantPanelView(
-                    session: assistantSession,
-                    liveFollowUpText: liveAssistantFollowUpText,
-                    onSend: onAssistantFollowUp
-                )
-            }
-        }
-        .frame(height: displayState == .assistant ? assistantPanelHeight : 0)
         .clipped()
     }
 }

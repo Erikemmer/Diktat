@@ -2,7 +2,6 @@ import Foundation
 
 enum BackupCategory: String, CaseIterable, Hashable {
     case general
-    case prompts
     case modes
     case dictionary
 
@@ -10,8 +9,6 @@ enum BackupCategory: String, CaseIterable, Hashable {
         switch self {
         case .general:
             return String(localized: "General Settings")
-        case .prompts:
-            return String(localized: "Custom Prompts")
         case .modes:
             return String(localized: "Modes")
         case .dictionary:
@@ -24,7 +21,6 @@ struct GeneralBackup: Codable {
     let primaryRecordingShortcut: ShortcutBackup?
     let secondaryRecordingShortcut: ShortcutBackup?
     let pasteLastTranscriptionShortcut: ShortcutBackup?
-    let pasteLastEnhancementShortcut: ShortcutBackup?
     let retryLastTranscriptionShortcut: ShortcutBackup?
     let cancelRecorderShortcut: ShortcutBackup?
     let openHistoryWindowShortcut: ShortcutBackup?
@@ -51,10 +47,6 @@ struct GeneralBackup: Codable {
     let restoreClipboardAfterPaste: Bool?
     let clipboardRestoreDelay: Double?
     let finishAndSendKey: String?
-    let isAutoLearnDictionaryEnabled: Bool?
-    let autoLearnReviewSchedule: String?
-    let autoLearnProvider: String?
-    let autoLearnModel: String?
 }
 
 struct WordBackup: Codable {
@@ -67,7 +59,6 @@ struct WordBackup: Codable {
 
 struct BackupFile: Codable {
     let version: String
-    let customPrompts: [CustomPrompt]
     let modeConfigs: [ModeConfig]
     let modeShortcuts: [String: ShortcutBackup]?
     let vocabularyWords: [WordBackup]?
@@ -76,19 +67,18 @@ struct BackupFile: Codable {
     let customEmojis: [String]?
 
     private enum CodingKeys: String, CodingKey {
-        case version, customPrompts, modeConfigs, modeShortcuts, vocabularyWords, wordReplacements, generalSettings,
+        case version, modeConfigs, modeShortcuts, vocabularyWords, wordReplacements, generalSettings,
             customEmojis
         case legacyModeConfigs = "powerModeConfigs"
         case legacyModeShortcuts = "powerModeShortcuts"
     }
 
     init(
-        version: String, customPrompts: [CustomPrompt], modeConfigs: [ModeConfig],
+        version: String, modeConfigs: [ModeConfig],
         modeShortcuts: [String: ShortcutBackup]?, vocabularyWords: [WordBackup]?, wordReplacements: [String: String]?,
         generalSettings: GeneralBackup?, customEmojis: [String]?
     ) {
         self.version = version
-        self.customPrompts = customPrompts
         self.modeConfigs = modeConfigs
         self.modeShortcuts = modeShortcuts
         self.vocabularyWords = vocabularyWords
@@ -100,7 +90,6 @@ struct BackupFile: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         version = try container.decodeIfPresent(String.self, forKey: .version) ?? "0.0.0"
-        customPrompts = try container.decodeIfPresent([CustomPrompt].self, forKey: .customPrompts) ?? []
         modeConfigs =
             try container.decodeIfPresent([ModeConfig].self, forKey: .modeConfigs)
             ?? container.decodeIfPresent([ModeConfig].self, forKey: .legacyModeConfigs)
@@ -117,7 +106,6 @@ struct BackupFile: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(version, forKey: .version)
-        try container.encode(customPrompts, forKey: .customPrompts)
         try container.encode(modeConfigs, forKey: .modeConfigs)
         try container.encodeIfPresent(modeShortcuts, forKey: .modeShortcuts)
         try container.encodeIfPresent(vocabularyWords, forKey: .vocabularyWords)

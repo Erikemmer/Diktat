@@ -341,7 +341,6 @@ private struct AsyncCircleButton: View {
 
 private enum OperationFeedback: Equatable {
     case retranscribeSuccess
-    case reEnhanceSuccess
 }
 
 // MARK: - AudioPlayerView
@@ -353,26 +352,14 @@ struct AudioPlayerView: View {
     @StateObject private var playerManager = AudioPlayerManager()
     @State private var isHovering = false
     @State private var isRetranscribing = false
-    @State private var isReEnhancing = false
     @State private var operationFeedback: OperationFeedback?
     @State private var showModePopover = false
-    @State private var showPromptPopover = false
     @EnvironmentObject private var engine: VoiceInkEngine
-    @EnvironmentObject private var enhancementService: AIEnhancementService
     @ObservedObject private var modeManager = ModeManager.shared
     @Environment(\.modelContext) private var modelContext
 
     private var isOperationInProgress: Bool {
-        isRetranscribing || isReEnhancing
-    }
-
-    private var currentEnhancementConfiguration: EnhancementRuntimeConfiguration? {
-        guard let aiService = enhancementService.getAIService() else { return nil }
-        return ModeRuntimeResolver.currentEnhancementConfiguration(
-            mode: selectedMode,
-            enhancementService: enhancementService,
-            aiService: aiService
-        )
+        isRetranscribing
     }
 
     private var transcriptionService: AudioTranscriptionService {
@@ -447,20 +434,6 @@ struct AudioPlayerView: View {
                     .disabled(isOperationInProgress)
                     .help("Retranscribe this audio")
 
-                    if transcription != nil {
-                        AsyncCircleButton(
-                            defaultIcon: "wand.and.stars",
-                            isLoading: isReEnhancing,
-                            showSuccess: operationFeedback == .reEnhanceSuccess,
-                            action: { showPromptPopover.toggle() }
-                        )
-                        .disabled(isOperationInProgress)
-                        .help("Re-enhance with selected prompt")
-                        .popover(isPresented: $showPromptPopover, arrowEdge: .bottom) {
-                            promptSelectionPopover
-                        }
-                    }
-
                     if let onInfoTap {
                         CircleIconButton(icon: "info.circle", action: onInfoTap)
                             .help("View details")
@@ -522,54 +495,6 @@ struct AudioPlayerView: View {
         showModePopover = false
     }
 
-    private var promptSelectionPopover: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Select Prompt")
-                .font(.headline)
-                .foregroundColor(AppTheme.Text.primary)
-                .padding(.horizontal)
-                .padding(.top, 8)
-
-            Divider()
-                .background(AppTheme.Border.subtle)
-
-            ScrollView {
-                let prompts = enhancementService.allPrompts
-                VStack(alignment: .leading, spacing: 4) {
-                    if prompts.isEmpty {
-                        Text("No Prompts Available")
-                            .foregroundColor(AppTheme.Text.primary)
-                            .font(.system(size: 13))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                    } else {
-                        ForEach(prompts) { prompt in
-                            EnhancementPromptRow(
-                                prompt: prompt,
-                                isSelected: currentEnhancementConfiguration?.prompt?.id == prompt.id,
-                                isDisabled: false,
-                                action: {
-                                    selectPromptForReEnhancement(prompt)
-                                }
-                            )
-                        }
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-        .frame(width: 220)
-        .frame(maxHeight: 340)
-        .padding(.vertical, 8)
-        .background(AppTheme.Surface.window)
-        .popoverAppAppearance()
-    }
-
-    private func selectPromptForReEnhancement(_ prompt: CustomPrompt) {
-        showPromptPopover = false
-        reEnhanceOnly(prompt: prompt)
-    }
-
     private func showSuccessFeedback(_ feedback: OperationFeedback, title: String) {
         operationFeedback = feedback
         NotificationManager.shared.showNotification(title: title, type: .success, duration: 1.0)
@@ -582,55 +507,6 @@ struct AudioPlayerView: View {
 
     private func showErrorNotification(_ title: String) {
         NotificationManager.shared.showNotification(title: title, type: .error, duration: 3.0)
-    }
-
-    private func reEnhanceOnly(prompt selectedPrompt: CustomPrompt) {
-        guard let transcription = transcription else { return }
-
-        guard let baseEnhancementConfiguration = currentEnhancementConfiguration else {
-            showErrorNotification(String(localized: "AI Enhancement is not enabled or configured"))
-            return
-        }
-
-        let enhancementConfiguration = baseEnhancementConfiguration.replacingPrompt(selectedPrompt)
-
-        isReEnhancing = true
-        operationFeedback = nil
-
-        Task {
-            do {
-                transcription.aiEnhancementModelName =
-                    enhancementConfiguration.modelName ?? enhancementConfiguration.provider?.defaultModel
-                transcription.promptName = enhancementConfiguration.prompt?.title
-                let enhancementResult = try await enhancementService.enhance(
-                    transcription.text,
-                    configuration: enhancementConfiguration
-                )
-                await MainActor.run {
-                    transcription.enhancedText = enhancementResult.text
-                    transcription.aiEnhancementModelName =
-                        enhancementConfiguration.modelName ?? enhancementConfiguration.provider?.defaultModel
-                    transcription.promptName =
-                        enhancementResult.promptName ?? enhancementConfiguration.prompt?.title
-                    transcription.enhancementDuration = enhancementResult.duration
-                    transcription.aiRequestSystemMessage = enhancementResult.systemMessage
-                    transcription.aiRequestUserMessage = enhancementResult.userMessage
-                    try? modelContext.save()
-
-                    isReEnhancing = false
-                    showSuccessFeedback(.reEnhanceSuccess, title: String(localized: "Re-enhancement successful"))
-                }
-            } catch {
-                let errorDescription = EnhancementFailureFormatter.description(for: error)
-                let failureMessage = EnhancementFailureFormatter.reEnhancementMessage(
-                    description: errorDescription
-                )
-                await MainActor.run {
-                    isReEnhancing = false
-                    showErrorNotification(failureMessage)
-                }
-            }
-        }
     }
 
     private func retranscribeAudio() {
@@ -661,19 +537,10 @@ struct AudioPlayerView: View {
                 )
                 await MainActor.run {
                     isRetranscribing = false
-                    if let enhancementFailure = result.enhancementFailure {
-                        NotificationManager.shared.showNotification(
-                            title: EnhancementFailureFormatter.transcriptionSavedMessage(
-                                description: enhancementFailure
-                            ),
-                            type: .warning
-                        )
-                    } else {
-                        showSuccessFeedback(
-                            .retranscribeSuccess,
-                            title: String(localized: "Retranscription successful")
-                        )
-                    }
+                    showSuccessFeedback(
+                        .retranscribeSuccess,
+                        title: String(localized: "Retranscription successful")
+                    )
                 }
             } catch {
                 await MainActor.run {

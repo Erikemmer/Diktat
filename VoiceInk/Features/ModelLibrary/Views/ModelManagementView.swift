@@ -3,7 +3,6 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ModelManagementView: View {
-    @EnvironmentObject private var aiService: AIService
     @EnvironmentObject private var whisperModelManager: WhisperModelManager
     @EnvironmentObject private var transcriptionModelManager: TranscriptionModelManager
     @ObservedObject private var warmupCoordinator = WhisperModelWarmupCoordinator.shared
@@ -105,9 +104,6 @@ struct ModelManagementView: View {
             }
 
             importLocalModelButton
-
-            LocalEnhancementServiceManagementView()
-                .environmentObject(aiService)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

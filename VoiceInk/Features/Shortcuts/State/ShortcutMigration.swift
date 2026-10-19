@@ -259,8 +259,6 @@ enum ShortcutMigration {
             return ["toggleMiniRecorder2"]
         case .pasteLastTranscription:
             return ["pasteLastTranscription"]
-        case .pasteLastEnhancement:
-            return ["pasteLastEnhancement"]
         case .retryLastTranscription:
             return ["retryLastTranscription"]
         case .cancelRecorder:

@@ -72,7 +72,7 @@ class RecordingShortcutManager: ObservableObject {
     }
 
     private static func canHandleShortcutAction(for recordingState: RecordingState) -> Bool {
-        recordingState != .transcribing && recordingState != .enhancing && recordingState != .busy
+        recordingState != .transcribing && recordingState != .busy
     }
 
     init(engine: VoiceInkEngine, recorderUIManager: RecorderUIManager) {
@@ -241,14 +241,11 @@ class RecordingShortcutManager: ObservableObject {
         switch action {
         case .pasteLastTranscription:
             LastTranscriptionService.pasteLastTranscription(from: engine.modelContext)
-        case .pasteLastEnhancement:
-            LastTranscriptionService.pasteLastEnhancement(from: engine.modelContext)
         case .retryLastTranscription:
             LastTranscriptionService.retryLastTranscription(
                 from: engine.modelContext,
                 transcriptionModelManager: engine.transcriptionModelManager,
-                serviceRegistry: engine.serviceRegistry,
-                enhancementService: engine.enhancementService
+                serviceRegistry: engine.serviceRegistry
             )
         case .openQuickHistory:
             QuickHistoryController.shared.show(modelContext: engine.modelContext, engine: engine)

@@ -9,8 +9,6 @@ struct MenuBarView: View {
     @EnvironmentObject var recordingShortcutManager: RecordingShortcutManager
     @EnvironmentObject var menuBarManager: MenuBarManager
     @EnvironmentObject var mainWindowNavigation: MainWindowNavigation
-    @EnvironmentObject var enhancementService: AIEnhancementService
-    @EnvironmentObject var aiService: AIService
     @ObservedObject private var launchAtLoginManager = LaunchAtLoginManager.shared
     @ObservedObject private var modeManager = ModeManager.shared
     @ObservedObject var audioDeviceManager = AudioDeviceManager.shared
@@ -94,8 +92,7 @@ struct MenuBarView: View {
                 LastTranscriptionService.retryLastTranscription(
                     from: engine.modelContext,
                     transcriptionModelManager: transcriptionModelManager,
-                    serviceRegistry: engine.serviceRegistry,
-                    enhancementService: enhancementService
+                    serviceRegistry: engine.serviceRegistry
                 )
             }
 

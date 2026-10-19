@@ -143,11 +143,11 @@ struct AudioFileRow: View {
             }
 
             ScrollView {
-                MarkdownContentView(
-                    displayText,
-                    fontSize: 14,
-                    foregroundColor: AppTheme.Text.primary
-                )
+                Text(displayText)
+                    .font(.system(size: 14))
+                    .foregroundStyle(AppTheme.Text.primary)
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .frame(maxHeight: 350)
 

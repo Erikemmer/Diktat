@@ -3,10 +3,8 @@ import SwiftUI
 struct DictionarySettingsView: View {
     @State private var selectedSection: DictionarySection = .replacements
     @State private var activePanel: DictionaryPanel?
-    @State private var isAutoLearnReviewPresented = false
-    @AppStorage(AutoLearnSettings.hasFailureKey) private var hasAutoLearnFailure = false
     private let dictionaryInfoMessage: LocalizedStringKey =
-        "Word Replacements run after transcription. Vocabulary helps supported transcription models and AI enhancement recognize names, technical terms, and unique spellings."
+        "Word Replacements run after transcription to replace misheard words, phrases, abbreviations, or boilerplate text."
 
     enum DictionarySection: String, CaseIterable, Hashable {
         case replacements = "Word Replacements"
@@ -17,7 +15,7 @@ struct DictionarySettingsView: View {
             case .spellings:
                 return String(
                     localized:
-                        "Vocabulary helps supported transcription models and AI enhancement preserve important names, technical terms, and unique spellings."
+                        "Vocabulary helps supported transcription models preserve important names, technical terms, and unique spellings."
                 )
             case .replacements:
                 return String(
@@ -39,7 +37,6 @@ struct DictionarySettingsView: View {
 
     private enum DictionaryPanel: Equatable {
         case settings
-        case autoLearnFailure
     }
 
     var body: some View {
@@ -69,21 +66,9 @@ struct DictionarySettingsView: View {
             case .settings:
                 DictionarySettingsPanel {
                     activePanel = nil
-                } onReviewNow: {
-                    activePanel = nil
-                    isAutoLearnReviewPresented = true
-                }
-            case .autoLearnFailure:
-                AutoLearnFailurePanel {
-                    activePanel = nil
                 }
             case nil:
                 EmptyView()
-            }
-        }
-        .sidePanel(isPresented: $isAutoLearnReviewPresented) {
-            AutoLearnReviewPanel {
-                isAutoLearnReviewPresented = false
             }
         }
     }
@@ -91,20 +76,9 @@ struct DictionarySettingsView: View {
     private var headerSection: some View {
         AppScreenHeader(
             title: "Dictionary",
-            infoMessage: dictionaryInfoMessage,
-            infoURL: "https://tryvoiceink.com/docs/auto-learn-dictionary"
+            infoMessage: dictionaryInfoMessage
         ) {
-            HStack(spacing: 8) {
-                if hasAutoLearnFailure {
-                    AppIconButton(
-                        systemName: "exclamationmark.triangle.fill",
-                        help: "Dictionary Auto Learn failed"
-                    ) {
-                        activePanel = .autoLearnFailure
-                    }
-                }
-                settingsButton
-            }
+            settingsButton
         }
     }
 

@@ -26,30 +26,6 @@ struct TranscriptionFormattingConfiguration {
     let isTextFormattingEnabled: Bool
 }
 
-struct EnhancementRuntimeConfiguration {
-    let mode: ModeConfig?
-    let isEnabled: Bool
-    let prompt: CustomPrompt?
-    let provider: AIProvider?
-    let modelName: String?
-    let useClipboardContext: Bool
-    let useSelectedTextContext: Bool
-    let useScreenCaptureContext: Bool
-
-    func replacingPrompt(_ prompt: CustomPrompt) -> EnhancementRuntimeConfiguration {
-        EnhancementRuntimeConfiguration(
-            mode: mode,
-            isEnabled: true,
-            prompt: prompt,
-            provider: provider,
-            modelName: modelName,
-            useClipboardContext: useClipboardContext,
-            useSelectedTextContext: useSelectedTextContext,
-            useScreenCaptureContext: useScreenCaptureContext
-        )
-    }
-}
-
 struct OutputRuntimeConfiguration {
     let mode: ModeConfig?
     let outputMode: ModeOutputMode
@@ -145,38 +121,6 @@ enum ModeRuntimeResolver {
         )
     }
 
-    static func currentEnhancementConfiguration(
-        mode: ModeConfig? = nil,
-        enhancementService: AIEnhancementService,
-        aiService: AIService
-    ) -> EnhancementRuntimeConfiguration {
-        let mode = mode ?? ModeManager.shared.currentEffectiveConfiguration
-        let provider = resolvedProvider(
-            providerName: mode?.selectedAIProvider,
-            aiService: aiService
-        )
-        let prompt = resolvedPrompt(
-            promptId: mode?.selectedPrompt,
-            enhancementService: enhancementService
-        )
-        let modelName = resolvedEnhancementModelName(
-            provider: provider,
-            configuredModelName: mode?.selectedAIModel,
-            aiService: aiService
-        )
-
-        return EnhancementRuntimeConfiguration(
-            mode: mode,
-            isEnabled: mode?.isAIEnhancementEnabled ?? false,
-            prompt: prompt,
-            provider: provider,
-            modelName: modelName,
-            useClipboardContext: mode?.useClipboardContext ?? false,
-            useSelectedTextContext: mode?.useSelectedTextContext ?? true,
-            useScreenCaptureContext: mode?.useScreenCapture ?? false
-        )
-    }
-
     static func outputConfiguration(mode: ModeConfig? = nil) -> OutputRuntimeConfiguration {
         let mode = mode ?? ModeManager.shared.currentEffectiveConfiguration
 
@@ -186,58 +130,5 @@ enum ModeRuntimeResolver {
             autoSendKey: mode?.outputMode == .paste ? (mode?.autoSendKey ?? .none) : .none,
             customCommand: mode?.customCommand
         )
-    }
-
-    private static func resolvedPrompt(
-        promptId: String?,
-        enhancementService: AIEnhancementService
-    ) -> CustomPrompt? {
-        guard let promptId,
-            let uuid = UUID(uuidString: promptId)
-        else {
-            return nil
-        }
-
-        return enhancementService.allPrompts.first { $0.id == uuid }
-    }
-
-    private static func resolvedProvider(
-        providerName: String?,
-        aiService: AIService
-    ) -> AIProvider? {
-        if let providerName {
-            guard let provider = AIProvider(rawValue: providerName) else {
-                return nil
-            }
-            return aiService.connectedProviders.contains(provider) ? provider : nil
-        }
-
-        return aiService.connectedProviders.first
-    }
-
-    private static func resolvedEnhancementModelName(
-        provider: AIProvider?,
-        configuredModelName: String?,
-        aiService: AIService
-    ) -> String? {
-        guard let provider else { return nil }
-
-        if provider == .localCLI {
-            return nil
-        }
-
-        let models = aiService.availableModels(for: provider)
-        if let configuredModelName,
-            !configuredModelName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-            (provider.supportsCustomModelID || models.isEmpty || models.contains(configuredModelName))
-        {
-            return configuredModelName.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-
-        if let firstModel = models.first {
-            return firstModel
-        }
-
-        return provider.defaultModel
     }
 }

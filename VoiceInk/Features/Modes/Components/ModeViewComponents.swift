@@ -52,7 +52,6 @@ struct ModeEmptyStateView: View {
 struct ModeConfigurationsGrid: View {
     @ObservedObject var modeManager: ModeManager
     let onEditConfig: (ModeConfig) -> Void
-    @EnvironmentObject var enhancementService: AIEnhancementService
 
     var body: some View {
         LazyVStack(spacing: 12) {
@@ -138,20 +137,12 @@ struct ConfigurationRow: View {
     let isEditing: Bool
     let modeManager: ModeManager
     let onEditConfig: (ModeConfig) -> Void
-    @EnvironmentObject var enhancementService: AIEnhancementService
     @EnvironmentObject var transcriptionModelManager: TranscriptionModelManager
     @State private var isHovering = false
     @State private var isShowingDeleteConfirmation = false
     @State private var deletionCandidate: ModeConfig?
 
     private let maxAppIconsToShow = 5
-
-    private var selectedPrompt: CustomPrompt? {
-        guard let promptId = config.selectedPrompt,
-            let uuid = UUID(uuidString: promptId)
-        else { return nil }
-        return enhancementService.allPrompts.first { $0.id == uuid }
-    }
 
     private var transcriptionModelMetadata: TranscriptionModelMetadata {
         switch ModeRuntimeResolver.transcriptionModelResolution(
@@ -381,29 +372,6 @@ struct ConfigurationRow: View {
                     )
                 }
 
-                if config.isAIEnhancementEnabled,
-                    config.selectedAIProvider != AIProvider.localCLI.rawValue,
-                    let modelName = config.selectedAIModel,
-                    !modelName.isEmpty
-                {
-                    HStack(spacing: 4) {
-                        Image(systemName: "cpu")
-                            .font(.system(size: 10))
-                        Text(modelName.count > 20 ? String(modelName.prefix(18)) + "..." : modelName)
-                            .font(.caption)
-                    }
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(
-                        Capsule()
-                            .fill(AppTheme.Surface.control)
-                    )
-                    .overlay(
-                        Capsule()
-                            .stroke(AppTheme.Border.control, lineWidth: 0.5)
-                    )
-                }
-
                 if config.outputMode != .paste {
                     HStack(spacing: 4) {
                         Image(systemName: config.outputMode.iconName)
@@ -441,25 +409,6 @@ struct ConfigurationRow: View {
                             .stroke(AppTheme.Border.control, lineWidth: 0.5)
                     )
                 }
-                if config.isAIEnhancementEnabled {
-                    HStack(spacing: 4) {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 10))
-                        Text(selectedPrompt?.title ?? "AI")
-                            .font(.caption)
-                    }
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(
-                        Capsule()
-                            .fill(AppTheme.Surface.control)
-                    )
-                    .overlay(
-                        Capsule()
-                            .stroke(AppTheme.Border.control, lineWidth: 0.5)
-                    )
-                }
-
                 ModeShortcutIndicator(modeID: config.id)
 
                 Spacer()

@@ -5,16 +5,12 @@ struct ModeConfigEditorView: View {
     let modeManager: ModeManager
     let onDismiss: () -> Void
 
-    @EnvironmentObject private var enhancementService: AIEnhancementService
-    @EnvironmentObject private var aiService: AIService
     @EnvironmentObject private var transcriptionModelManager: TranscriptionModelManager
     @EnvironmentObject private var modeWarmupStore: ModeFormWarmupStore
 
     @State private var draft: ModeConfigDraft
     @State private var validationErrors: [ModeValidationError] = []
     @State private var showValidationAlert = false
-    @State private var promptEditorMode: PromptEditorView.Mode?
-    @State private var promptEditorID = UUID()
     @State private var didSaveConfiguration = false
 
     init(mode: ConfigurationMode, modeManager: ModeManager, onDismiss: @escaping () -> Void) {
@@ -25,84 +21,33 @@ struct ModeConfigEditorView: View {
     }
 
     var body: some View {
-        Group {
-            if let promptEditorMode {
-                PromptEditorView(
-                    mode: promptEditorMode,
-                    onDismiss: closePromptEditor,
-                    onSave: handlePromptSaved,
-                    onDelete: handlePromptDeleted
-                )
-                .environmentObject(enhancementService)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .id(promptEditorID)
-            } else {
-                ModeConfigFormView(
-                    mode: mode,
-                    modeManager: modeManager,
-                    draft: $draft,
-                    validationErrors: $validationErrors,
-                    showValidationAlert: $showValidationAlert,
-                    onDismiss: onDismiss,
-                    onSave: saveConfiguration,
-                    onDelete: deleteConfiguration,
-                    openPromptEditor: openPromptEditor
-                )
-            }
-        }
+        ModeConfigFormView(
+            mode: mode,
+            modeManager: modeManager,
+            draft: $draft,
+            validationErrors: $validationErrors,
+            showValidationAlert: $showValidationAlert,
+            onDismiss: onDismiss,
+            onSave: saveConfiguration,
+            onDelete: deleteConfiguration
+        )
         .onAppear(perform: prepareView)
         .onDisappear(perform: cleanupUnsavedShortcutIfNeeded)
-        .onExitCommand(perform: handleExitCommand)
-    }
-
-    private func openPromptEditor(mode: PromptEditorView.Mode) {
-        promptEditorID = UUID()
-        promptEditorMode = mode
-    }
-
-    private func closePromptEditor() {
-        promptEditorMode = nil
-    }
-
-    private func handlePromptSaved(_ prompt: CustomPrompt) {
-        draft.selectedPromptId = prompt.id
-        closePromptEditor()
-    }
-
-    private func handlePromptDeleted(_ prompt: CustomPrompt) {
-        enhancementService.deletePrompt(prompt)
-        if draft.selectedPromptId == prompt.id {
-            draft.selectedPromptId = enhancementService.allPrompts.first?.id
-        }
-    }
-
-    private func handleExitCommand() {
-        if promptEditorMode != nil {
-            closePromptEditor()
-        } else {
-            onDismiss()
-        }
+        .onExitCommand(perform: onDismiss)
     }
 
     private func prepareView() {
-        modeWarmupStore.configure(
-            aiService: aiService,
-            enhancementService: enhancementService,
-            transcriptionModelManager: transcriptionModelManager
-        )
+        modeWarmupStore.configure(transcriptionModelManager: transcriptionModelManager)
 
         let snapshot = modeWarmupStore.snapshot
 
         if case .add = mode {
-            draft.applyAddModeDefaults(snapshot: snapshot)
             draft.inheritUsableTranscriptionModelSelection(from: snapshot)
         } else if let selectedModelName = draft.selectedTranscriptionModelName,
             !snapshot.hasUsableTranscriptionModel(named: selectedModelName)
         {
             draft.selectedTranscriptionModelName = nil
         }
-
-        draft.ensurePromptSelection(firstPromptId: snapshot.firstPromptId)
 
         if let selectedModelName = draft.selectedTranscriptionModelName,
             let model = snapshot.transcriptionModel(named: selectedModelName)

@@ -90,31 +90,6 @@ struct ModeConfigDraft {
         !name.isEmpty
     }
 
-    mutating func applyAddModeDefaults(snapshot: ModeFormWarmupSnapshot) {
-        let connectedProviders = snapshot.connectedAIProviders
-        let inheritedProvider = selectedAIProvider.flatMap(AIProvider.init(rawValue:))
-        let provider =
-            inheritedProvider.flatMap { provider in
-                connectedProviders.contains(provider) ? provider : nil
-            } ?? connectedProviders.first
-
-        selectedAIProvider = provider?.rawValue
-        guard let provider, provider != .localCLI else {
-            selectedAIModel = nil
-            return
-        }
-
-        let availableModels = snapshot.availableModels(for: provider)
-        if let selectedAIModel,
-            !selectedAIModel.isEmpty,
-            (provider.supportsCustomModelID || availableModels.isEmpty || availableModels.contains(selectedAIModel))
-        {
-            return
-        }
-
-        selectedAIModel = snapshot.selectedModel(for: provider)
-    }
-
     mutating func inheritUsableTranscriptionModelSelection(from snapshot: ModeFormWarmupSnapshot) {
         if let selectedTranscriptionModelName,
             snapshot.hasUsableTranscriptionModel(named: selectedTranscriptionModelName)
@@ -123,12 +98,6 @@ struct ModeConfigDraft {
         }
 
         selectedTranscriptionModelName = snapshot.usableTranscriptionModels.first?.selectionKey
-    }
-
-    mutating func ensurePromptSelection(firstPromptId: UUID?) {
-        if isAIEnhancementEnabled && selectedPromptId == nil {
-            selectedPromptId = firstPromptId
-        }
     }
 
     mutating func useCompatibleLanguage(for model: any TranscriptionModel) {

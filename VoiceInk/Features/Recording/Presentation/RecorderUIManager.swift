@@ -95,7 +95,6 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
                 notchWindowManager = NotchWindowManager(
                     engine: engine,
                     recorder: recorder,
-                    assistantSession: engine.assistantSession,
                     onRecordButtonTapped: { [weak self] in
                         Task { @MainActor in
                             await self?.toggleRecorderPanel()
@@ -104,11 +103,6 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
                     onCloseTapped: { [weak self] in
                         Task { @MainActor in
                             await self?.dismissRecorderPanel()
-                        }
-                    },
-                    onAssistantFollowUp: { [weak engine] text in
-                        Task { @MainActor in
-                            await engine?.sendAssistantFollowUp(text)
                         }
                     }
                 )
@@ -119,7 +113,6 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
                 miniWindowManager = MiniWindowManager(
                     engine: engine,
                     recorder: recorder,
-                    assistantSession: engine.assistantSession,
                     onRecordButtonTapped: { [weak self] in
                         Task { @MainActor in
                             await self?.toggleRecorderPanel()
@@ -128,11 +121,6 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
                     onCloseTapped: { [weak self] in
                         Task { @MainActor in
                             await self?.dismissRecorderPanel()
-                        }
-                    },
-                    onAssistantFollowUp: { [weak engine] text in
-                        Task { @MainActor in
-                            await engine?.sendAssistantFollowUp(text)
                         }
                     }
                 )
@@ -226,19 +214,9 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
             switch engine.recordingState {
             case .recording:
                 await engine.toggleRecord(modeId: modeId)
-            case .starting, .transcribing, .enhancing:
+            case .starting, .transcribing:
                 await cancelRecording()
-            case .idle:
-                if engine.assistantSession.canSendFollowUp {
-                    SoundManager.shared.playStartSound()
-                    await engine.toggleRecord(
-                        modeId: modeId,
-                        isAssistantFollowUp: true
-                    )
-                } else {
-                    await dismissRecorderPanel()
-                }
-            case .busy:
+            case .idle, .busy:
                 await dismissRecorderPanel()
             }
         } else {
@@ -262,11 +240,10 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
     }
 
     func dismissRecorderPanel() async {
-        guard let engine = engine else { return }
+        guard engine != nil else { return }
 
         hideRecorderPanel()
         isRecorderPanelVisible = false
-        engine.assistantSession.reset()
     }
 
     func resetOnLaunch() async {
@@ -275,7 +252,6 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
         await engine.resetRecordingSession()
         hideRecorderPanel()
         isRecorderPanelVisible = false
-        engine.assistantSession.reset()
     }
 
     func cancelRecording() async {
@@ -330,7 +306,7 @@ class RecorderUIManager: ObservableObject, RecorderPanelPresenting {
     @objc public func handleDismissRecorderPanelNotification() {
         Task {
             switch engine?.recordingState {
-            case .starting, .recording, .transcribing, .enhancing:
+            case .starting, .recording, .transcribing:
                 await cancelRecording()
             case .idle, .busy, nil:
                 await dismissRecorderPanel()

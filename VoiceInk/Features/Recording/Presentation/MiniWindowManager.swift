@@ -13,20 +13,16 @@ class MiniWindowManager {
     init(
         engine: VoiceInkEngine,
         recorder: Recorder,
-        assistantSession: AssistantSession,
         onRecordButtonTapped: @escaping () -> Void,
-        onCloseTapped: @escaping () -> Void,
-        onAssistantFollowUp: @escaping (String) -> Void
+        onCloseTapped: @escaping () -> Void
     ) {
         self.makeView = {
             AnyView(
                 MiniRecorderView(
                     stateProvider: engine,
                     recorder: recorder,
-                    assistantSession: assistantSession,
                     onRecordButtonTapped: onRecordButtonTapped,
-                    onCloseTapped: onCloseTapped,
-                    onAssistantFollowUp: onAssistantFollowUp
+                    onCloseTapped: onCloseTapped
                 )
             )
         }
@@ -60,9 +56,7 @@ class MiniWindowManager {
         deinitializeWindow()
     }
 
-    // Rebuilding gives the SwiftUI content a new identity, so view-local state inside it is
-    // reset — currently the assistant follow-up draft and its focus. The conversation itself
-    // lives in `AssistantSession`, which is owned by the engine and survives.
+    // Rebuilding gives the SwiftUI content a new identity, so view-local state inside it is reset.
     private func initializeWindow() {
         deinitializeWindow()
         guard let metrics = MiniRecorderPanel.calculateWindowMetrics() else {

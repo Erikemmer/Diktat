@@ -4,7 +4,6 @@ enum ShortcutAction: Hashable {
     case primaryRecording
     case secondaryRecording
     case pasteLastTranscription
-    case pasteLastEnhancement
     case retryLastTranscription
     case cancelRecorder
     case openQuickHistory
@@ -35,8 +34,6 @@ enum ShortcutAction: Hashable {
             return "secondaryRecording"
         case .pasteLastTranscription:
             return "pasteLastTranscription"
-        case .pasteLastEnhancement:
-            return "pasteLastEnhancement"
         case .retryLastTranscription:
             return "retryLastTranscription"
         case .cancelRecorder:
@@ -64,8 +61,6 @@ enum ShortcutAction: Hashable {
             return String(localized: "Secondary Shortcut")
         case .pasteLastTranscription:
             return String(localized: "Paste Last Transcription")
-        case .pasteLastEnhancement:
-            return String(localized: "Paste Last Enhanced Transcription")
         case .retryLastTranscription:
             return String(localized: "Retry Last Transcription")
         case .cancelRecorder:
@@ -95,7 +90,6 @@ enum ShortcutAction: Hashable {
 
     static let globalUtilityActions: [Self] = [
         .pasteLastTranscription,
-        .pasteLastEnhancement,
         .retryLastTranscription,
         .openQuickHistory,
         .quickAddToDictionary,
@@ -109,7 +103,6 @@ enum ShortcutAction: Hashable {
         .primaryRecording,
         .secondaryRecording,
         .pasteLastTranscription,
-        .pasteLastEnhancement,
         .retryLastTranscription,
         .cancelRecorder,
         .openQuickHistory,

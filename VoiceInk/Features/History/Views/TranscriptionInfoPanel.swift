@@ -34,7 +34,7 @@ struct TranscriptionInfoSidePanel: View {
     }
 }
 
-/// Reusable component that displays transcription details and the recorded AI request.
+/// Reusable component that displays transcription details.
 struct TranscriptionInfoPanel: View {
     let transcription: Transcription
 
@@ -42,7 +42,6 @@ struct TranscriptionInfoPanel: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 detailsSection
-                aiRequestSection
             }
             .padding(.horizontal, 20)
             .padding(.top, QuickPanelMetrics.topEdgeHeight)
@@ -85,30 +84,6 @@ struct TranscriptionInfoPanel: View {
                     }
                 }
 
-                if let aiModel = transcription.aiEnhancementModelName {
-                    TranscriptionMetadataRow(
-                        icon: "sparkles",
-                        label: "Enhancement Model",
-                        value: aiModel
-                    )
-
-                    if let duration = transcription.enhancementDuration {
-                        TranscriptionMetadataRow(
-                            icon: "clock.fill",
-                            label: "Enhancement Time",
-                            value: duration.formatTiming()
-                        )
-                    }
-                }
-
-                if let promptName = transcription.promptName {
-                    TranscriptionMetadataRow(
-                        icon: "text.bubble.fill",
-                        label: "Prompt",
-                        value: promptName
-                    )
-                }
-
                 if let modeName = transcription.modeName {
                     TranscriptionMetadataRow(
                         icon: "bolt.fill",
@@ -116,33 +91,6 @@ struct TranscriptionInfoPanel: View {
                         value: modeName
                     )
                 }
-            }
-        }
-    }
-
-    // MARK: - AI Request Section
-
-    @ViewBuilder
-    private var aiRequestSection: some View {
-        if transcription.aiRequestSystemMessage != nil || transcription.aiRequestUserMessage != nil {
-            infoSection("AI Request") {
-                VStack(alignment: .leading, spacing: 12) {
-                    if let systemMsg = transcription.aiRequestSystemMessage, !systemMsg.isEmpty {
-                        requestMessageBlock(title: "System Prompt", message: systemMsg)
-                    }
-
-                    if let userMsg = transcription.aiRequestUserMessage, !userMsg.isEmpty {
-                        requestMessageBlock(title: "User Message", message: userMsg)
-                    }
-
-                    aiRequestTokenEstimate
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .hoverCopyButton(
-                    textToCopy: fullRequestText,
-                    alignment: .topTrailing,
-                    padding: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-                )
             }
         }
     }
@@ -162,53 +110,6 @@ struct TranscriptionInfoPanel: View {
                 .padding(14)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(HistoryCardBackground())
-        }
-    }
-
-    private var aiRequestTokenEstimate: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "number")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.secondary)
-
-            Text("Around \(estimatedAIRequestTokenCount.formatted()) tokens")
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(.secondary)
-                .textSelection(.enabled)
-        }
-        .help("Token count is estimated from the request text.")
-    }
-
-    private var estimatedAIRequestTokenCount: Int {
-        EstimatedTokenCounter.count(
-            in: [
-                transcription.aiRequestSystemMessage,
-                transcription.aiRequestUserMessage,
-            ]
-        ) ?? 0
-    }
-
-    private var fullRequestText: String {
-        var parts: [String] = []
-        if let sys = transcription.aiRequestSystemMessage, !sys.isEmpty {
-            parts.append("System Prompt:\n\(sys)")
-        }
-        if let user = transcription.aiRequestUserMessage, !user.isEmpty {
-            parts.append("User Message:\n\(user)")
-        }
-        return parts.joined(separator: "\n\n")
-    }
-
-    private func requestMessageBlock(title: LocalizedStringKey, message: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(title)
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundColor(.secondary)
-            Text(message)
-                .font(.system(size: 11, weight: .regular, design: .monospaced))
-                .lineSpacing(2)
-                .textSelection(.enabled)
-                .foregroundColor(.primary)
         }
     }
 }

@@ -3,39 +3,20 @@ import SwiftData
 import os
 
 /// Handles the full post-recording pipeline:
-/// transcribe → filter → format → word-replace → AI enhance → deliver → save
+/// transcribe → filter → format → word-replace → deliver → save
 @MainActor
 class TranscriptionPipeline {
-    struct AssistantHooks {
-        let isFollowUp: Bool
-        let sendFollowUp: (String, Transcription) async -> Void
-        let startResponse: (String, EnhancementRuntimeConfiguration) async -> Void
-        let showResponse: (String, String?) async -> Void
-        let failResponse: (String) async -> Void
-
-        static let inactive = AssistantHooks(
-            isFollowUp: false,
-            sendFollowUp: { _, _ in },
-            startResponse: { _, _ in },
-            showResponse: { _, _ in },
-            failResponse: { _ in }
-        )
-    }
-
     private let modelContext: ModelContext
     private let serviceRegistry: TranscriptionServiceRegistry
-    private let enhancementService: AIEnhancementService?
     private let delivery = TranscriptionDelivery()
     private let logger = Logger(subsystem: "com.prakashjoshipax.voiceink", category: "TranscriptionPipeline")
 
     init(
         modelContext: ModelContext,
-        serviceRegistry: TranscriptionServiceRegistry,
-        enhancementService: AIEnhancementService?
+        serviceRegistry: TranscriptionServiceRegistry
     ) {
         self.modelContext = modelContext
         self.serviceRegistry = serviceRegistry
-        self.enhancementService = enhancementService
     }
 
     /// Run the full pipeline for a given transcription record.
@@ -44,7 +25,7 @@ class TranscriptionPipeline {
     ///   - audioURL: The recorded audio file.
     ///   - transcriptionConfiguration: Mode-resolved transcription engine settings for this phase.
     ///   - session: An active streaming session if one was prepared, otherwise nil.
-    ///   - onStateChange: Called when the pipeline moves to a new recording state (e.g. `.enhancing`).
+    ///   - onStateChange: Called when the pipeline moves to a new recording state (e.g. `.idle`).
     ///   - shouldCancel: Returns true if the user requested cancellation.
     ///   - onCancel: Called when cancellation is detected to cancel active session state.
     ///   - onDismiss: Called when delivery should close the recorder panel.
@@ -55,21 +36,16 @@ class TranscriptionPipeline {
         formattingConfiguration resolveFormattingConfiguration: @escaping () -> TranscriptionFormattingConfiguration,
         session: TranscriptionSession?,
         triggerWordModeSelection: @escaping (String) -> String? = { _ in nil },
-        enhancementConfiguration: @escaping () -> EnhancementRuntimeConfiguration?,
-        recordingContextSnapshot: @escaping () async -> RecordingContextSnapshot? = { nil },
         outputConfiguration: @escaping () -> OutputRuntimeConfiguration,
         sendAfterPaste: Bool = false,
         onStateChange: @escaping (RecordingState) -> Void,
         shouldCancel: () -> Bool,
         onCancel: @escaping () async -> Void,
-        onDismiss: @escaping () async -> Void,
-        assistant: AssistantHooks = .inactive
+        onDismiss: @escaping () async -> Void
     ) async {
         let model = transcriptionConfiguration.model
         var finalText: String?
-        var responseError: String?
         var outputForDelivery: OutputRuntimeConfiguration?
-        var responseConfig: EnhancementRuntimeConfiguration?
 
         func finishCanceledTranscription() async {
             await onCancel()
@@ -121,18 +97,15 @@ class TranscriptionPipeline {
 
             text = text.trimmingCharacters(in: .whitespacesAndNewlines)
 
-            if !assistant.isFollowUp,
-                let processedText = triggerWordModeSelection(text)
-            {
+            if let processedText = triggerWordModeSelection(text) {
                 text = processedText
             }
 
             let formattingConfiguration = resolveFormattingConfiguration()
-            let resolvedEnhancementConfiguration = enhancementConfiguration()
             let resolvedOutputConfiguration = outputConfiguration()
             let modeMetadata = metadata(
-                for: formattingConfiguration.mode ?? resolvedEnhancementConfiguration?.mode
-                    ?? resolvedOutputConfiguration.mode ?? transcriptionConfiguration.mode
+                for: formattingConfiguration.mode ?? resolvedOutputConfiguration.mode
+                    ?? transcriptionConfiguration.mode
             )
 
             if formattingConfiguration.isTextFormattingEnabled {
@@ -151,77 +124,7 @@ class TranscriptionPipeline {
             transcription.modeName = modeMetadata.name
             transcription.modeEmoji = modeMetadata.emoji
             finalText = cleanedText
-
-            if !assistant.isFollowUp {
-                let shouldRespondInRecorder =
-                    resolvedOutputConfiguration.outputMode == .respond
-                    && resolvedEnhancementConfiguration?.isEnabled == true
-                    && resolvedEnhancementConfiguration.map { configuration in
-                        enhancementService?.isConfigured(for: configuration) == true
-                    } == true
-                outputForDelivery = resolvedOutputConfiguration
-                responseConfig = shouldRespondInRecorder ? resolvedEnhancementConfiguration : nil
-
-                let isSkipShortEnhancementEnabled = UserDefaults.standard.bool(forKey: "SkipShortEnhancement")
-                let savedThreshold = UserDefaults.standard.integer(forKey: "ShortEnhancementWordThreshold")
-                let shortEnhancementWordThreshold = savedThreshold > 0 ? savedThreshold : 3
-                let shouldSkipEnhancement =
-                    !shouldRespondInRecorder && isSkipShortEnhancementEnabled
-                    && WordCounter.count(in: text) <= shortEnhancementWordThreshold
-
-                if let enhancementService,
-                    let resolvedEnhancementConfiguration,
-                    resolvedEnhancementConfiguration.isEnabled,
-                    enhancementService.isConfigured(for: resolvedEnhancementConfiguration),
-                    !shouldSkipEnhancement
-                {
-                    if shouldCancel() {
-                        await finishCanceledTranscription()
-                        return
-                    }
-
-                    onStateChange(.enhancing)
-                    let textForAI = text
-                    if shouldRespondInRecorder {
-                        await assistant.startResponse(textForAI, resolvedEnhancementConfiguration)
-                    }
-
-                    do {
-                        let contextSnapshot = await recordingContextSnapshot()
-                        transcription.aiEnhancementModelName =
-                            resolvedEnhancementConfiguration.modelName
-                            ?? resolvedEnhancementConfiguration.provider?.defaultModel
-                        transcription.promptName = resolvedEnhancementConfiguration.prompt?.title
-                        let enhancementResult = try await enhancementService.enhance(
-                            textForAI,
-                            configuration: resolvedEnhancementConfiguration,
-                            contextSnapshot: contextSnapshot
-                        )
-                        transcription.enhancedText = enhancementResult.text
-                        transcription.promptName =
-                            enhancementResult.promptName ?? resolvedEnhancementConfiguration.prompt?.title
-                        transcription.enhancementDuration = enhancementResult.duration
-                        transcription.aiRequestSystemMessage = enhancementResult.systemMessage
-                        transcription.aiRequestUserMessage = enhancementResult.userMessage
-                        finalText = enhancementResult.text
-                    } catch {
-                        let errorDescription = EnhancementFailureFormatter.description(for: error)
-                        let failureMessage = EnhancementFailureFormatter.message(description: errorDescription)
-                        transcription.enhancedText = failureMessage
-                        responseError = errorDescription
-                        await MainActor.run {
-                            NotificationManager.shared.showNotification(
-                                title: failureMessage,
-                                type: .warning
-                            )
-                        }
-                        if shouldCancel() {
-                            await finishCanceledTranscription()
-                            return
-                        }
-                    }
-                }
-            }
+            outputForDelivery = resolvedOutputConfiguration
 
             transcription.transcriptionStatus = TranscriptionStatus.completed.rawValue
         } catch {
@@ -279,17 +182,11 @@ class TranscriptionPipeline {
                 transcription: transcription,
                 text: finalText,
                 output: outputForDelivery ?? outputConfiguration(),
-                responseConfig: responseConfig,
-                responseError: responseError,
-                isAssistantFollowUp: assistant.isFollowUp,
                 sendAfterPaste: sendAfterPaste
             ),
             actions: TranscriptionDelivery.Actions(
                 setState: onStateChange,
-                dismiss: onDismiss,
-                sendFollowUp: assistant.sendFollowUp,
-                showResponse: assistant.showResponse,
-                failResponse: assistant.failResponse
+                dismiss: onDismiss
             )
         )
 

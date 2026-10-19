@@ -15,7 +15,6 @@ struct TranscriptionDetailView: View {
 
     private var audioURL: URL? { transcription.availableHistoryAudioURL }
     private var playbackURL: URL? { presentation == .mainWindow ? audioURL : nil }
-    private var rendersMarkdown: Bool { presentation == .mainWindow }
 
     private var footerHeight: CGFloat {
         QuickPanelMetrics.footerHeight
@@ -72,23 +71,8 @@ struct TranscriptionDetailView: View {
     }
 
     private var transcriptionContent: some View {
-        let enhancementText = transcription.historyEnhancementDetailText
-
-        return VStack(alignment: .leading, spacing: 12) {
-            if let enhancementText {
-                HistoryTranscriptionTextCard(
-                    text: enhancementText,
-                    title: "Enhanced",
-                    surface: AppTheme.Surface.control,
-                    rendersMarkdown: rendersMarkdown
-                )
-            }
-
-            HistoryTranscriptionTextCard(
-                text: transcription.text,
-                title: enhancementText == nil ? nil : "Original",
-                rendersMarkdown: rendersMarkdown
-            )
+        VStack(alignment: .leading, spacing: 12) {
+            HistoryTranscriptionTextCard(text: transcription.text)
         }
     }
 
@@ -116,7 +100,6 @@ private struct HistoryTranscriptionTextCard: View {
     let text: String
     var title: LocalizedStringKey? = nil
     var surface = AppTheme.Surface.window
-    var rendersMarkdown = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -150,17 +133,11 @@ private struct HistoryTranscriptionTextCard: View {
     }
 
     private var textContent: some View {
-        Group {
-            if rendersMarkdown {
-                MarkdownContentView(text, fontSize: 14, foregroundColor: AppTheme.Text.primary)
-            } else {
-                Text(text)
-                    .font(.system(size: 14))
-                    .foregroundStyle(AppTheme.Text.primary)
-                    .textSelection(.enabled)
-            }
-        }
-        .lineSpacing(3)
+        Text(text)
+            .font(.system(size: 14))
+            .foregroundStyle(AppTheme.Text.primary)
+            .textSelection(.enabled)
+            .lineSpacing(3)
         .fixedSize(horizontal: false, vertical: true)
     }
 }

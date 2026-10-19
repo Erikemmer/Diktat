@@ -191,76 +191,16 @@ class AudioTranscriptionManager: ObservableObject {
             let cleanedText = text
             try Task.checkCancellation()
 
-            // Handle enhancement if enabled
-            var transcription: Transcription
-
-            let enhancementConfiguration = engine.enhancementService
-                .flatMap { enhancementService in
-                    enhancementService.getAIService().map { aiService in
-                        ModeRuntimeResolver.currentEnhancementConfiguration(
-                            mode: mode,
-                            enhancementService: enhancementService,
-                            aiService: aiService
-                        )
-                    }
-                }
-
-            if let enhancementService = engine.enhancementService,
-                let enhancementConfiguration,
-                enhancementConfiguration.isEnabled,
-                enhancementService.isConfigured(for: enhancementConfiguration)
-            {
-                item.status = .processing(phase: .enhancing)
-                do {
-                    let enhancementResult = try await enhancementService.enhance(
-                        text,
-                        configuration: enhancementConfiguration
-                    )
-                    transcription = Transcription(
-                        text: cleanedText,
-                        duration: duration,
-                        enhancedText: enhancementResult.text,
-                        audioFileURL: permanentURL.absoluteString,
-                        transcriptionModelName: currentModel.displayName,
-                        aiEnhancementModelName: enhancementConfiguration.modelName
-                            ?? enhancementConfiguration.provider?.defaultModel,
-                        promptName: enhancementResult.promptName
-                            ?? enhancementConfiguration.prompt?.title,
-                        transcriptionDuration: transcriptionDuration,
-                        enhancementDuration: enhancementResult.duration,
-                        aiRequestSystemMessage: enhancementResult.systemMessage,
-                        aiRequestUserMessage: enhancementResult.userMessage,
-                        modeName: modeMetadata.name,
-                        modeEmoji: modeMetadata.emoji
-                    )
-                } catch {
-                    let failureMessage = EnhancementFailureFormatter.message(for: error)
-                    transcription = Transcription(
-                        text: cleanedText,
-                        duration: duration,
-                        enhancedText: failureMessage,
-                        audioFileURL: permanentURL.absoluteString,
-                        transcriptionModelName: currentModel.displayName,
-                        aiEnhancementModelName: enhancementConfiguration.modelName
-                            ?? enhancementConfiguration.provider?.defaultModel,
-                        promptName: enhancementConfiguration.prompt?.title,
-                        transcriptionDuration: transcriptionDuration,
-                        modeName: modeMetadata.name,
-                        modeEmoji: modeMetadata.emoji
-                    )
-                }
-            } else {
-                transcription = Transcription(
-                    text: cleanedText,
-                    duration: duration,
-                    audioFileURL: permanentURL.absoluteString,
-                    transcriptionModelName: currentModel.displayName,
-                    promptName: nil,
-                    transcriptionDuration: transcriptionDuration,
-                    modeName: modeMetadata.name,
-                    modeEmoji: modeMetadata.emoji
-                )
-            }
+            let transcription = Transcription(
+                text: cleanedText,
+                duration: duration,
+                audioFileURL: permanentURL.absoluteString,
+                transcriptionModelName: currentModel.displayName,
+                promptName: nil,
+                transcriptionDuration: transcriptionDuration,
+                modeName: modeMetadata.name,
+                modeEmoji: modeMetadata.emoji
+            )
 
             modelContext.insert(transcription)
             try modelContext.save()

@@ -20,7 +20,6 @@ class CursorPaster {
 
     struct PasteOutcome {
         let result: PasteResult
-        let autoLearnGeneration: UInt64?
     }
 
     private static let prePasteDelay: TimeInterval = 0.20
@@ -84,7 +83,7 @@ class CursorPaster {
                 )
             else {
                 logger.error("Failed to prepare clipboard for paste id=\(sessionID, privacy: .public)")
-                return (PasteOutcome(result: .commandNotPosted, autoLearnGeneration: nil), nil)
+                return (PasteOutcome(result: .commandNotPosted), nil)
             }
 
             await wait(prePasteDelay)
@@ -98,16 +97,6 @@ class CursorPaster {
         logger.notice(
             "Paste id=\(sessionID, privacy: .public) app=\(appIdentifier, privacy: .public) method=\(method.rawValue, privacy: .public) commandPosted=\(pasteResult.didPostPasteCommand, privacy: .public) queueMs=\(queueWaitMs, privacy: .public) elapsedMs=\(elapsedMilliseconds(since: startedAt), privacy: .public)"
         )
-        let autoLearnGeneration: UInt64?
-        if AutoLearnSettings.isEnabled {
-            autoLearnGeneration = await AutoLearnService.shared.pasteDidFinish(
-                text: textToDeliver,
-                processID: application?.processIdentifier,
-                commandPosted: pasteResult.didPostPasteCommand
-            )
-        } else {
-            autoLearnGeneration = nil
-        }
         let clipboardRestoreTask: Task<Void, Never>?
         if shouldRestoreClipboard, let pasteboard {
             clipboardRestoreTask = scheduleClipboardRestore(
@@ -121,7 +110,7 @@ class CursorPaster {
         }
 
         return (
-            PasteOutcome(result: pasteResult, autoLearnGeneration: autoLearnGeneration),
+            PasteOutcome(result: pasteResult),
             clipboardRestoreTask
         )
     }

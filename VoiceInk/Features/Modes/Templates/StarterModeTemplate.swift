@@ -70,7 +70,7 @@ enum StarterModeCatalog {
             description: "Clean up dictated text while preserving your meaning.",
             guidance:
                 "Use this for everyday writing when you want grammar, flow, and light formatting improved before the result is pasted.",
-            promptId: PromptTemplates.defaultPromptId,
+            promptId: nil,
             outputMode: .paste,
             usesAIEnhancement: true,
             useSelectedTextContext: true,
@@ -85,7 +85,7 @@ enum StarterModeCatalog {
             description: "Turn a rough thought into a clean email.",
             guidance:
                 "Use this after selecting relevant text or opening the related window. VoiceInk uses that context to shape a clear email draft.",
-            promptId: PromptTemplates.emailPromptId,
+            promptId: nil,
             outputMode: .paste,
             usesAIEnhancement: true,
             useSelectedTextContext: true,
@@ -100,7 +100,7 @@ enum StarterModeCatalog {
             description: "Rewrite selected or dictated text with better clarity.",
             guidance:
                 "Use this when you have text selected and want a stronger version. The selected text is available as context for the rewrite.",
-            promptId: PromptTemplates.rewritePromptId,
+            promptId: nil,
             outputMode: .paste,
             usesAIEnhancement: true,
             useSelectedTextContext: true,
@@ -115,7 +115,7 @@ enum StarterModeCatalog {
             description: "Ask a question and keep the answer in the recorder.",
             guidance:
                 "Use this for answers, summaries, and follow-ups. Instead of pasting, VoiceInk keeps the conversation inside the recorder.",
-            promptId: PromptTemplates.assistantPromptId,
+            promptId: nil,
             outputMode: .respond,
             usesAIEnhancement: true,
             useSelectedTextContext: false,

@@ -6,13 +6,11 @@ enum BackupImporter {
 
     @MainActor
     static func apply(
-        _ backup: BackupFile, categories: Set<BackupCategory>, enhancementService: AIEnhancementService,
+        _ backup: BackupFile, categories: Set<BackupCategory>,
         recordingShortcutManager: RecordingShortcutManager, menuBarManager: MenuBarManager,
         mediaController: MediaController, playbackController: PlaybackController, recorderUIManager: RecorderUIManager,
         modelContext: ModelContext, transcriptionModelManager: TranscriptionModelManager
     ) async throws {
-        var shouldRepairModePromptSelections = false
-
         if categories.contains(.dictionary) {
             try await importDictionary(from: backup, modelContext: modelContext)
         }
@@ -26,12 +24,6 @@ enum BackupImporter {
                 playbackController: playbackController,
                 recorderUIManager: recorderUIManager
             )
-        }
-
-        if categories.contains(.prompts) {
-            enhancementService.customPrompts = backup.customPrompts
-            shouldRepairModePromptSelections = true
-            print("Successfully imported \(backup.customPrompts.count) prompts.")
         }
 
         if categories.contains(.modes) {
@@ -57,7 +49,6 @@ enum BackupImporter {
             }
 
             modeManager.saveConfigurations()
-            shouldRepairModePromptSelections = true
 
             if let customEmojis = backup.customEmojis {
                 let emojiManager = EmojiManager.shared
@@ -66,10 +57,6 @@ enum BackupImporter {
                 }
             }
             print("Successfully imported \(backup.modeConfigs.count) Mode configurations.")
-        }
-
-        if shouldRepairModePromptSelections {
-            enhancementService.repairModePromptSelections()
         }
     }
 
@@ -93,9 +80,6 @@ enum BackupImporter {
         }
         if let pasteShortcut = general.pasteLastTranscriptionShortcut {
             ShortcutStore.setShortcut(pasteShortcut.shortcut, for: .pasteLastTranscription)
-        }
-        if let pasteEnhancementShortcut = general.pasteLastEnhancementShortcut {
-            ShortcutStore.setShortcut(pasteEnhancementShortcut.shortcut, for: .pasteLastEnhancement)
         }
         if let retryShortcut = general.retryLastTranscriptionShortcut {
             ShortcutStore.setShortcut(retryShortcut.shortcut, for: .retryLastTranscription)
@@ -190,30 +174,6 @@ enum BackupImporter {
         }
         if let finishAndSendKey = general.finishAndSendKey.flatMap(FinishAndSendKey.init(rawValue:)) {
             UserDefaults.standard.set(finishAndSendKey.rawValue, forKey: FinishAndSendSettings.key)
-        }
-        let importedReviewSchedule = general.autoLearnReviewSchedule.flatMap {
-            AutoLearnReviewSchedule(rawValue: $0)
-        }
-        if let importedReviewSchedule {
-            UserDefaults.standard.set(importedReviewSchedule.rawValue, forKey: AutoLearnSettings.reviewScheduleKey)
-        }
-        if let autoLearnEnabled = general.isAutoLearnDictionaryEnabled {
-            UserDefaults.standard.set(autoLearnEnabled, forKey: AutoLearnSettings.isEnabledKey)
-        }
-        if let provider = general.autoLearnProvider {
-            UserDefaults.standard.set(provider, forKey: AutoLearnSettings.providerKey)
-        }
-        if let model = general.autoLearnModel {
-            UserDefaults.standard.set(model, forKey: AutoLearnSettings.modelKey)
-        }
-        if general.isAutoLearnDictionaryEnabled != nil || importedReviewSchedule != nil {
-            Task {
-                if let autoLearnEnabled = general.isAutoLearnDictionaryEnabled {
-                    await AutoLearnService.shared.settingDidChange(isEnabled: autoLearnEnabled)
-                } else {
-                    await AutoLearnService.shared.reviewScheduleDidChange()
-                }
-            }
         }
 
         print("Successfully imported general settings.")

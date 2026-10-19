@@ -51,12 +51,6 @@ final class QuickHistoryController: NSObject {
 
         targetApplication = resolvedTargetApplication()
 
-        guard let enhancementService = engine.enhancementService else {
-            // Quick History's detail actions require the enhancement service.
-            // Do not crash if an engine is intentionally configured without it.
-            return
-        }
-
         let viewModel = QuickHistoryViewModel(modelContext: modelContext)
         let rootView = QuickHistoryView(
                 viewModel: viewModel,
@@ -69,7 +63,6 @@ final class QuickHistoryController: NSObject {
             )
             .modelContainer(modelContext.container)
             .environmentObject(engine)
-            .environmentObject(enhancementService)
 
         let hostingController = NSHostingController(rootView: rootView)
         let panel = PersistentQuickPanel(

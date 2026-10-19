@@ -132,7 +132,7 @@ struct VocabularyInfoPopover: View {
                 .font(.headline)
 
             Text(
-                "Vocabulary helps supported transcription models and AI enhancement preserve important names, technical terms, and unique spellings."
+                "Vocabulary helps supported transcription models preserve important names, technical terms, and unique spellings."
             )
             .font(.subheadline)
             .foregroundColor(.secondary)

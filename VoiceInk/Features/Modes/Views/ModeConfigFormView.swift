@@ -9,16 +9,13 @@ struct ModeConfigFormView: View {
     let onDismiss: () -> Void
     let onSave: () -> Void
     let onDelete: () -> ModeRemovalResult
-    let openPromptEditor: (PromptEditorView.Mode) -> Void
 
-    @EnvironmentObject private var aiService: AIService
     @EnvironmentObject private var modeWarmupStore: ModeFormWarmupStore
     @FocusState private var isNameFieldFocused: Bool
 
     @State private var isShowingIconPicker = false
     @State private var isShowingDeleteConfirmation = false
     @State private var isShowingDefaultModeDeleteAlert = false
-    @State private var isContextAwarenessExpanded = false
 
     private var isDeletingDefaultMode: Bool {
         modeManager.getConfiguration(with: draft.id)?.isDefault == true
@@ -36,31 +33,6 @@ struct ModeConfigFormView: View {
         warmupSnapshot.transcriptionModel(named: effectiveModelName)
     }
 
-    private var selectedPrompt: CustomPrompt? {
-        guard let selectedPromptId = draft.selectedPromptId else { return nil }
-        return warmupSnapshot.prompts.first { $0.id == selectedPromptId }
-    }
-
-    private var aiProviderOptions: [AIProvider] {
-        warmupSnapshot.connectedAIProviders
-    }
-
-    private var configuredSelectedAIProvider: AIProvider? {
-        let selectedProvider: AIProvider?
-        if let providerName = draft.selectedAIProvider {
-            selectedProvider = AIProvider(rawValue: providerName)
-        } else {
-            selectedProvider = aiProviderOptions.first
-        }
-
-        guard let selectedProvider,
-            selectedProvider.supportsEnhancement,
-            aiProviderOptions.contains(selectedProvider)
-        else { return nil }
-
-        return selectedProvider
-    }
-
     var body: some View {
         QuickPanelScaffold {
             formContent
@@ -74,18 +46,6 @@ struct ModeConfigFormView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isNameFieldFocused = true
             }
-        }
-        .onChange(of: draft.isAIEnhancementEnabled) { _, _ in
-            applyOutputRules()
-        }
-        .onChange(of: draft.selectedPromptId) { _, _ in
-            applyOutputRules()
-        }
-        .onChange(of: draft.selectedAIProvider) { _, _ in
-            applyOutputRules()
-        }
-        .onChange(of: draft.selectedAIModel) { _, _ in
-            applyOutputRules()
         }
     }
 
@@ -139,7 +99,6 @@ struct ModeConfigFormView: View {
                 cleanURL: modeManager.cleanURL
             )
             transcriptionSection
-            aiEnhancementSection
             advancedSection
         }
         .formStyle(.grouped)
@@ -323,243 +282,12 @@ struct ModeConfigFormView: View {
         }
     }
 
-    private var aiEnhancementSection: some View {
-        Section("AI Enhancement") {
-            Toggle("AI Enhancement", isOn: $draft.isAIEnhancementEnabled)
-                .onChange(of: draft.isAIEnhancementEnabled) { _, newValue in
-                    if newValue {
-                        if configuredSelectedAIProvider == nil {
-                            draft.selectedAIProvider = aiProviderOptions.first?.rawValue
-                            draft.selectedAIModel = nil
-                        }
-                        if draft.selectedAIModel == nil,
-                            let provider = configuredSelectedAIProvider,
-                            provider != .localCLI
-                        {
-                            draft.selectedAIModel = warmupSnapshot.selectedModel(for: provider)
-                        }
-                        if draft.selectedPromptId == nil {
-                            draft.selectedPromptId = warmupSnapshot.firstPromptId
-                        }
-                        if configuredSelectedAIProvider == .ollama {
-                            aiService.refreshOllamaAvailabilityInBackground()
-                        }
-                    }
-                }
-
-            let providerBinding = Binding<AIProvider>(
-                get: {
-                    configuredSelectedAIProvider ?? aiProviderOptions.first ?? .gemini
-                },
-                set: { newValue in
-                    draft.selectedAIProvider = newValue.rawValue
-                    draft.selectedAIModel = nil
-                }
-            )
-
-            if draft.isAIEnhancementEnabled {
-                let providerOptions = aiProviderOptions
-
-                if providerOptions.isEmpty {
-                    LabeledContent("AI Provider") {
-                        Text("No providers connected")
-                            .foregroundColor(.secondary)
-                            .italic()
-                    }
-                } else {
-                    Picker("AI Provider", selection: providerBinding) {
-                        ForEach(providerOptions, id: \.self) { provider in
-                            Text(provider.rawValue).tag(provider)
-                        }
-                    }
-                    .onChange(of: draft.selectedAIProvider) { _, newValue in
-                        if let provider = newValue.flatMap({ AIProvider(rawValue: $0) }) {
-                            switch provider {
-                            case .localCLI:
-                                draft.selectedAIModel = nil
-                            case .ollama:
-                                if draft.selectedAIModel == nil || draft.selectedAIModel?.isEmpty == true {
-                                    draft.selectedAIModel = warmupSnapshot.selectedModel(for: provider)
-                                }
-                                aiService.refreshOllamaAvailabilityInBackground()
-                            default:
-                                draft.selectedAIModel = warmupSnapshot.selectedModel(for: provider)
-                            }
-
-                            if draft.selectedPromptId == nil {
-                                draft.selectedPromptId = warmupSnapshot.firstPromptId
-                            }
-                        }
-                    }
-                }
-
-                if let provider = configuredSelectedAIProvider {
-                    aiModelPicker(for: provider)
-                    promptPicker
-                    contextAwarenessRow
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func aiModelPicker(for provider: AIProvider) -> some View {
-        if provider == .localCLI {
-            LabeledContent("AI Model") {
-                Text("Default")
-                    .foregroundColor(.secondary)
-            }
-            .onAppear {
-                draft.selectedAIModel = nil
-            }
-        } else {
-            let models = aiModelOptions(for: provider)
-            if models.isEmpty {
-                LabeledContent("AI Model") {
-                    Text(
-                        provider == .openRouter
-                            ? LocalizedStringKey("No models loaded") : LocalizedStringKey("No models available")
-                    )
-                    .foregroundColor(.secondary)
-                    .italic()
-                }
-            } else {
-                let modelBinding = Binding<String>(
-                    get: {
-                        if let model = draft.selectedAIModel, !model.isEmpty { return model }
-                        return warmupSnapshot.selectedModel(for: provider)
-                    },
-                    set: { newModelValue in
-                        draft.selectedAIModel = newModelValue
-                    }
-                )
-
-                if provider.supportsCustomModelID {
-                    EnhancementModelPicker(
-                        title: "AI Model",
-                        provider: provider,
-                        models: models,
-                        savedCustomModelID: aiService.customModelID(for: provider),
-                        draftModel: modelBinding
-                    )
-                } else {
-                    Picker("AI Model", selection: modelBinding) {
-                        ForEach(models, id: \.self) { model in
-                            Text(model).tag(model)
-                        }
-                    }
-                }
-
-                if provider == .openRouter {
-                    Button("Refresh Models") {
-                        Task { await aiService.fetchOpenRouterModels() }
-                    }
-                    .help("Refresh models")
-                }
-            }
-        }
-    }
-
-    private func aiModelOptions(for provider: AIProvider) -> [String] {
-        var models = warmupSnapshot.availableModels(for: provider)
-
-        if let selectedModel = draft.selectedAIModel,
-            !selectedModel.isEmpty,
-            !models.contains(selectedModel),
-            !provider.supportsCustomModelID
-        {
-            models.insert(selectedModel, at: 0)
-        }
-
-        return models
-    }
-
-    private var promptPicker: some View {
-        HStack(spacing: 8) {
-            Text("Prompt")
-
-            Spacer(minLength: 12)
-
-            if warmupSnapshot.prompts.isEmpty {
-                Text("No prompts available")
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            } else {
-                Picker("", selection: $draft.selectedPromptId) {
-                    ForEach(warmupSnapshot.prompts) { prompt in
-                        Text(prompt.title)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                            .tag(prompt.id as UUID?)
-                    }
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-            }
-
-            if let selectedPrompt {
-                Button {
-                    openPromptEditor(.edit(selectedPrompt))
-                } label: {
-                    Image(systemName: "pencil.circle.fill")
-                        .font(.system(size: 18))
-                        .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.secondary)
-                }
-                .buttonStyle(.plain)
-                .help("Edit prompt")
-            }
-
-            AddIconButton(helpText: "Add prompt") {
-                openPromptEditor(.add)
-            }
-        }
-    }
-
-    private var contextAwarenessRow: some View {
-        ExpandableSettingsRow(
-            title: "Context Awareness",
-            isExpanded: $isContextAwarenessExpanded
-        ) {
-            VStack(alignment: .leading, spacing: 10) {
-                contextToggles
-            }
-        }
-    }
-
-    private var contextToggles: some View {
-        Group {
-            Toggle(isOn: $draft.useSelectedTextContext) {
-                HStack(spacing: 4) {
-                    Text("Selected Text")
-                    InfoTip("Use selected text from the active app as context for this mode.")
-                }
-            }
-
-            Toggle(isOn: $draft.useClipboardContext) {
-                HStack(spacing: 4) {
-                    Text("Clipboard")
-                    InfoTip("Use clipboard text as context for this mode.")
-                }
-            }
-
-            Toggle(isOn: $draft.useScreenCapture) {
-                HStack(spacing: 4) {
-                    Text("Screen")
-                    InfoTip("Use captured on-screen text as context for this mode.")
-                }
-            }
-        }
-    }
-
     private var outputChoices: [ModeOutputMode] {
         ModeOutputMode.choices(canRespond: canRespond)
     }
 
     private var canRespond: Bool {
-        draft.isAIEnhancementEnabled
-            && selectedPrompt != nil
-            && configuredSelectedAIProvider != nil
+        false
     }
 
     private func applyOutputRules() {

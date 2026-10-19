@@ -78,7 +78,6 @@ struct StaticVisualizer: View {
 struct ProcessingStatusDisplay: View {
     enum Mode {
         case transcribing
-        case enhancing
     }
 
     let mode: Mode
@@ -87,14 +86,12 @@ struct ProcessingStatusDisplay: View {
     private var label: LocalizedStringKey {
         switch mode {
         case .transcribing: return "Transcribing"
-        case .enhancing: return "Enhancing"
         }
     }
 
     private var animationSpeed: Double {
         switch mode {
         case .transcribing: return 0.18
-        case .enhancing: return 0.22
         }
     }
 

@@ -64,7 +64,6 @@ final class SystemInfoService {
 
             PERMISSIONS:
             Accessibility: \(getAccessibilityStatus())
-            Screen Recording: \(getScreenRecordingStatus())
             Microphone: \(getMicrophoneStatus())
             """
 
@@ -169,13 +168,11 @@ final class SystemInfoService {
             ?? mode.selectedTranscriptionModelName
             ?? "Not configured"
         let languageDescription = getModeLanguageDescription(for: mode, model: model)
-        let enhancementDescription = getModeEnhancementDescription(for: mode)
 
         return """
             Mode: \(mode.name)
             Transcription Model: \(modelDescription)
             Language: \(languageDescription)
-            Enhancement: \(enhancementDescription)
             """
     }
 
@@ -200,26 +197,8 @@ final class SystemInfoService {
         return "\(displayName) (\(language))"
     }
 
-    private func getModeEnhancementDescription(for mode: ModeConfig) -> String {
-        guard mode.isAIEnhancementEnabled else {
-            return "Disabled"
-        }
-
-        let configuration = [mode.selectedAIProvider, mode.selectedAIModel]
-            .compactMap { value -> String? in
-                guard let value, !value.isEmpty else { return nil }
-                return value
-            }
-
-        return configuration.isEmpty ? "Enabled (Not configured)" : configuration.joined(separator: " — ")
-    }
-
     private func getAccessibilityStatus() -> String {
         return AXIsProcessTrusted() ? "Granted" : "Not Granted"
-    }
-
-    private func getScreenRecordingStatus() -> String {
-        return CGPreflightScreenCaptureAccess() ? "Granted" : "Not Granted"
     }
 
     private func getMicrophoneStatus() -> String {

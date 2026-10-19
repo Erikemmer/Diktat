@@ -71,15 +71,6 @@ struct ModeValidator {
             errors.append(.missingTranscriptionModel)
         }
 
-        if config.isAIEnhancementEnabled,
-            let providerName = config.selectedAIProvider,
-            let provider = AIProvider(rawValue: providerName),
-            provider.supportsCustomModelID,
-            config.selectedAIModel?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty != false
-        {
-            errors.append(.missingEnhancementModel)
-        }
-
         if config.outputMode == .customCommand,
             config.customCommand?.trimmedCommand == nil
         {

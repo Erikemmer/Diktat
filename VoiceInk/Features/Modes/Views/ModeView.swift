@@ -54,8 +54,6 @@ enum ConfigurationType {
 struct ModeView: View {
     @StateObject private var modeManager = ModeManager.shared
     @StateObject private var modeWarmupStore = ModeFormWarmupStore.shared
-    @EnvironmentObject private var enhancementService: AIEnhancementService
-    @EnvironmentObject private var aiService: AIService
     @EnvironmentObject private var transcriptionModelManager: TranscriptionModelManager
     @State private var activePanel: PanelType?
     @State private var panelID = UUID()
@@ -176,11 +174,7 @@ struct ModeView: View {
             }
         }
         .onAppear {
-            modeWarmupStore.configure(
-                aiService: aiService,
-                enhancementService: enhancementService,
-                transcriptionModelManager: transcriptionModelManager
-            )
+            modeWarmupStore.configure(transcriptionModelManager: transcriptionModelManager)
         }
     }
 

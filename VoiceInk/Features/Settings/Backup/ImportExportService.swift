@@ -118,7 +118,7 @@ class ImportExportService {
 
     @MainActor
     func exportSettings(
-        enhancementService: AIEnhancementService, recordingShortcutManager: RecordingShortcutManager,
+        recordingShortcutManager: RecordingShortcutManager,
         menuBarManager: MenuBarManager, mediaController: MediaController, playbackController: PlaybackController,
         recorderUIManager: RecorderUIManager, modelContext: ModelContext
     ) async {
@@ -153,7 +153,6 @@ class ImportExportService {
             secondaryRecordingShortcut: ShortcutStore.shortcut(for: .secondaryRecording).map(ShortcutBackup.init),
             pasteLastTranscriptionShortcut: ShortcutStore.shortcut(for: .pasteLastTranscription).map(
                 ShortcutBackup.init),
-            pasteLastEnhancementShortcut: ShortcutStore.shortcut(for: .pasteLastEnhancement).map(ShortcutBackup.init),
             retryLastTranscriptionShortcut: ShortcutStore.shortcut(for: .retryLastTranscription).map(
                 ShortcutBackup.init),
             cancelRecorderShortcut: ShortcutStore.shortcut(for: .cancelRecorder).map(ShortcutBackup.init),
@@ -182,16 +181,11 @@ class ImportExportService {
             isExperimentalFeaturesEnabled: UserDefaults.standard.bool(forKey: "isExperimentalFeaturesEnabled"),
             restoreClipboardAfterPaste: UserDefaults.standard.bool(forKey: "restoreClipboardAfterPaste"),
             clipboardRestoreDelay: UserDefaults.standard.double(forKey: "clipboardRestoreDelay"),
-            finishAndSendKey: FinishAndSendSettings.selectedKey.rawValue,
-            isAutoLearnDictionaryEnabled: AutoLearnSettings.isEnabled,
-            autoLearnReviewSchedule: AutoLearnSettings.reviewSchedule.rawValue,
-            autoLearnProvider: AutoLearnSettings.selectedProvider?.rawValue,
-            autoLearnModel: AutoLearnSettings.selectedModel
+            finishAndSendKey: FinishAndSendSettings.selectedKey.rawValue
         )
 
         let exportedSettings = BackupFile(
             version: currentSettingsVersion,
-            customPrompts: enhancementService.customPrompts,
             modeConfigs: modeConfigs,
             modeShortcuts: modeShortcuts.isEmpty ? nil : modeShortcuts,
             vocabularyWords: exportedDictionaryItems,
@@ -246,7 +240,7 @@ class ImportExportService {
 
     @MainActor
     func importSettings(
-        enhancementService: AIEnhancementService, recordingShortcutManager: RecordingShortcutManager,
+        recordingShortcutManager: RecordingShortcutManager,
         menuBarManager: MenuBarManager, mediaController: MediaController, playbackController: PlaybackController,
         recorderUIManager: RecorderUIManager, modelContext: ModelContext,
         transcriptionModelManager: TranscriptionModelManager
@@ -305,7 +299,6 @@ class ImportExportService {
             try await BackupImporter.apply(
                 backup,
                 categories: selectedCategories,
-                enhancementService: enhancementService,
                 recordingShortcutManager: recordingShortcutManager,
                 menuBarManager: menuBarManager,
                 mediaController: mediaController,
@@ -318,8 +311,7 @@ class ImportExportService {
             showImportSuccessAlert(
                 message: String(
                     format: String(localized: "Settings imported successfully from %@.\n\nImported: %@."),
-                    url.lastPathComponent, categorySummary(for: selectedCategories)),
-                needsAPIKeyReminder: needsAPIKeyReminder(for: selectedCategories)
+                    url.lastPathComponent, categorySummary(for: selectedCategories))
             )
         } catch {
             showAlert(
@@ -361,10 +353,6 @@ class ImportExportService {
             .joined(separator: ", ")
     }
 
-    private func needsAPIKeyReminder(for categories: Set<BackupCategory>) -> Bool {
-        !categories.isDisjoint(with: [.prompts, .modes])
-    }
-
     private func showAlert(title: String, message: String) {
         DispatchQueue.main.async {
             let alert = NSAlert()
@@ -376,36 +364,17 @@ class ImportExportService {
         }
     }
 
-    private func showImportSuccessAlert(message: String, needsAPIKeyReminder: Bool) {
+    private func showImportSuccessAlert(message: String) {
         DispatchQueue.main.async {
             let alert = NSAlert()
             alert.messageText = String(localized: "Import Successful")
-            var informativeText = message
-            if needsAPIKeyReminder {
-                informativeText +=
-                    "\n\n"
-                    + String(
-                        localized:
-                            "IMPORTANT: If you were using AI enhancement features, please make sure to reconfigure your API keys in the AI Models section."
-                    )
-            }
-            informativeText +=
-                "\n\n" + String(localized: "It is recommended to restart VoiceInk for all changes to take full effect.")
+            let informativeText =
+                message + "\n\n"
+                + String(localized: "It is recommended to restart VoiceInk for all changes to take full effect.")
             alert.informativeText = informativeText
             alert.alertStyle = .informational
             alert.addButton(withTitle: String(localized: "OK"))
-            if needsAPIKeyReminder {
-                alert.addButton(withTitle: String(localized: "Configure API Keys"))
-            }
-
-            let response = alert.runModal()
-            if needsAPIKeyReminder && response == .alertSecondButtonReturn {
-                NotificationCenter.default.post(
-                    name: .navigateToDestination,
-                    object: nil,
-                    userInfo: ["destination": "AI Models"]
-                )
-            }
+            alert.runModal()
         }
     }
 }

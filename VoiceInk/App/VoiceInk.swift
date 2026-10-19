@@ -19,8 +19,6 @@ struct VoiceInkApp: App {
     @StateObject private var recordingShortcutManager: RecordingShortcutManager
     @StateObject private var menuBarManager: MenuBarManager
     @StateObject private var mainWindowNavigation = MainWindowNavigation.shared
-    @StateObject private var aiService = AIService()
-    @StateObject private var enhancementService: AIEnhancementService
     @StateObject private var activeWindowService = ActiveWindowService.shared
     @State private var showMenuBarIcon = true
     @State private var didShowLaunchReminders = false
@@ -90,23 +88,6 @@ struct VoiceInkApp: App {
         DictionaryService.cleanUpDictionaryContent(context: resolvedContainer.mainContext, source: "launch")
 
         // Initialize services with proper sharing of instances
-        let aiService = AIService()
-        _aiService = StateObject(wrappedValue: aiService)
-        aiService.refreshOllamaAvailabilityInBackground()
-        Task { @MainActor in
-            await aiService.fetchOpenRouterModelsIfNeededForMigration()
-        }
-
-        let enhancementService = AIEnhancementService(aiService: aiService, modelContext: resolvedContainer.mainContext)
-        _enhancementService = StateObject(wrappedValue: enhancementService)
-        let autoLearnReviewer = AutoLearnAIReviewer(enhancementService: enhancementService)
-        Task {
-            await AutoLearnService.shared.configure(
-                modelContainer: resolvedContainer,
-                reviewer: autoLearnReviewer
-            )
-        }
-
         // 1. Create modelsDirectory URL
         let appSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("com.prakashjoshipax.VoiceInk")
@@ -127,8 +108,7 @@ struct VoiceInkApp: App {
         let engine = VoiceInkEngine(
             modelContext: resolvedContainer.mainContext,
             whisperModelManager: whisperModelManager,
-            transcriptionModelManager: transcriptionModelManager,
-            enhancementService: enhancementService
+            transcriptionModelManager: transcriptionModelManager
         )
 
         // 5. Configure circular deps
@@ -297,8 +277,6 @@ struct VoiceInkApp: App {
                     .environmentObject(recordingShortcutManager)
                     .environmentObject(menuBarManager)
                     .environmentObject(mainWindowNavigation)
-                    .environmentObject(aiService)
-                    .environmentObject(enhancementService)
                     .modelContainer(container)
                     .onAppear {
                         showLaunchRemindersIfNeeded()
@@ -358,8 +336,6 @@ struct VoiceInkApp: App {
                 .environmentObject(recordingShortcutManager)
                 .environmentObject(menuBarManager)
                 .environmentObject(mainWindowNavigation)
-                .environmentObject(aiService)
-                .environmentObject(enhancementService)
         } label: {
             let image: NSImage = {
                 let ratio = $0.size.height / $0.size.width

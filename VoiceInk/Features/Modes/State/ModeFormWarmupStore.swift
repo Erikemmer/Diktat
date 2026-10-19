@@ -2,71 +2,26 @@ import Combine
 import Foundation
 
 struct ModeFormWarmupSnapshot {
-    let connectedAIProviders: [AIProvider]
-    let aiModelsByProvider: [AIProvider: [String]]
-    let selectedAIModelsByProvider: [AIProvider: String]
     let usableTranscriptionModels: [any TranscriptionModel]
     let allTranscriptionModels: [any TranscriptionModel]
-    let prompts: [CustomPrompt]
 
     static let empty = ModeFormWarmupSnapshot(
-        connectedAIProviders: [],
-        aiModelsByProvider: [:],
-        selectedAIModelsByProvider: [:],
         usableTranscriptionModels: [],
-        allTranscriptionModels: [],
-        prompts: []
+        allTranscriptionModels: []
     )
 
     @MainActor
-    init(
-        aiService: AIService,
-        enhancementService: AIEnhancementService,
-        transcriptionModelManager: TranscriptionModelManager
-    ) {
-        let providers = aiService.connectedProviders
-        var modelsByProvider: [AIProvider: [String]] = [:]
-        var selectedModelsByProvider: [AIProvider: String] = [:]
-
-        for provider in providers {
-            modelsByProvider[provider] = aiService.availableModels(for: provider)
-            selectedModelsByProvider[provider] = aiService.selectedModel(for: provider)
-        }
-
-        connectedAIProviders = providers
-        aiModelsByProvider = modelsByProvider
-        selectedAIModelsByProvider = selectedModelsByProvider
+    init(transcriptionModelManager: TranscriptionModelManager) {
         usableTranscriptionModels = transcriptionModelManager.usableModels
         allTranscriptionModels = transcriptionModelManager.allAvailableModels
-        prompts = enhancementService.allPrompts
     }
 
     private init(
-        connectedAIProviders: [AIProvider],
-        aiModelsByProvider: [AIProvider: [String]],
-        selectedAIModelsByProvider: [AIProvider: String],
         usableTranscriptionModels: [any TranscriptionModel],
-        allTranscriptionModels: [any TranscriptionModel],
-        prompts: [CustomPrompt]
+        allTranscriptionModels: [any TranscriptionModel]
     ) {
-        self.connectedAIProviders = connectedAIProviders
-        self.aiModelsByProvider = aiModelsByProvider
-        self.selectedAIModelsByProvider = selectedAIModelsByProvider
         self.usableTranscriptionModels = usableTranscriptionModels
         self.allTranscriptionModels = allTranscriptionModels
-        self.prompts = prompts
-    }
-
-    var firstPromptId: UUID? {
-        prompts.first?.id
-    }
-
-    func availableModels(for provider: AIProvider) -> [String] {
-        aiModelsByProvider[provider] ?? []
-    }
-
-    func selectedModel(for provider: AIProvider) -> String {
-        selectedAIModelsByProvider[provider] ?? provider.defaultModel
     }
 
     func transcriptionModel(named name: String?) -> (any TranscriptionModel)? {
@@ -89,8 +44,6 @@ final class ModeFormWarmupStore: ObservableObject {
     @Published private(set) var installedApps: [InstalledAppInfo] = []
     @Published private(set) var isLoadingInstalledApps = false
 
-    private weak var aiService: AIService?
-    private weak var enhancementService: AIEnhancementService?
     private weak var transcriptionModelManager: TranscriptionModelManager?
 
     private var cancellables = Set<AnyCancellable>()
@@ -105,17 +58,9 @@ final class ModeFormWarmupStore: ObservableObject {
         pendingSnapshotRefresh?.cancel()
     }
 
-    func configure(
-        aiService: AIService,
-        enhancementService: AIEnhancementService,
-        transcriptionModelManager: TranscriptionModelManager
-    ) {
-        let dependenciesChanged =
-            self.aiService !== aiService || self.enhancementService !== enhancementService
-            || self.transcriptionModelManager !== transcriptionModelManager
+    func configure(transcriptionModelManager: TranscriptionModelManager) {
+        let dependenciesChanged = self.transcriptionModelManager !== transcriptionModelManager
 
-        self.aiService = aiService
-        self.enhancementService = enhancementService
         self.transcriptionModelManager = transcriptionModelManager
 
         if dependenciesChanged {
@@ -129,16 +74,9 @@ final class ModeFormWarmupStore: ObservableObject {
     }
 
     func refreshSnapshot() {
-        guard let aiService,
-            let enhancementService,
-            let transcriptionModelManager
-        else { return }
+        guard let transcriptionModelManager else { return }
 
-        snapshot = ModeFormWarmupSnapshot(
-            aiService: aiService,
-            enhancementService: enhancementService,
-            transcriptionModelManager: transcriptionModelManager
-        )
+        snapshot = ModeFormWarmupSnapshot(transcriptionModelManager: transcriptionModelManager)
         hasSnapshot = true
     }
 
@@ -180,22 +118,6 @@ final class ModeFormWarmupStore: ObservableObject {
         notificationObservers.forEach(NotificationCenter.default.removeObserver)
         notificationObservers.removeAll()
 
-        aiService?.objectWillChange
-            .sink { [weak self] _ in
-                Task { @MainActor in
-                    self?.scheduleSnapshotRefresh()
-                }
-            }
-            .store(in: &cancellables)
-
-        enhancementService?.objectWillChange
-            .sink { [weak self] _ in
-                Task { @MainActor in
-                    self?.scheduleSnapshotRefresh()
-                }
-            }
-            .store(in: &cancellables)
-
         transcriptionModelManager?.objectWillChange
             .sink { [weak self] _ in
                 Task { @MainActor in
@@ -205,8 +127,7 @@ final class ModeFormWarmupStore: ObservableObject {
             .store(in: &cancellables)
 
         let notificationNames: [Notification.Name] = [
-            .AppSettingsDidChange,
-            .aiProviderKeyChanged,
+            .AppSettingsDidChange
         ]
 
         notificationObservers = notificationNames.map { name in
