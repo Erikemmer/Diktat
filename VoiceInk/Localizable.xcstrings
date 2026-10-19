@@ -3172,50 +3172,6 @@
         }
       }
     },
-    "A custom enhancement model with this display name already exists" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ein eigenes Verbesserungsmodell mit diesem Anzeigenamen existiert bereits"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un modèle d'amélioration personnalisé portant ce nom d'affichage existe déjà"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已存在使用此显示名称的自定润色模型"
-          }
-        }
-      }
-    },
-    "A custom enhancement model with this model name already exists" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ein eigenes Verbesserungsmodell mit diesem Modellnamen existiert bereits"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un modèle d'amélioration personnalisé portant ce nom de modèle existe déjà"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已存在使用此模型名称的自定润色模型"
-          }
-        }
-      }
-    },
     "A mode with the name '%@' already exists." : {
       "localizations" : {
         "de" : {
@@ -3440,72 +3396,6 @@
         }
       }
     },
-    "Activate a license to continue using Diktat." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere eine Lizenz, um Diktat weiter zu verwenden."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez une licence pour continuer à utiliser Diktat."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "激活许可证以继续使用 Diktat。"
-          }
-        }
-      }
-    },
-    "Activate an existing key, purchase a license, or start a 7-day free trial." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere einen vorhandenen Schlüssel, kaufe eine Lizenz oder starte eine 7-tägige kostenlose Testversion."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez une clé existante, achetez une licence ou démarrez un essai gratuit de 7 jours."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "激活现有密钥、购买许可证，或开始 7 天免费试用。"
-          }
-        }
-      }
-    },
-    "Activate License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz aktivieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer la licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "激活许可证"
-          }
-        }
-      }
-    },
     "Activating" : {
       "localizations" : {
         "de" : {
@@ -3653,28 +3543,6 @@
         }
       }
     },
-    "Add a new mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neuen Modus hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un nouveau mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加新模式"
-          }
-        }
-      }
-    },
     "Add a trailing space after pasted transcription output." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3742,28 +3610,6 @@
         }
       }
     },
-    "Add Custom Enhancement Model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigenes Verbesserungsmodell hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un modèle d'amélioration personnalisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加自定润色模型"
-          }
-        }
-      }
-    },
     "Add custom model" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3805,50 +3651,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "添加自定转写模型"
-          }
-        }
-      }
-    },
-    "Add customized modes for different contexts" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene Modi für verschiedene Kontexte hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutez des modes personnalisés pour différents contextes"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "为不同场景添加自定模式"
-          }
-        }
-      }
-    },
-    "Add enhancement model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserungsmodell hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un modèle d'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加润色模型"
           }
         }
       }
@@ -4008,50 +3810,6 @@
         }
       }
     },
-    "Add New Mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neuen Modus hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un nouveau mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加新模式"
-          }
-        }
-      }
-    },
-    "Add new prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neuen Prompt hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter une nouvelle invite"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加新提示词"
-          }
-        }
-      }
-    },
     "Add Now" : {
       "localizations" : {
         "de" : {
@@ -4092,28 +3850,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "一次添加一个条目，或粘贴多个以逗号分隔的条目。"
-          }
-        }
-      }
-    },
-    "Add prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt hinzufügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter une invite"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "添加提示词"
           }
         }
       }
@@ -4408,96 +4144,6 @@
         }
       }
     },
-    "Affiliate Program" : {
-      "comment" : "Title of a resource link that opens the Diktat affiliate program.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Partnerprogramm"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Programme d'affiliation"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "联盟计划"
-          }
-        }
-      }
-    },
-    "AI Enhancement" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Verbesserung"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amélioration de l'IA"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 润色"
-          }
-        }
-      }
-    },
-    "AI enhancement failed to process the text." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die KI-Verbesserung konnte den Text nicht verarbeiten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L’amélioration par IA n’a pas pu traiter le texte."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 润色无法处理该文本。"
-          }
-        }
-      }
-    },
-    "AI Enhancement is not enabled or configured" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Verbesserung ist nicht aktiviert oder konfiguriert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'amélioration de l'IA n'est pas activée ou configurée"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 润色未开启或未配置"
-          }
-        }
-      }
-    },
     "AI Model" : {
       "localizations" : {
         "de" : {
@@ -4631,28 +4277,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AI 提供商集成"
-          }
-        }
-      }
-    },
-    "AI provider not configured. Please check your API key." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Anbieter nicht konfiguriert. Bitte überprüfe deinen API-Schlüssel."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fournisseur IA non configuré. Veuillez vérifier votre clé API."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未配置 AI 提供商。请检查你的 API 密钥。"
           }
         }
       }
@@ -5057,72 +4681,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "API 密钥"
-          }
-        }
-      }
-    },
-    "API Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API 密钥"
-          }
-        }
-      }
-    },
-    "API key cannot be empty" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel darf nicht leer sein"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La clé API ne peut pas être vide"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API 密钥不能为空"
-          }
-        }
-      }
-    },
-    "API key for this service is missing. Please configure it in the settings." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der API-Schlüssel für diesen Dienst fehlt. Bitte konfiguriere ihn in den Einstellungen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La clé API de ce service est manquante. Configurez-la dans les réglages."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "缺少此服务的 API 密钥。请在设置中进行配置。"
           }
         }
       }
@@ -5594,29 +5152,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "提问"
-          }
-        }
-      }
-    },
-    "Assign a unique keyboard or mouse shortcut to instantly activate this mode and start recording." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weise ein eindeutiges Tastatur- oder Maustastenkürzel zu, um diesen Modus sofort zu aktivieren und die Aufnahme zu starten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attribuez un raccourci clavier ou souris unique pour activer instantanément ce mode et démarrer l'enregistrement."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "分配一个唯一的键盘或鼠标快捷键，即可立即激活此模式并开始录音。"
           }
         }
       }
@@ -6097,28 +5632,6 @@
         }
       }
     },
-    "Automatically Check for Updates" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatisch nach Updates suchen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rechercher automatiquement les mises à jour"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自动检查更新"
-          }
-        }
-      }
-    },
     "Automatically learns corrections you make after dictation." : {
       "comment" : "Explains the purpose of Dictionary Auto Learn.",
       "extractionState" : "stale",
@@ -6185,50 +5698,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自动从转写中移除已配置的填充词，例如「uh」「um」或「hmm」。如果未配置任何填充词，将跳过此清理。"
-          }
-        }
-      }
-    },
-    "Automatically skip AI enhancement when the transcription has very few words. Short phrases like \"yes\", \"thank you\", or quick commands don't benefit from enhancement." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Verbesserung automatisch überspringen, wenn die Transkription sehr wenige Wörter enthält. Kurze Phrasen wie „ja“, „danke“ oder schnelle Befehle profitieren nicht von der Verbesserung."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignorez automatiquement l’amélioration de l’IA lorsque la transcription contient très peu de mots. Les phrases courtes comme « oui », « merci » ou les commandes rapides ne bénéficient pas d'améliorations."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "当转写内容字数很少时，自动跳过 AI 润色。「是的」「谢谢」之类的简短用语或快速指令并不能从润色中获益。"
-          }
-        }
-      }
-    },
-    "Available Enhancement Models" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verfügbare Verbesserungsmodelle"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles d'amélioration disponibles"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可用的润色模型"
           }
         }
       }
@@ -6341,30 +5810,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "返回"
-          }
-        }
-      }
-    },
-    "Back to dashboard" : {
-      "comment" : "A button that dismisses a sheet and returns to the dashboard.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zurück zum Dashboard"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retour au tableau de bord"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "返回仪表盘"
           }
         }
       }
@@ -6563,50 +6008,6 @@
         }
       }
     },
-    "Buy License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz kaufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acheter une licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "购买许可证"
-          }
-        }
-      }
-    },
-    "Buy Diktat License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat-Lizenz kaufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acheter une licence Diktat"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "购买 Diktat 许可证"
-          }
-        }
-      }
-    },
     "Calculating %@." : {
       "comment" : "Dashboard momentum headline shown while stats are loading. The placeholder is the highlighted progress label.",
       "isCommentAutoGenerated" : true,
@@ -6719,28 +6120,6 @@
         }
       }
     },
-    "Cannot Save Mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus kann nicht gespeichert werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de sauvegarder le mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法存储模式"
-          }
-        }
-      }
-    },
     "Change sort order" : {
       "comment" : "A button that changes the order of vocabulary words.",
       "isCommentAutoGenerated" : true,
@@ -6806,50 +6185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "更新日志"
-          }
-        }
-      }
-    },
-    "Check for Updates" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nach Updates suchen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier les mises à jour"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "检查更新"
-          }
-        }
-      }
-    },
-    "Check for Updates…" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nach Updates suchen …"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifiez les mises à jour…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "检查更新…"
           }
         }
       }
@@ -7344,30 +6679,6 @@
         }
       }
     },
-    "Click to edit dashboard name" : {
-      "comment" : "A label that describes a user's ability to tap to edit their dashboard name.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboardnamen bearbeiten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cliquez pour modifier le nom du tableau de bord"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "点击编辑仪表盘名称"
-          }
-        }
-      }
-    },
     "Clipboard" : {
       "localizations" : {
         "de" : {
@@ -7592,50 +6903,6 @@
         }
       }
     },
-    "Complete Onboarding" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einführung abschließen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Intégration complète"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完成新手引导"
-          }
-        }
-      }
-    },
-    "Configure API Keys" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel konfigurieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurer les clés API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置 API 密钥"
-          }
-        }
-      }
-    },
     "Configure Transcription Model" : {
       "comment" : "Title of a step in the onboarding process that allows the user to configure the transcription model.",
       "isCommentAutoGenerated" : true,
@@ -7744,28 +7011,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请连接麦克风或允许麦克风访问，然后刷新。"
-          }
-        }
-      }
-    },
-    "Connect Ollama or configure a CLI command for local enhancement." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbinde Ollama oder konfiguriere einen CLI-Befehl für die lokale Verbesserung."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connectez Ollama ou configurez une commande CLI pour une amélioration locale."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "连接 Ollama，或配置 CLI 命令进行本地润色。"
           }
         }
       }
@@ -8111,28 +7356,6 @@
         }
       }
     },
-    "Copy License Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzschlüssel kopieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copier la clé de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "拷贝许可证密钥"
-          }
-        }
-      }
-    },
     "Copy System Info" : {
       "localizations" : {
         "de" : {
@@ -8383,30 +7606,6 @@
         }
       }
     },
-    "Could not save re-enhancement" : {
-      "comment" : "Error message shown when saving a re-enhanced transcription fails.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die erneute Verbesserung konnte nicht gespeichert werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible d'enregistrer la réamélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法保存重新增强的转录"
-          }
-        }
-      }
-    },
     "Could not save settings to file: %@" : {
       "localizations" : {
         "de" : {
@@ -8425,72 +7624,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法将设置存储到文件：%@"
-          }
-        }
-      }
-    },
-    "Could not verify this API key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser API-Schlüssel konnte nicht verifiziert werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de vérifier cette clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法验证此 API 密钥"
-          }
-        }
-      }
-    },
-    "Could not verify this API key. Check the key and try again." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser API-Schlüssel konnte nicht verifiziert werden. Überprüfe den Schlüssel und versuche es erneut."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de vérifier cette clé API. Vérifiez la clé et réessayez."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法验证此 API 密钥。请检查密钥后重试。"
-          }
-        }
-      }
-    },
-    "Couldn't deactivate the license. Please try again." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Lizenz konnte nicht deaktiviert werden. Bitte versuche es erneut."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossible de désactiver la licence. Veuillez réessayer."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法停用许可证。请重试。"
           }
         }
       }
@@ -8537,30 +7670,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "创建并选择"
-          }
-        }
-      }
-    },
-    "Create your first mode" : {
-      "comment" : "Title of the empty state shown before the user creates a mode.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erstelle deinen ersten Modus"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créez votre premier mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "创建你的第一个模式"
           }
         }
       }
@@ -8809,28 +7918,6 @@
         }
       }
     },
-    "Custom Enhancement Models" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene Verbesserungsmodelle"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modèles d'amélioration personnalisés"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定润色模型"
-          }
-        }
-      }
-    },
     "Custom Model Definitions" : {
       "localizations" : {
         "de" : {
@@ -8871,74 +7958,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自定义模型"
-          }
-        }
-      }
-    },
-    "Custom Prompts" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene Prompts"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invites personnalisées"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定提示词"
-          }
-        }
-      }
-    },
-    "Custom prompts aren't available with Diktat Refine. Select a Mode that uses another AI provider." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene Prompts sind mit Diktat Refine nicht verfügbar. Wähle einen Modus mit einem anderen KI-Anbieter."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les invites personnalisées ne sont pas disponibles avec Diktat Refine. Sélectionnez un mode qui utilise un autre fournisseur d'IA."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat Refine 不支持自定义提示词。请选择使用其他 AI 提供商的模式。"
-          }
-        }
-      }
-    },
-    "Custom prompts aren't available with Diktat Refine. Select another mode first." : {
-      "comment" : "A message displayed when a user tries to select a custom prompt with Diktat Refine.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Benutzerdefinierte Prompts sind mit Diktat Refine nicht verfügbar. Wähle zuerst einen anderen Modus."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les invites personnalisées ne sont pas disponibles avec Diktat Refine. Sélectionnez d'abord un autre mode."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat Refine 不支持自定义提示词。请先选择其他模式。"
           }
         }
       }
@@ -9102,50 +8121,6 @@
         }
       }
     },
-    "Deactivate License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz deaktivieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactiver la licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "停用许可证"
-          }
-        }
-      }
-    },
-    "Deactivate License?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz deaktivieren?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactiver la licence ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "要停用许可证吗？"
-          }
-        }
-      }
-    },
     "Default" : {
       "localizations" : {
         "de" : {
@@ -9187,75 +8162,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "默认和 AppleScript 会暂时使用剪贴板来粘贴转录。启用后，会在所选延迟后恢复剪贴板之前的内容。直接输入不会更改剪贴板。"
-          }
-        }
-      }
-    },
-    "Default Mode Can’t Be Deleted" : {
-      "comment" : "An alert that appears when the user tries to delete a mode that is set as the default mode.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standardmodus kann nicht gelöscht werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le mode par défaut ne peut pas être supprimé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法删除默认模式"
-          }
-        }
-      }
-    },
-    "Default mode is used when no app or website matches" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Standardmodus wird verwendet, wenn keine App oder Website übereinstimmt"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le mode par défaut est utilisé lorsqu'aucune application ou site Web ne correspond"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "当没有匹配的 App 或网站时，将使用默认模式"
-          }
-        }
-      }
-    },
-    "Default mode is used when no specific app or website matches are found." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Standardmodus wird verwendet, wenn keine App oder Website übereinstimmt."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le mode par défaut est utilisé lorsqu'aucune correspondance spécifique avec une application ou un site Web n'est trouvée."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "当未找到匹配的特定 App 或网站时，将使用默认模式。"
           }
         }
       }
@@ -9397,28 +8303,6 @@
         }
       }
     },
-    "Delete Custom Enhancement Model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigenes Verbesserungsmodell löschen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer le modèle d'amélioration personnalisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "删除自定润色模型"
-          }
-        }
-      }
-    },
     "Delete Custom Model" : {
       "localizations" : {
         "de" : {
@@ -9437,28 +8321,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "删除自定模型"
-          }
-        }
-      }
-    },
-    "Delete Mode?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus löschen?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode Supprimer ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "要删除此模式吗？"
           }
         }
       }
@@ -9505,28 +8367,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "删除旧录音，同时保留转写历史记录。"
-          }
-        }
-      }
-    },
-    "Delete Prompt?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt löschen?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer l'invite ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "要删除此提示词吗？"
           }
         }
       }
@@ -10832,28 +9672,6 @@
         }
       }
     },
-    "During recording, press Option + 1-9 to switch modes quickly." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drücke während der Aufnahme Option + 1-9, um schnell den Modus zu wechseln."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pendant l'enregistrement, appuyez sur Option + 1-9 pour changer de mode rapidement."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "录音时，按 Option + 1-9 可快速切换模式。"
-          }
-        }
-      }
-    },
     "e.g. my email, my mail" : {
       "localizations" : {
         "de" : {
@@ -10920,50 +9738,6 @@
         }
       }
     },
-    "Each trigger word can only belong to one mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jedes Auslöserwort kann nur zu einem Modus gehören"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chaque mot déclencheur ne peut appartenir qu'à un seul mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "每个触发词只能属于一个模式"
-          }
-        }
-      }
-    },
-    "Each website can only belong to one mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jede Website kann nur zu einem Modus gehören"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chaque site Web ne peut appartenir qu'à un seul mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "每个网站只能属于一个模式"
-          }
-        }
-      }
-    },
     "Earn 30% from referrals" : {
       "comment" : "Text displayed in a resource link row in the License Management view for the affiliate program.",
       "isCommentAutoGenerated" : true,
@@ -11010,28 +9784,6 @@
         }
       }
     },
-    "Edit Custom Enhancement Model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigenes Verbesserungsmodell bearbeiten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modifier le modèle d'amélioration personnalisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑自定润色模型"
-          }
-        }
-      }
-    },
     "Edit Custom Transcription Model" : {
       "localizations" : {
         "de" : {
@@ -11054,28 +9806,6 @@
         }
       }
     },
-    "Edit mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus bearbeiten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode édition"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑模式"
-          }
-        }
-      }
-    },
     "Edit Model" : {
       "localizations" : {
         "de" : {
@@ -11094,28 +9824,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "编辑模型"
-          }
-        }
-      }
-    },
-    "Edit prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt bearbeiten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modifier l'invite"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编辑提示词"
           }
         }
       }
@@ -11459,52 +10167,6 @@
         }
       }
     },
-    "Enhanced" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbessert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amélioré"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已润色"
-          }
-        }
-      }
-    },
-    "Enhanced transcription" : {
-      "comment" : "A label for a transcription that has been enhanced.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserte Transkription"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transcription améliorée"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "增强后的转录"
-          }
-        }
-      }
-    },
     "Enhancement" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -11594,231 +10256,6 @@
         }
       }
     },
-    "Enhancement modes and AI actions will stay off until you add a key. You can set this up anytime from Settings." : {
-      "comment" : "A message displayed in the onboarding screen.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserungsmodi und KI-Aktionen bleiben deaktiviert, bis du einen Schlüssel hinzufügst. Du kannst dies jederzeit in den Einstellungen einrichten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les modes d'amélioration et les actions de l'IA resteront désactivés jusqu'à ce que vous ajoutiez une clé. Vous pouvez configurer cela à tout moment à partir des paramètres."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "润色模式与 AI 操作将保持关闭，直到你添加密钥。你可以随时在设置中完成配置。"
-          }
-        }
-      }
-    },
-    "Enhancement request timed out. Check your connection or increase the timeout duration." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeitüberschreitung bei der Verbesserungsanfrage. Überprüfe deine Verbindung oder verlängere die maximale Wartezeit."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La demande d'amélioration a expiré. Vérifiez votre connexion ou augmentez la durée du délai d'attente."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "润色请求超时。请检查网络连接或延长超时时长。"
-          }
-        }
-      }
-    },
-    "Enhancement Settings" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserungseinstellungen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paramètres d'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "润色设置"
-          }
-        }
-      }
-    },
-    "Enhancement Time" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserungszeit"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temps d'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "润色用时"
-          }
-        }
-      }
-    },
-    "Enhancing" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wird verbessert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Améliorer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在润色"
-          }
-        }
-      }
-    },
-    "Enhancing recording" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aufnahme wird verbessert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Améliorer l'enregistrement"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在润色录音"
-          }
-        }
-      }
-    },
-    "Enhancing..." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wird verbessert..."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amélioration..."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在润色…"
-          }
-        }
-      }
-    },
-    "Enter a model ID for AI enhancement." : {
-      "comment" : "A description of the error that occurs when an AI enhancement model is not selected.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geben Sie eine Modell-ID für die KI-Verbesserung ein."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saisissez un identifiant de modèle pour l'amélioration par l'IA."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请输入用于 AI 润色的模型 ID。"
-          }
-        }
-      }
-    },
-    "Enter License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz eingeben"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrez la licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "输入许可证"
-          }
-        }
-      }
-    },
-    "Enter License Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzschlüssel eingeben"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrez la clé de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "输入许可证密钥"
-          }
-        }
-      }
-    },
     "Enter word or phrase to replace (use commas for multiple)" : {
       "localizations" : {
         "de" : {
@@ -11860,28 +10297,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "输入你的"
-          }
-        }
-      }
-    },
-    "Environment variables available: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT. Custom commands can also read VOICEINK_FULL_PROMPT from stdin." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verfügbare Umgebungsvariablen: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT. Benutzerdefinierte Befehle können VOICEINK_FULL_PROMPT auch aus stdin lesen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Variables d’environnement disponibles : VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT. Les commandes personnalisées peuvent aussi lire VOICEINK_FULL_PROMPT depuis stdin."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可用的环境变量：VOICEINK_SYSTEM_PROMPT、VOICEINK_USER_PROMPT、VOICEINK_FULL_PROMPT。自定义命令也可以从 stdin 读取 VOICEINK_FULL_PROMPT。"
           }
         }
       }
@@ -12844,28 +11259,6 @@
         }
       }
     },
-    "Failed to save API key securely" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel konnte nicht sicher gespeichert werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de l'enregistrement sécurisé de la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法安全地存储 API 密钥"
-          }
-        }
-      }
-    },
     "Failed to save changes: %@" : {
       "localizations" : {
         "de" : {
@@ -12884,28 +11277,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法存储更改：%@"
-          }
-        }
-      }
-    },
-    "Failed to save custom enhancement model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigenes Verbesserungsmodell konnte nicht gespeichert werden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de l'enregistrement du modèle d'amélioration personnalisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法存储自定润色模型"
           }
         }
       }
@@ -13086,28 +11457,6 @@
         }
       }
     },
-    "Fast transcription with no AI enhancement." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schnelle Transkription ohne KI-Verbesserung."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transcription rapide sans amélioration de l'IA."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "快速转写，不使用 AI 增强。"
-          }
-        }
-      }
-    },
     "Filler word" : {
       "localizations" : {
         "de" : {
@@ -13198,51 +11547,6 @@
         }
       }
     },
-    "Finish Onboarding" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einführung abschließen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terminer l'intégration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "完成新手引导"
-          }
-        }
-      }
-    },
-    "Free updates" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kostenlose Updates"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mises à jour gratuites"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "免费更新"
-          }
-        }
-      }
-    },
     "General" : {
       "localizations" : {
         "de" : {
@@ -13305,50 +11609,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "获取 %@ API 密钥"
-          }
-        }
-      }
-    },
-    "Get API key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel abrufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtenir la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "获取 API 密钥"
-          }
-        }
-      }
-    },
-    "Get API Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel abrufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obtenir la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "获取 API 密钥"
           }
         }
       }
@@ -13511,28 +11771,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未找到 HAL Output AudioUnit"
-          }
-        }
-      }
-    },
-    "Have a license key?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hast du einen Lizenzschlüssel?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous avez une clé de licence ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已有许可证密钥？"
           }
         }
       }
@@ -14248,28 +12486,6 @@
         }
       }
     },
-    "IMPORTANT: If you were using AI enhancement features, please make sure to reconfigure your API keys in the AI Models section." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "WICHTIG: Falls du KI-Verbesserungsfunktionen verwendet hast, konfiguriere bitte deine API-Schlüssel im Bereich KI-Modelle neu."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IMPORTANT : Si vous utilisiez les fonctionnalités d'amélioration de l'IA, assurez-vous de reconfigurer vos clés API dans la section Modèles IA."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重要提示：如果你之前在使用 AI 润色功能，请务必在「AI 模型」部分重新配置你的 API 密钥。"
-          }
-        }
-      }
-    },
     "Imported" : {
       "localizations" : {
         "de" : {
@@ -14655,30 +12871,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "界面"
-          }
-        }
-      }
-    },
-    "Invalid API key" : {
-      "comment" : "Error message when the API key is invalid.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ungültiger API-Schlüssel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé API invalide"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API 密钥无效"
           }
         }
       }
@@ -15310,249 +13502,6 @@
         }
       }
     },
-    "License activated successfully!" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz erfolgreich aktiviert!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence activée avec succès !"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证激活成功！"
-          }
-        }
-      }
-    },
-    "License active on this Mac." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz auf diesem Mac aktiv."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence active sur ce Mac."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证已在这台 Mac 上激活。"
-          }
-        }
-      }
-    },
-    "License key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzschlüssel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证密钥"
-          }
-        }
-      }
-    },
-    "License Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzschlüssel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证密钥"
-          }
-        }
-      }
-    },
-    "License key not found. Please double-check your key and try again." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzschlüssel nicht gefunden. Bitte überprüfe deinen Schlüssel und versuche es erneut."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé de licence introuvable. Veuillez vérifier votre clé et réessayer."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未找到许可证密钥。请仔细核对你的密钥后重试。"
-          }
-        }
-      }
-    },
-    "License Management" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenzverwaltung"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gestion des licences"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证管理"
-          }
-        }
-      }
-    },
-    "License required" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz erforderlich"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence requise"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "需要许可证"
-          }
-        }
-      }
-    },
-    "License Required" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz erforderlich"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence requise"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "需要许可证"
-          }
-        }
-      }
-    },
-    "License validated successfully!" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz erfolgreich validiert!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence validée avec succès !"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "许可证验证成功！"
-          }
-        }
-      }
-    },
-    "Licensed" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenziert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已激活"
-          }
-        }
-      }
-    },
-    "Licensed (Pro)" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenziert (Pro)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Licence (Pro)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已激活（Pro）"
-          }
-        }
-      }
-    },
     "Lifetime access" : {
       "localizations" : {
         "de" : {
@@ -15662,28 +13611,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "实时文本显示"
-          }
-        }
-      }
-    },
-    "Load a template or enter a command to enable Local CLI enhancement." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lade eine Vorlage oder gib einen Befehl ein, um die lokale CLI-Verbesserung zu aktivieren."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chargez un modèle ou entrez une commande pour activer l'amélioration de la CLI locale."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "载入模板或输入命令，以启用本地 CLI 润色。"
           }
         }
       }
@@ -15998,28 +13925,6 @@
         }
       }
     },
-    "Local Enhancement Services" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lokale Verbesserungsdienste"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Services d'amélioration locaux"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "本地润色服务"
-          }
-        }
-      }
-    },
     "Local models don't work reliably on Intel Macs" : {
       "localizations" : {
         "de" : {
@@ -16219,50 +14124,6 @@
         }
       }
     },
-    "Manage custom enhancement models in the Custom tab." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene Verbesserungsmodelle im Tab „Eigene“ verwalten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gérez les modèles d'amélioration personnalisés dans l'onglet Personnalisé."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在「自定」标签页中管理自定润色模型。"
-          }
-        }
-      }
-    },
-    "Manage License" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz verwalten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gérer la licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "管理许可证"
-          }
-        }
-      }
-    },
     "Manage Models" : {
       "localizations" : {
         "de" : {
@@ -16281,28 +14142,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "模型目录"
-          }
-        }
-      }
-    },
-    "Manage Modes" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modi verwalten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gérer les modes"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "转写模式"
           }
         }
       }
@@ -16509,50 +14348,6 @@
         }
       }
     },
-    "Mode name" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modusname"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nom du mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式名称"
-          }
-        }
-      }
-    },
-    "Mode name cannot be empty." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modusname darf nicht leer sein."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le nom du mode ne peut pas être vide."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式名称不能为空。"
-          }
-        }
-      }
-    },
     "Mode shortcut: %@" : {
       "comment" : "A label that describes the shortcut for a given mode.",
       "isCommentAutoGenerated" : true,
@@ -16573,28 +14368,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "模式快捷键：%@"
-          }
-        }
-      }
-    },
-    "Mode shortcuts" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus-Tastenkürzel"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raccourcis de mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式快捷键"
           }
         }
       }
@@ -16891,50 +14664,6 @@
         }
       }
     },
-    "Modes help you set up Diktat for different writing tasks, workflows, and scenarios." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modi helfen dir, Diktat für verschiedene Schreibaufgaben, Arbeitsabläufe und Szenarien einzurichten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les modes vous aident à configurer Diktat pour différentes tâches d'écriture, flux de travail et scénarios."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式可帮助你针对不同的写作任务、工作流程和使用场景来设置 Diktat。"
-          }
-        }
-      }
-    },
-    "Modes Settings" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modi-Einstellungen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paramètres des modes"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式设置"
-          }
-        }
-      }
-    },
     "Monthly Productivity" : {
       "comment" : "A title for a productivity chart.",
       "isCommentAutoGenerated" : true,
@@ -16979,29 +14708,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "更多"
-          }
-        }
-      }
-    },
-    "More enhancement models available" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weitere Verbesserungsmodelle verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plus de modèles d'amélioration disponibles"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还有更多润色模型可用"
           }
         }
       }
@@ -17205,28 +14911,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "我的自定模型"
-          }
-        }
-      }
-    },
-    "My Enhancement Model" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mein Verbesserungsmodell"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mon modèle d'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我的润色模型"
           }
         }
       }
@@ -17625,28 +15309,6 @@
         }
       }
     },
-    "No Custom Enhancement Models" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine eigenen Verbesserungsmodelle"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun modèle d'amélioration personnalisé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "暂无自定润色模型"
-          }
-        }
-      }
-    },
     "No Custom Transcription Models" : {
       "localizations" : {
         "de" : {
@@ -17687,30 +15349,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无可用设备"
-          }
-        }
-      }
-    },
-    "No enhancement models" : {
-      "comment" : "Title displayed in a column of a card that shows the usage of AI models for enhancement.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Verbesserungsmodelle"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun modèle d'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无润色模型"
           }
         }
       }
@@ -17851,52 +15489,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未找到麦克风"
-          }
-        }
-      }
-    },
-    "No mode configured" : {
-      "comment" : "A title for a warning dialog that appears when the user has not selected a mode.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kein Modus eingerichtet"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun mode configuré"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未配置模式"
-          }
-        }
-      }
-    },
-    "No mode selected" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kein Modus ausgewählt"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun mode sélectionné"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未选择模式"
           }
         }
       }
@@ -18177,116 +15769,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未载入任何模型。"
-          }
-        }
-      }
-    },
-    "No Modes" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Modi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无模式"
-          }
-        }
-      }
-    },
-    "No modes available" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Modi verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun mode disponible"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无可用模式"
-          }
-        }
-      }
-    },
-    "No Modes Available" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Modi verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun mode disponible"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无可用模式"
-          }
-        }
-      }
-    },
-    "No prompts available" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Prompts verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune invite disponible"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无可用提示词"
-          }
-        }
-      }
-    },
-    "No Prompts Available" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Prompts verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune invite disponible"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无可用提示词"
           }
         }
       }
@@ -18912,29 +16394,6 @@
         }
       }
     },
-    "Not Licensed" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht lizenziert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未激活"
-          }
-        }
-      }
-    },
     "Not selected" : {
       "comment" : "A label describing a button that is not selected.",
       "isCommentAutoGenerated" : true,
@@ -18999,28 +16458,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "刘海"
-          }
-        }
-      }
-    },
-    "Note: Press Option 1-9 during recording to switch modes manually." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hinweis: Drücke Option 1-9 während der Aufnahme, um manuell den Modus zu wechseln."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remarque : Appuyez sur l'option 1 à 9 pendant l'enregistrement pour changer de mode manuellement."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注意：录音时按 Option 1-9 可手动切换模式。"
           }
         }
       }
@@ -19317,30 +16754,6 @@
         }
       }
     },
-    "Open Modes settings" : {
-      "comment" : "A button that opens the Modes settings.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modi-Einstellungen öffnen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paramètres des modes ouverts"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开模式设置"
-          }
-        }
-      }
-    },
     "Open Quick History" : {
       "comment" : "A label for the Quick History shortcut.",
       "isCommentAutoGenerated" : true,
@@ -19544,28 +16957,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OpenRouter 语音转文字模型"
-          }
-        }
-      }
-    },
-    "Opens the update window" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öffnet das Updatefenster"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvre la fenêtre de mise à jour"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开更新窗口"
           }
         }
       }
@@ -19884,74 +17275,6 @@
         }
       }
     },
-    "Paste API key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel einfügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coller la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "粘贴 API 密钥"
-          }
-        }
-      }
-    },
-    "Paste enhanced text when available, otherwise paste the original transcription" : {
-      "comment" : "A help message for the paste button.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserten Text einfügen, falls verfügbar, andernfalls die Originaltranskription"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Collez le texte amélioré lorsqu'il est disponible, sinon collez la transcription originale"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "有增强文本时粘贴增强文本，否则粘贴原始转录"
-          }
-        }
-      }
-    },
-    "Paste Last Enhanced Transcription" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Letzte verbesserte Transkription einfügen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coller la dernière transcription améliorée"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "粘贴上次转写（已润色）"
-          }
-        }
-      }
-    },
     "Paste Last Transcription" : {
       "localizations" : {
         "de" : {
@@ -19970,28 +17293,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "粘贴上次转写"
-          }
-        }
-      }
-    },
-    "Paste Last Transcription (Enhanced)" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Letzte Transkription einfügen (Verbessert)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Coller la dernière transcription (amélioré)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "粘贴上次转写（已润色）"
           }
         }
       }
@@ -20316,28 +17617,6 @@
         }
       }
     },
-    "Please enter a license key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bitte gib einen Lizenzschlüssel ein"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veuillez saisir une clé de licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请输入许可证密钥"
-          }
-        }
-      }
-    },
     "Please fix the validation errors before saving." : {
       "localizations" : {
         "de" : {
@@ -20378,28 +17657,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请重新启动 App。如果问题仍然存在，请联系支持人员。"
-          }
-        }
-      }
-    },
-    "Premium Features Activated" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium-Funktionen aktiviert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fonctionnalités Premium activées"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高级功能已激活"
           }
         }
       }
@@ -20718,28 +17975,6 @@
         }
       }
     },
-    "Prompt name" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt-Name"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nom d'invite"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "提示词名称"
-          }
-        }
-      }
-    },
     "Provider" : {
       "localizations" : {
         "de" : {
@@ -20804,29 +18039,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "正在汇总你的 Diktat 活动。"
-          }
-        }
-      }
-    },
-    "Purchase License" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz kaufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acheter une licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "购买许可证"
           }
         }
       }
@@ -20965,28 +18177,6 @@
         }
       }
     },
-    "Re-enhance with selected prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mit ausgewähltem Prompt neu verbessern"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réaméliorer avec l'invite sélectionnée"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用所选提示词重新润色"
-          }
-        }
-      }
-    },
     "Re-enhancement failed: %@" : {
       "localizations" : {
         "de" : {
@@ -21005,28 +18195,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新润色失败：%@"
-          }
-        }
-      }
-    },
-    "Re-enhancement successful" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erneute Verbesserung erfolgreich"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réamélioration réussie"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重新润色成功"
           }
         }
       }
@@ -21412,30 +18580,6 @@
         }
       }
     },
-    "Recover or manage your license" : {
-      "comment" : "Title of a resource link that opens the license portal.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lizenz wiederherstellen oder verwalten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Récupérer ou gérer votre licence"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "找回或管理你的许可证"
-          }
-        }
-      }
-    },
     "Refresh" : {
       "localizations" : {
         "de" : {
@@ -21610,50 +18754,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "移除 %@ 触发词"
-          }
-        }
-      }
-    },
-    "Remove API key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel entfernen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "移除 API 密钥"
-          }
-        }
-      }
-    },
-    "Remove API Key?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel entfernen?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer la clé API ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "要移除 API 密钥吗？"
           }
         }
       }
@@ -21838,28 +18938,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已移除%1$@和%2$@。"
-          }
-        }
-      }
-    },
-    "Reorder Modes" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modi neu anordnen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modes de réorganisation"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重新排序模式"
           }
         }
       }
@@ -22146,28 +19224,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重置"
-          }
-        }
-      }
-    },
-    "Reset Onboarding" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einführung zurücksetzen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réinitialiser l'intégration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重置新手引导"
           }
         }
       }
@@ -22644,29 +19700,6 @@
         }
       }
     },
-    "Review how Diktat handles your data before choosing a license." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Überprüfe, wie Diktat deine Daten handhabt, bevor du eine Lizenz auswählst."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifiez comment Diktat gère vos données avant de choisir une licence."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择许可证前，请先查看 Diktat 如何处理你的数据。"
-          }
-        }
-      }
-    },
     "Review Now" : {
       "comment" : "A button that triggers the review of pending corrections.",
       "isCommentAutoGenerated" : true,
@@ -22756,28 +19789,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "立即运行清理"
-          }
-        }
-      }
-    },
-    "Runs locally with your user permissions. The final transcript is sent on stdin and exposed as VOICEINK_TRANSCRIPT." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wird lokal mit deinen Benutzerberechtigungen ausgeführt. Das finale Transkript wird über stdin gesendet und als VOICEINK_TRANSCRIPT bereitgestellt."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S'exécute localement avec vos autorisations utilisateur. La transcription finale est envoyée sur stdin et exposée sous le nom VOICEINK_TRANSCRIPT."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "以你的用户权限在本地运行。最终转写文本通过 stdin 传入，并以 VOICEINK_TRANSCRIPT 形式提供。"
           }
         }
       }
@@ -22911,28 +19922,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "存储更改"
-          }
-        }
-      }
-    },
-    "Save this prompt and select it." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diesen Prompt speichern und auswählen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrez cette invite et sélectionnez-la."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "存储并选择此提示词。"
           }
         }
       }
@@ -23207,54 +20196,6 @@
         }
       }
     },
-    "Select a mode and retranscribe" : {
-      "comment" : "A description of the action to select a mode and retranscribe.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus auswählen und erneut transkribieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez un mode et retranscrivez"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择模式并重新转录"
-          }
-        }
-      }
-    },
-    "Select a prompt and enhance" : {
-      "comment" : "A description of the action of selecting a prompt to enhance a transcription.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt auswählen und verbessern"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez une invite et améliorez"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择提示词并增强"
-          }
-        }
-      }
-    },
     "Select a supported transcription language or locale. Automatic multilingual transcription is shown when available." : {
       "comment" : "A description of the available languages for a given transcription model.",
       "isCommentAutoGenerated" : true,
@@ -23368,28 +20309,6 @@
         }
       }
     },
-    "Select an enabled mode to start" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivierten Modus zum Starten auswählen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez un mode activé pour démarrer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择一个已启用的模式以开始"
-          }
-        }
-      }
-    },
     "Select at least one category to import." : {
       "localizations" : {
         "de" : {
@@ -23458,50 +20377,6 @@
         }
       }
     },
-    "Select mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus auswählen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez le mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择模式"
-          }
-        }
-      }
-    },
-    "Select Mode" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus auswählen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionner le mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择模式"
-          }
-        }
-      }
-    },
     "Select Mode %@" : {
       "localizations" : {
         "de" : {
@@ -23520,28 +20395,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择模式 %@"
-          }
-        }
-      }
-    },
-    "Select Prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt auswählen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez l'invite"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择提示词"
           }
         }
       }
@@ -24024,54 +20877,6 @@
         }
       }
     },
-    "Set Up a Mode" : {
-      "comment" : "A button that opens the Modes settings.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus einrichten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurer un mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "设置一个模式"
-          }
-        }
-      }
-    },
-    "Set up AI enhancement later?" : {
-      "comment" : "A confirmation dialog that lets the user skip the AI enhancement setup.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "KI-Verbesserung später einrichten?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurer l'amélioration de l'IA plus tard ?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "稍后设置 AI 润色？"
-          }
-        }
-      }
-    },
     "Settings" : {
       "localizations" : {
         "de" : {
@@ -24458,9 +21263,6 @@
         }
       }
     },
-    "Skip onboarding" : {
-
-    },
     "Skip short transcriptions" : {
       "localizations" : {
         "de" : {
@@ -24482,9 +21284,6 @@
           }
         }
       }
-    },
-    "Skip the remaining onboarding steps" : {
-
     },
     "Skipped %lld duplicate, conflicting, invalid, or cyclic entries." : {
       "localizations" : {
@@ -24796,29 +21595,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "开始"
-          }
-        }
-      }
-    },
-    "Start 7-day Trial" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-tägige Testversion starten"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commencer l'essai de 7 jours"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "开始 7 天试用"
           }
         }
       }
@@ -25381,50 +22157,6 @@
         }
       }
     },
-    "System Prompt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Systemprompt"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invite système"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "系统提示词"
-          }
-        }
-      }
-    },
-    "System prompt is required" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Systemprompt ist erforderlich"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une invite système est requise"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "系统提示词不能为空"
-          }
-        }
-      }
-    },
     "Template" : {
       "localizations" : {
         "de" : {
@@ -25624,30 +22356,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "该替换会在现有规则之间形成循环"
-          }
-        }
-      }
-    },
-    "The AI provider stopped before completing the enhancement." : {
-      "comment" : "Error message when the AI provider stops processing the input before completion.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der KI-Anbieter wurde beendet, bevor die Verbesserung abgeschlossen war."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le fournisseur d’IA s’est arrêté avant de terminer l’amélioration."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 提供商在完成增强之前已停止。"
           }
         }
       }
@@ -25871,29 +22579,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "不支持该音频格式"
-          }
-        }
-      }
-    },
-    "The configured AI enhancement provider cannot review Auto Learn candidates." : {
-      "comment" : "Error shown when the configured AI provider cannot perform Dictionary Auto Learn review.",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der konfigurierte KI-Verbesserungsanbieter kann Kandidaten für das automatische Lernen nicht prüfen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le fournisseur d’amélioration de l’IA configuré ne peut pas examiner les candidats à l’apprentissage automatique."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已配置的 AI 增强提供商无法审核自动学习候选项。"
           }
         }
       }
@@ -26317,28 +23002,6 @@
         }
       }
     },
-    "The provided API key is invalid." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der angegebene API-Schlüssel ist ungültig."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La clé API fournie n'est pas valide."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "提供的 API 密钥无效。"
-          }
-        }
-      }
-    },
     "The selected language is not supported by SpeechAnalyzer." : {
       "localizations" : {
         "de" : {
@@ -26712,37 +23375,6 @@
         }
       }
     },
-    "This deactivates Diktat on this Mac and frees a device on your license." : {
-      "comment" : "A message displayed in a confirmation dialog when the user deactivates their license.",
-      "extractionState" : "manual",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dadurch wird Diktat auf diesem Mac deaktiviert und ein Geräteplatz in deiner Lizenz freigegeben."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This deactivates Diktat on this Mac and frees a device on your license."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cela désactive Diktat sur ce Mac et libère un appareil sur votre licence."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "这将在此 Mac 上停用 Diktat，并释放许可证中的一个设备名额。"
-          }
-        }
-      }
-    },
     "This dictionary uses unsupported schema version %d." : {
       "localizations" : {
         "de" : {
@@ -26828,50 +23460,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "这是针对英语优化的模型，仅支持英语转写。"
-          }
-        }
-      }
-    },
-    "This license has been revoked or disabled. Please contact support." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Lizenz wurde widerrufen oder deaktiviert. Bitte kontaktiere den Support."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette licence a été révoquée ou désactivée. Veuillez contacter l'assistance."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此许可证已被吊销或停用。请联系支持人员。"
-          }
-        }
-      }
-    },
-    "This license has reached its device limit. Visit the License Management Portal to deactivate other devices." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Lizenz hat ihr Gerätelimit erreicht. Besuche das Lizenzverwaltungsportal, um andere Geräte zu deaktivieren."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette licence a atteint sa limite d'appareils. Visitez le portail de gestion des licences pour désactiver d'autres appareils."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此许可证已达到设备数量上限。请前往许可证管理门户取消其他设备的激活。"
           }
         }
       }
@@ -27743,94 +24331,6 @@
         }
       }
     },
-    "Trial Active" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testversion aktiv"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essai actif"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "试用中"
-          }
-        }
-      }
-    },
-    "Trial ended" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testphase beendet"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essai terminé"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "试用已结束"
-          }
-        }
-      }
-    },
-    "Trial Ending Soon" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testversion endet bald"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'essai se termine bientôt"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "试用即将到期"
-          }
-        }
-      }
-    },
-    "Trial Expired" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testversion abgelaufen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essai expiré"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "试用已结束"
-          }
-        }
-      }
-    },
     "Triggers" : {
       "localizations" : {
         "de" : {
@@ -27941,29 +24441,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请尝试其他搜索词。"
-          }
-        }
-      }
-    },
-    "Try Enhancement" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbesserung ausprobieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essayez l'amélioration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "试试润色"
           }
         }
       }
@@ -28174,28 +24651,6 @@
         }
       }
     },
-    "Update Available" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update verfügbar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mise à jour disponible"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "有可用更新"
-          }
-        }
-      }
-    },
     "Update the word or phrase that should be automatically replaced." : {
       "localizations" : {
         "de" : {
@@ -28214,52 +24669,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "更新需要被自动替换的词语或短语。"
-          }
-        }
-      }
-    },
-    "Use captured on-screen text as context for this mode." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erfassten Bildschirmtext als Kontext für diesen Modus verwenden."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez le texte capturé à l'écran comme contexte pour ce mode."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "将捕获的屏幕文本用作此模式的上下文。"
-          }
-        }
-      }
-    },
-    "Use clipboard text as context for this mode." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Text aus der Zwischenablage als Kontext für diesen Modus verwenden."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez le texte du presse-papiers comme contexte pour ce mode."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "将剪贴板文本用作此模式的上下文。"
           }
         }
       }
@@ -28306,29 +24715,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在本地使用 NVIDIA 的 Parakeet 模型，或连接云端转写提供商。"
-          }
-        }
-      }
-    },
-    "Use selected text from the active app as context for this mode." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ausgewählten Text der aktiven App als Kontext für diesen Modus verwenden."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez le texte sélectionné dans l'application active comme contexte pour ce mode."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "将当前 App 中选中的文本用作此模式的上下文。"
           }
         }
       }
@@ -28490,28 +24876,6 @@
         }
       }
     },
-    "Variables: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Variablen: VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Variables : VOICEINK_SYSTEM_PROMPT, VOICEINK_USER_PROMPT, VOICEINK_FULL_PROMPT"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "变量：VOICEINK_SYSTEM_PROMPT、VOICEINK_USER_PROMPT、VOICEINK_FULL_PROMPT"
-          }
-        }
-      }
-    },
     "Verification Successful" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -28575,28 +24939,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "验证并存储"
-          }
-        }
-      }
-    },
-    "Verify API Key" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "API-Schlüssel überprüfen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier la clé API"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "验证 API 密钥"
           }
         }
       }
@@ -28709,30 +25051,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "视频与指南"
-          }
-        }
-      }
-    },
-    "View dashboard insights" : {
-      "comment" : "A button that opens a view that shows the user's typing performance and productivity.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard-Einblicke anzeigen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher les informations du tableau de bord"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "查看仪表盘洞察"
           }
         }
       }
@@ -29078,73 +25396,6 @@
         }
       }
     },
-    "Diktat automatically switches to this mode based on the app or website you're using, or when you say a trigger word during recording." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat wechselt automatisch in diesen Modus, abhängig von der verwendeten App oder Website oder wenn du während der Aufnahme ein Auslösewort sagst."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat passe automatiquement à ce mode selon l’application ou le site web que vous utilisez, ou lorsque vous prononcez un mot déclencheur pendant l’enregistrement."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 会根据你正在使用的 App 或网站自动切换到此模式，也会在你录音时说出触发词后切换。"
-          }
-        }
-      }
-    },
-    "Diktat automatically understands what you are working with and selects your preferred setup. You can always configure this by editing or creating new modes." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat erkennt automatisch, woran du arbeitest, und wählt deine bevorzugte Konfiguration aus. Du kannst dies jederzeit anpassen, indem du Modi bearbeitest oder neue erstellst."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat comprend automatiquement avec quoi vous travaillez et sélectionne votre configuration préférée. Vous pouvez toujours configurer cela en modifiant ou en créant de nouveaux modes."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 会自动识别你正在处理的内容，并选用你偏好的设置。你随时可以通过编辑或创建新模式来进行配置。"
-          }
-        }
-      }
-    },
-    "Diktat can select the right mode from the app you are using and the rules you configure." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat kann anhand der verwendeten App und der konfigurierten Regeln den passenden Modus auswählen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat peut sélectionner le bon mode à partir de l'application que vous utilisez et des règles que vous configurez."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 可以根据你正在使用的 App 和你配置的规则选择合适的模式。"
-          }
-        }
-      }
-    },
     "Diktat could not switch to another microphone." : {
       "localizations" : {
         "de" : {
@@ -29209,74 +25460,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diktat 无法访问 macOS 钥匙串。请退出并重新打开 Diktat。如果问题仍然存在，请重新启动 Mac。"
-          }
-        }
-      }
-    },
-    "Diktat couldn't remove the saved license. Please try again." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat konnte die gespeicherte Lizenz nicht entfernen. Bitte versuche es erneut."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat n'a pas pu supprimer la licence enregistrée. Veuillez réessayer."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 无法移除已保存的许可证。请重试。"
-          }
-        }
-      }
-    },
-    "Diktat couldn't save the license. Please try again." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat konnte die Lizenz nicht speichern. Bitte versuche es erneut."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat n'a pas pu enregistrer la licence. Veuillez réessayer."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 无法保存许可证。请重试。"
-          }
-        }
-      }
-    },
-    "Diktat couldn't start the trial because the macOS Keychain is unavailable. Quit and reopen Diktat. If the problem continues, restart your Mac." : {
-      "comment" : "Error message displayed when the macOS Keychain is unavailable while starting a trial.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat konnte den Testzeitraum nicht starten, da der macOS-Schlüsselbund nicht verfügbar ist. Beende Diktat und öffne die App erneut. Falls das Problem weiterhin besteht, starte deinen Mac neu."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat n'a pas pu démarrer la version d'essai car le trousseau macOS n'est pas disponible. Quittez et rouvrez Diktat. Si le problème persiste, redémarrez votre Mac."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 无法开始试用，因为 macOS 钥匙串不可用。请退出并重新打开 Diktat。如果问题仍然存在，请重新启动 Mac。"
           }
         }
       }
@@ -29459,74 +25642,6 @@
         }
       }
     },
-    "Diktat Modes" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat-Modi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modes d'encre vocale"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 模式"
-          }
-        }
-      }
-    },
-    "Diktat modes include Dictation, Enhance, Email, Assistant, Rewrite, Ask, Summarize, and Translate." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat-Modi umfassen Diktat, Verbesserung, E-Mail, Assistent, Umschreiben, Fragen, Zusammenfassen und Übersetzen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les modes Diktat incluent Dictée, Améliorer, E-mail, Assistant, Réécriture, Demander, Résumer et Traduire."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 的模式包括听写、润色、邮件、助手、改写、提问、总结和翻译。"
-          }
-        }
-      }
-    },
-    "Diktat needs at least one mode to record. Create one to start dictating." : {
-      "comment" : "A description of the benefits of creating a mode.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat benötigt mindestens einen Modus zum Aufnehmen. Erstelle einen, um mit dem Diktieren zu beginnen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat a besoin d'au moins un mode pour enregistrer. Créez-en un pour commencer à dicter."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 至少需要一个模式才能录音。创建一个模式即可开始听写。"
-          }
-        }
-      }
-    },
     "Diktat needs to restart macOS audio. Sound in all apps will cut out for a moment." : {
       "localizations" : {
         "de" : {
@@ -29679,28 +25794,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diktat 录音服务不可用"
-          }
-        }
-      }
-    },
-    "Diktat Refine could not complete the enhancement." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat Refine konnte die Verbesserung nicht abschließen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat Refine n'a pas pu terminer l'amélioration."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat Refine 无法完成润色。"
           }
         }
       }
@@ -29859,28 +25952,6 @@
         }
       }
     },
-    "Diktat uses LLMs to enhance transcripts and perform AI actions. Set up an API key before continuing." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat verwendet LLMs, um Transkripte zu verbessern und KI-Aktionen auszuführen. Richte einen API-Schlüssel ein, bevor du fortfährst."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat utilise des LLM pour améliorer les transcriptions et effectuer des actions d'IA. Configurez une clé API avant de continuer."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diktat 使用大语言模型润色转写记录并执行 AI 操作。请先设置 API 密钥再继续。"
-          }
-        }
-      }
-    },
     "Diktat uses your microphone to capture your voice." : {
       "localizations" : {
         "de" : {
@@ -29965,30 +26036,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "等待中"
-          }
-        }
-      }
-    },
-    "Walkthroughs and product updates" : {
-      "comment" : "Link to a YouTube channel dedicated to tutorials and updates related to Diktat.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anleitungen und Produktupdates"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Procédures pas à pas et mises à jour du produit"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "演示教程和产品更新"
           }
         }
       }
@@ -30532,28 +26579,6 @@
         }
       }
     },
-    "Write prompt instructions" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prompt-Anweisungen schreiben"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écrire des instructions rapides"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "编写提示词指令"
-          }
-        }
-      }
-    },
     "Yearly Productivity" : {
       "comment" : "A title for the productivity chart for the last year.",
       "isCommentAutoGenerated" : true,
@@ -30858,29 +26883,6 @@
         }
       }
     },
-    "Your enhanced message will appear here." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deine verbesserte Nachricht erscheint hier."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre message amélioré apparaîtra ici."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "润色后的内容会显示在这里。"
-          }
-        }
-      }
-    },
     "Your first milestone appears after one session." : {
       "comment" : "Subtext displayed in the dashboard when the user has not yet recorded any sessions.",
       "isCommentAutoGenerated" : true,
@@ -30946,29 +26948,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "退出并重新打开 Diktat 后，语言更改才会完全生效。"
-          }
-        }
-      }
-    },
-    "Your license key is verified. Diktat is ready to use on this Mac." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein Lizenzschlüssel wurde verifiziert. Diktat ist auf diesem Mac einsatzbereit."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre clé de licence est vérifiée. Diktat est prêt à être utilisé sur ce Mac."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你的许可证密钥已通过验证。Diktat 已可在这台 Mac 上使用。"
           }
         }
       }
